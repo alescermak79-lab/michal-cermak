@@ -84,6 +84,26 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .statement h2{font-size:clamp(34px,5.4vw,64px);font-weight:600;max-width:20ch}
 .statement h2 .dim{color:var(--muted)}
 
+/* work */
+.work{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.work{grid-template-columns:1fr}}
+.proj{display:flex;flex-direction:column;text-decoration:none;color:inherit;border-radius:28px;overflow:hidden;background:var(--bg-2);transition:transform .25s}
+.proj:hover{transform:translateY(-4px)}
+.shot{aspect-ratio:16/11;max-width:100%;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;position:relative}
+.shot b{font-family:var(--display);font-size:24px;letter-spacing:-.03em;line-height:1.1;max-width:14ch}
+.shot small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.shot .pill{position:absolute;top:18px;left:18px;font-size:11px;font-weight:600;padding:6px 11px;border-radius:999px}
+.shot.hw{background:radial-gradient(circle at 78% 30%,#ff8a1f 0 15%,#c9560d 16% 18%,transparent 19%),radial-gradient(circle at 80% 18%,#3b6b2a 0 3%,transparent 4%),linear-gradient(160deg,#2a1240,#120818);color:#ffe9d1}
+.shot.hw .pill{background:#ff8a1f;color:#1b0b26}
+.shot.bee{background:radial-gradient(circle at 80% 28%,#f2b632 0 13%,transparent 14%),repeating-linear-gradient(60deg,#f6e3b4 0 18px,#f1d89d 18px 36px);color:#3a2208}
+.shot.bee .pill{background:#3a2208;color:#f6e3b4}
+.shot.cat{background:radial-gradient(circle at 80% 28%,#f5b200 0 11%,transparent 12%),linear-gradient(160deg,#0f3a34,#082320);color:#fffcf3}
+.shot.cat .pill{background:#f5b200;color:#082320}
+.proj .meta{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px}
+.proj h3{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.proj p{color:var(--muted);font-size:15px}
+.proj .go{margin-top:6px;font-size:14px;color:var(--accent);font-weight:500}
+
 /* services */
 .head{display:flex;flex-direction:column;gap:14px;margin-bottom:48px}
 .head h2{font-size:clamp(36px,5vw,58px);font-weight:600}
@@ -158,7 +178,7 @@ footer{padding-block:48px;display:flex;justify-content:space-between;flex-wrap:w
   <div class="wrap">
     <a class="logo" href="#top">Michal Čermák<span>.</span></a>
     <div class="links">
-      <a href="#sluzby">Služby</a><a href="#postup">Postup</a><a href="#cenik">Ceník</a><a href="#omne">O mně</a>
+      <a href="#weby">Moje weby</a><a href="#sluzby">Služby</a><a href="#postup">Postup</a><a href="#cenik">Ceník</a><a href="#omne">O mně</a>
     </div>
     <a class="btn small" href="#kontakt">Napište mi</a>
   </div>
@@ -221,6 +241,39 @@ footer{padding-block:48px;display:flex;justify-content:space-between;flex-wrap:w
 
   <section class="statement">
     <h2>Zákazník se o vás rozhodne za pár vteřin v telefonu. <span class="dim">Starý web z roku 2012 ho pošle ke konkurenci.</span></h2>
+  </section>
+
+  <section id="weby">
+    <div class="head">
+      <p class="eyebrow">Moje weby</p>
+      <h2>Co jsem už vytvořil.</h2>
+    </div>
+    <div class="work">
+      <a class="proj" href="https://alescermak79-lab.github.io/vcelarstvi-lada/" target="_blank" rel="noopener">
+        <div class="shot bee"><span class="pill">Prodej online</span><small>Jižní Morava</small><b>Med z Kačkovca</b></div>
+        <div class="meta">
+          <h3>Včelař Láda</h3>
+          <p>Web malého včelaře s příběhem o úlech u maringotky a objednávkou medu ve sklenicích 250 g, 500 g a 1 kg.</p>
+          <span class="go">Otevřít web ↗</span>
+        </div>
+      </a>
+      <a class="proj" href="https://alescermak79-lab.github.io/daisyazyl-podpora/" target="_blank" rel="noopener">
+        <div class="shot cat"><span class="pill">Neziskovka</span><small>Daisy azyl</small><b>Druhá šance pro kočičky</b></div>
+        <div class="meta">
+          <h3>Daisy azyl</h3>
+          <p>Kampaň na pravidelné dary pro kočičí azyl. Příběhy zvířat a QR platba trvalého příkazu přímo v telefonu.</p>
+          <span class="go">Otevřít web ↗</span>
+        </div>
+      </a>
+      <a class="proj" href="https://alescermak79-lab.github.io/dynova-stezka/" target="_blank" rel="noopener">
+        <div class="shot hw"><span class="pill">Webová aplikace</span><small>Sousedská akce</small><b>Sousedský Halloween</b></div>
+        <div class="meta">
+          <h3>Sousedský Halloween</h3>
+          <p>Mapa domů, kde děti dostanou sladkosti, s plánováním trasy a navigací k dalšímu domu přímo v mobilu.</p>
+          <span class="go">Otevřít web ↗</span>
+        </div>
+      </a>
+    </div>
   </section>
 
   <section id="sluzby">
