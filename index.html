@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Michal Čermák – moderní weby a grafika s pomocí AI pro podniky se zastaralým webem.">
+<title>Michal Čermák</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Apple-like single column, huge quiet type, one live "phone" showcase as the hero moment */
+:root{
+  --bg:#fbfaf8; --bg-2:#f2f0ec; --fg:#141312; --muted:#6e6a64; --line:#e4e0da;
+  --accent:#d9472b; --accent-soft:#fbe6e0; --card:#ffffff;
+  --display:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --body:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d0c0b; --bg-2:#171614; --fg:#f4f2ee; --muted:#9a958e; --line:#2a2825;
+  --accent:#ff6a4d; --accent-soft:#3a1d16; --card:#1a1917; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d0c0b; --bg-2:#171614; --fg:#f4f2ee; --muted:#9a958e; --line:#2a2825;
+  --accent:#ff6a4d; --accent-soft:#3a1d16; --card:#1a1917; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-inline:20px}
+a{color:inherit}
+.wrap{max-width:1080px;margin-inline:auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-0.035em;line-height:1.04}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:clamp(19px,2.2vw,23px);color:var(--muted);max-width:34ch;line-height:1.45}
+section{padding-block:clamp(72px,11vw,140px)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;margin-inline:-20px;padding:14px 20px;
+  background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-weight:600;letter-spacing:-0.02em;text-decoration:none;font-size:16px}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:24px;font-size:14px}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:var(--fg)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--fg);color:var(--bg);text-decoration:none;border:0;cursor:pointer;
+  font:500 15px/1 var(--body);padding:14px 22px;border-radius:999px;transition:transform .2s,opacity .2s}
+.btn:hover{transform:translateY(-1px);opacity:.9}
+.btn.small{padding:9px 16px;font-size:14px}
+.btn.ghost{background:transparent;color:var(--accent);padding-inline:4px}
+@media (max-width:720px){.links{display:none}}
+
+/* hero */
+.hero{padding-block:clamp(56px,9vw,110px) clamp(40px,6vw,72px);text-align:center}
+.hero .eyebrow{margin-bottom:22px}
+.hero h1{font-size:clamp(46px,8.6vw,104px);font-weight:600;max-width:14ch;margin-inline:auto}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lead{margin:26px auto 0;text-align:center}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+
+/* showcase */
+.stage{position:relative;margin-top:clamp(48px,7vw,80px);display:flex;justify-content:center;align-items:flex-end;gap:clamp(16px,4vw,48px);flex-wrap:wrap}
+.phone{width:270px;max-width:100%;aspect-ratio:9/19;border-radius:44px;background:#111;padding:10px;box-shadow:0 40px 80px -30px rgba(20,10,5,.35),0 0 0 1px var(--line)}
+.screen{height:100%;border-radius:35px;overflow:hidden;background:#fff8f0;color:#2a1a12;display:flex;flex-direction:column;font-size:12px;text-align:left}
+.phone.alt .screen{background:#f3f5f0;color:#18231a}
+.notch{width:86px;height:22px;background:#111;border-radius:0 0 14px 14px;margin:0 auto}
+.s-head{padding:14px 18px 0;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:13px}
+.s-hero{margin:12px 12px 0;border-radius:20px;padding:18px;color:#fff;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;
+  background:radial-gradient(circle at 70% 30%,#f5b041 0 12%,transparent 13%),radial-gradient(circle at 30% 55%,#7a1f12 0 7%,transparent 8%),radial-gradient(circle at 62% 66%,#7a1f12 0 6%,transparent 7%),radial-gradient(circle at 50% 50%,#e85d3a 0 46%,#c9882f 47% 53%,#3b1a10 54%)}
+.s-hero b{font-size:20px;letter-spacing:-.02em;line-height:1.1}
+.phone.alt .s-hero{background:radial-gradient(circle at 75% 25%,#cfe3b5 0 16%,transparent 17%),linear-gradient(140deg,#3e6b45,#1f3a26)}
+.s-list{padding:12px 16px;display:grid;gap:8px}
+.s-item{display:flex;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.08);padding-bottom:7px}
+.s-item span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.s-btn{margin:auto 14px 16px;background:#2a1a12;color:#fff;text-align:center;border-radius:14px;padding:11px;font-weight:600}
+.phone.alt .s-btn{background:#1f3a26}
+.phone.side{transform:translateY(-28px) rotate(-3deg)}
+.phone.side2{transform:translateY(-28px) rotate(3deg)}
+@media (max-width:860px){.phone.side,.phone.side2{display:none}}
+.caption{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:22px}
+
+/* statement */
+.statement h2{font-size:clamp(34px,5.4vw,64px);font-weight:600;max-width:20ch}
+.statement h2 .dim{color:var(--muted)}
+
+/* services */
+.head{display:flex;flex-direction:column;gap:14px;margin-bottom:48px}
+.head h2{font-size:clamp(36px,5vw,58px);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.tile{background:var(--bg-2);border-radius:28px;padding:34px;display:flex;flex-direction:column;gap:12px;min-height:250px}
+.tile h3{font-size:28px;font-weight:600}
+.tile p{color:var(--muted);max-width:40ch}
+.tile .tag{margin-top:auto;font-family:var(--mono);font-size:12px;color:var(--accent)}
+.tile.wide{grid-column:1/-1;background:var(--fg);color:var(--bg)}
+.tile.wide p{color:color-mix(in srgb,var(--bg) 70%,var(--fg))}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;border-top:1px solid var(--line);padding-top:32px}
+@media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+.step .n{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:14px}
+.step h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+.step p{color:var(--muted);font-size:15px}
+
+/* pricing */
+.prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.prices{grid-template-columns:1fr}}
+.price{border:1px solid var(--line);border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:18px;background:var(--card)}
+.price.pick{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.price .name{font-weight:600;font-size:20px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.badge{font-family:var(--mono);font-size:11px;background:var(--accent-soft);color:var(--accent);padding:4px 9px;border-radius:999px;letter-spacing:.04em}
+.amount{font-family:var(--display);font-size:44px;font-weight:600;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.amount small{font-size:16px;color:var(--muted);font-weight:400;letter-spacing:0}
+.price ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px;color:var(--muted)}
+.price li::before{content:"✓";color:var(--accent);margin-right:10px;font-weight:600}
+.note{margin-top:20px;font-size:14px;color:var(--muted)}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(32px,6vw,80px);align-items:center}
+@media (max-width:760px){.about{grid-template-columns:1fr}}
+.portrait{aspect-ratio:4/5;max-width:100%;border-radius:32px;background:linear-gradient(160deg,var(--bg-2),var(--accent-soft));display:grid;place-items:center;position:relative;overflow:hidden}
+.portrait .mono{font-family:var(--display);font-size:clamp(90px,14vw,150px);font-weight:600;letter-spacing:-.06em;color:var(--accent)}
+.portrait .age{position:absolute;left:20px;bottom:20px;background:var(--card);border-radius:999px;padding:8px 14px;font-family:var(--mono);font-size:12px}
+.about h2{font-size:clamp(34px,4.6vw,54px);font-weight:600;margin-bottom:22px}
+.about p{color:var(--muted);max-width:52ch}
+.about p+p{margin-top:14px}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.facts span{border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px}
+
+/* contact */
+.contact{background:var(--bg-2);border-radius:40px;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+@media (max-width:760px){.contact{grid-template-columns:1fr}}
+.contact h2{font-size:clamp(36px,5vw,58px);font-weight:600;margin-bottom:18px}
+.contact .lead{font-size:19px}
+.direct{margin-top:28px;display:grid;gap:6px;font-size:15px}
+.direct b{font-weight:500;user-select:all}
+form{display:grid;gap:12px}
+label{font-size:13px;color:var(--muted);display:grid;gap:6px}
+input,select,textarea{font:inherit;font-size:16px;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;width:100%}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sent{background:var(--card);border-radius:14px;padding:16px;font-size:15px}
+
+footer{padding-block:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted)}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero h1,.hero .lead,.cta-row,.stage{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero .lead{animation-delay:.08s}.cta-row{animation-delay:.16s}.stage{animation-delay:.24s}
+  @keyframes rise{from{transform:translateY(18px)}to{transform:none}}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">Michal Čermák<span>.</span></a>
+    <div class="links">
+      <a href="#sluzby">Služby</a><a href="#postup">Postup</a><a href="#cenik">Ceník</a><a href="#omne">O mně</a>
+    </div>
+    <a class="btn small" href="#kontakt">Napište mi</a>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <p class="eyebrow">Weby a grafika s pomocí AI</p>
+    <h1>Váš web zestárl. <em>Omladíme</em> ho.</h1>
+    <p class="lead">Přestavím zastaralý web vašeho podniku na moderní prezentaci, která funguje na mobilu a přivádí zákazníky. Pro řemeslníky, salony, servisy, obchody i restaurace.</p>
+    <div class="cta-row">
+      <a class="btn" href="#kontakt">Chci nový web</a>
+      <a class="btn ghost" href="#sluzby">Co umím ›</a>
+    </div>
+
+    <div class="stage" aria-label="Ukázky návrhů webů pro podniky">
+      <div class="phone side alt" aria-hidden="true">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="s-head"><span>Autoservis Novák</span><span>☰</span></div>
+          <div class="s-hero"><small>Servis všech značek</small><b>Přezutí na zimu bez čekání</b></div>
+          <div class="s-list">
+            <div class="s-item"><span>Přezutí kol</span><span>590 Kč</span></div>
+            <div class="s-item"><span>Výměna oleje</span><span>890 Kč</span></div>
+            <div class="s-item"><span>Příprava na STK</span><span>1 200 Kč</span></div>
+          </div>
+          <div class="s-btn">Objednat termín</div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="s-head"><span>Pizzeria Forno</span><span>☰</span></div>
+          <div class="s-hero"><small>Z pece na dřevo</small><b>Neapolská pizza do 20 minut</b></div>
+          <div class="s-list">
+            <div class="s-item"><span>Margherita</span><span>189 Kč</span></div>
+            <div class="s-item"><span>Diavola</span><span>229 Kč</span></div>
+            <div class="s-item"><span>Quattro formaggi</span><span>239 Kč</span></div>
+            <div class="s-item"><span>Prosciutto e funghi</span><span>235 Kč</span></div>
+          </div>
+          <div class="s-btn">Objednat s sebou</div>
+        </div>
+      </div>
+      <div class="phone side2" aria-hidden="true">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="s-head"><span>Salon Lucie</span><span>☰</span></div>
+          <div class="s-hero" style="background:linear-gradient(150deg,#c9a28c,#4a2f3a)"><small>Kadeřnictví a kosmetika</small><b>Volný termín ještě tento týden</b></div>
+          <div class="s-list">
+            <div class="s-item"><span>Dámský střih</span><span>650 Kč</span></div>
+            <div class="s-item"><span>Barvení</span><span>od 1 100 Kč</span></div>
+            <div class="s-item"><span>Pánský střih</span><span>350 Kč</span></div>
+          </div>
+          <div class="s-btn">Rezervovat online</div>
+        </div>
+      </div>
+    </div>
+    <p class="caption">Ukázkové návrhy · smyšlené podniky</p>
+  </header>
+
+  <section class="statement">
+    <h2>Zákazník se o vás rozhodne za pár vteřin v telefonu. <span class="dim">Starý web z roku 2012 ho pošle ke konkurenci.</span></h2>
+  </section>
+
+  <section id="sluzby">
+    <div class="head">
+      <p class="eyebrow">Služby</p>
+      <h2>Všechno, co podnik online potřebuje.</h2>
+    </div>
+    <div class="grid">
+      <div class="tile">
+        <h3>Redesign starého webu</h3>
+        <p>Převezmu obsah vašeho současného webu a postavím ho znovu: čistě, rychle a hlavně pro mobil. Služby, ceník, kontakt a tlačítko „zavolat“ na jedno klepnutí.</p>
+        <span class="tag">Hotovo obvykle do 7 dnů</span>
+      </div>
+      <div class="tile">
+        <h3>Nový web od nuly</h3>
+        <p>Nemáte web vůbec? Připravím ho včetně textů a fotek. Ceník, rezervace, poptávkový formulář nebo polední menu podle toho, co děláte.</p>
+        <span class="tag">Texty i fotky pomůžu připravit</span>
+      </div>
+      <div class="tile">
+        <h3>Logo a vizuál</h3>
+        <p>Logo, barvy a písmo, které k vám sedí. Od vizitek a letáků přes polep auta až po ceduli na provozovnu.</p>
+        <span class="tag">2–3 návrhy na výběr</span>
+      </div>
+      <div class="tile">
+        <h3>Sociální sítě</h3>
+        <p>Šablony příspěvků a stories pro Instagram a Facebook. Akce, novinka nebo volný termín během pár minut.</p>
+        <span class="tag">Instagram · Facebook · Google</span>
+      </div>
+      <div class="tile wide">
+        <h3>Proč s pomocí AI?</h3>
+        <p>Umělá inteligence mi pomáhá s návrhy, texty i úpravou fotek. Díky tomu pracuju rychleji a vy platíte méně než v klasické agentuře. Výsledek ale vždycky ladím ručně, aby vypadal jako vy, ne jako šablona.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="postup">
+    <div class="head">
+      <p class="eyebrow">Jak spolupráce probíhá</p>
+      <h2>Od starého webu k novému za týden.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><p class="n">01</p><h3>Krátký hovor</h3><p>Projdu váš současný web, zastavím se u vás nebo zavoláme. Řeknete mi, co vám na něm vadí.</p></div>
+      <div class="step"><p class="n">02</p><h3>Návrh do 48 hodin</h3><p>Pošlu vám první podobu webu nebo grafiky. Zdarma a nezávazně.</p></div>
+      <div class="step"><p class="n">03</p><h3>Úpravy</h3><p>Doladíme texty, fotky a barvy. Dokud nejste spokojení, pracuju dál.</p></div>
+      <div class="step"><p class="n">04</p><h3>Spuštění</h3><p>Web dám online, napojím na Google Mapy a ukážu vám, jak si ceník nebo novinky měnit sami.</p></div>
+    </div>
+  </section>
+
+  <section id="cenik">
+    <div class="head">
+      <p class="eyebrow">Ceník</p>
+      <h2>Jasné ceny, žádná překvapení.</h2>
+    </div>
+    <div class="prices">
+      <div class="price">
+        <div class="name">Start</div>
+        <div class="amount">4 900 <small>Kč</small></div>
+        <ul><li>Jednostránkový web</li><li>Služby, ceník, otevírací doba</li><li>Mapa a kontakt</li><li>Optimalizace pro mobil</li></ul>
+      </div>
+      <div class="price pick">
+        <div class="name">Podnik <span class="badge">Nejčastější</span></div>
+        <div class="amount">9 900 <small>Kč</small></div>
+        <ul><li>Vše ze Startu</li><li>Až 5 podstránek</li><li>Obsah, který si měníte sami</li><li>Rezervace nebo poptávkový formulář</li><li>Profil na Google Mapách</li></ul>
+      </div>
+      <div class="price">
+        <div class="name">Kompletní vizuál</div>
+        <div class="amount">16 900 <small>Kč</small></div>
+        <ul><li>Vše z balíčku Podnik</li><li>Logo a barevný styl</li><li>Vizitky a letáky</li><li>10 šablon na sociální sítě</li></ul>
+      </div>
+    </div>
+    <p class="note">Ceny jsou orientační a konečné. Doménu a hosting vyřeším za vás, obvykle za 200–400 Kč měsíčně.</p>
+  </section>
+
+  <section id="omne">
+    <div class="about">
+      <div class="portrait" aria-hidden="true"><span class="mono">MČ</span><span class="age">18 let · AI &amp; web</span></div>
+      <div>
+        <p class="eyebrow" style="margin-bottom:16px">O mně</p>
+        <h2>Ahoj, jsem Michal.</h2>
+        <p>Je mi 18 a internet je můj svět odjakživa. Naplno jsem se pustil do práce s umělou inteligencí a webovým designem, protože mě baví vidět, jak dobrý web promění malý podnik.</p>
+        <p>Nejsem velká agentura. Komunikujete přímo se mnou, odpovídám rychle a na výsledku mi záleží. Rád se zastavím osobně, poznám, jak fungujete, a pak navrhnu web, který vám přivede zákazníky.</p>
+        <div class="facts"><span>Weby</span><span>Redesign</span><span>Grafika</span><span>AI nástroje</span><span>Sociální sítě</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" style="padding-top:0">
+    <div class="contact">
+      <div>
+        <p class="eyebrow" style="margin-bottom:16px">Kontakt</p>
+        <h2>Pojďme to probrat.</h2>
+        <p class="lead">Napište mi pár vět o svém podniku. Ozvu se do 24 hodin s nápadem, co by vám pomohlo.</p>
+        <div class="direct">
+          <span>E-mail: <b>ahoj@michalcermak.cz</b></span>
+          <span>Telefon: <b>+420 000 000 000</b></span>
+        </div>
+      </div>
+      <form id="f" novalidate>
+        <label for="jmeno">Vaše jméno<input id="jmeno" name="jmeno" required placeholder="Jana Nováková"></label>
+        <label for="podnik">Název podniku<input id="podnik" name="podnik" placeholder="Truhlářství Dvořák"></label>
+        <label for="web">Současný web (pokud máte)<input id="web" name="web" placeholder="www.vas-podnik.cz"></label>
+        <label for="typ">Co potřebujete
+          <select id="typ" name="typ"><option>Předělat starý web</option><option>Nový web</option><option>Logo a vizuál</option><option>Sociální sítě</option><option>Zatím nevím</option></select>
+        </label>
+        <label for="zprava">Zpráva<textarea id="zprava" name="zprava" placeholder="Náš web je starý a na mobilu se špatně čte…"></textarea></label>
+        <button class="btn" type="submit" style="justify-self:start">Odeslat poptávku</button>
+        <p class="sent" id="ok" hidden>Díky! Tohle je ukázka formuláře. Na ostrém webu zpráva dorazí Michalovi e-mailem.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Michal Čermák · Weby a grafika pro podniky</span>
+    <span>Navrženo s pomocí AI, doladěno ručně.</span>
+  </footer>
+</main>
+
+<script>
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var j=document.getElementById('jmeno');
+  if(!j.value.trim()){j.focus();j.style.borderColor='var(--accent)';return;}
+  document.getElementById('ok').hidden=false;
+});
+</script>
+</body>
+</html>
