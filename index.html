@@ -112,7 +112,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .tile{background:var(--bg-2);border-radius:28px;padding:34px;display:flex;flex-direction:column;gap:12px;min-height:250px}
 .tile h3{font-size:28px;font-weight:600}
 .tile p{color:var(--muted);max-width:40ch}
-.tile .tag{margin-top:auto;font-family:var(--mono);font-size:12px;color:var(--accent)}
+.tile .tag{margin-top:auto;align-self:flex-start;font-family:var(--body);font-size:14px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:6px 12px;border-radius:999px}
 .tile.wide{grid-column:1/-1;background:var(--fg);color:var(--bg)}
 .tile.wide p{color:color-mix(in srgb,var(--bg) 70%,var(--fg))}
 
@@ -317,9 +317,9 @@ footer{padding-block:48px;display:flex;justify-content:space-between;flex-wrap:w
         <span class="tag">2–3 návrhy na výběr</span>
       </div>
       <div class="tile">
-        <h3>Sociální sítě</h3>
-        <p>Šablony příspěvků a stories pro Instagram a Facebook. Akce, novinka nebo volný termín během pár minut.</p>
-        <span class="tag">Instagram · Facebook · Google</span>
+        <h3>Vidět na Googlu</h3>
+        <p>Založím a vyladím váš profil na Google Mapách: fotky, otevírací doba, odkaz na web. Zákazníci vás najdou, když hledají služby ve vašem okolí.</p>
+        <span class="tag">Google Mapy · vyhledávání · recenze</span>
       </div>
       <div class="tile wide">
         <h3>Proč s pomocí AI?</h3>
@@ -414,7 +414,7 @@ footer{padding-block:48px;display:flex;justify-content:space-between;flex-wrap:w
         <label for="podnik">Název podniku<input id="podnik" name="podnik" placeholder="Truhlářství Dvořák"></label>
         <label for="web">Současný web (pokud máte)<input id="web" name="web" placeholder="www.vas-podnik.cz"></label>
         <label for="typ">Co potřebujete
-          <select id="typ" name="typ"><option>Předělat starý web</option><option>Nový web</option><option>Logo a vizuál</option><option>Sociální sítě</option><option>Zatím nevím</option></select>
+          <select id="typ" name="typ"><option>Předělat starý web</option><option>Nový web</option><option>Logo a vizuál</option><option>Profil na Googlu</option><option>Zatím nevím</option></select>
         </label>
         <label for="zprava">Zpráva<textarea id="zprava" name="zprava" placeholder="Náš web je starý a na mobilu se špatně čte…"></textarea></label>
         <button class="btn" type="submit" style="justify-self:start">Odeslat poptávku</button>
