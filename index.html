@@ -142,6 +142,14 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .price li::before{content:"✓";color:var(--accent);margin-right:10px;font-weight:600}
 .note{margin-top:20px;font-size:14px;color:var(--muted)}
 
+.why{margin-top:40px;background:var(--bg-2);border-radius:28px;padding:clamp(24px,4vw,40px);display:grid;gap:14px}
+.why h3{font-size:clamp(24px,3vw,30px);font-weight:600}
+.why-lead{color:var(--muted);max-width:60ch}
+.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:10px}
+@media (max-width:760px){.why-grid{grid-template-columns:1fr}}
+.why-grid h4{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.why-grid p{color:var(--muted);font-size:15px}
+
 /* about */
 .about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(32px,6vw,80px);align-items:center}
 @media (max-width:760px){.about{grid-template-columns:1fr}}
@@ -359,6 +367,15 @@ footer{padding-block:48px;display:flex;justify-content:space-between;flex-wrap:w
       </div>
     </div>
     <p class="note">Ceny jsou orientační a konečné. Doménu a hosting vyřeším za vás, obvykle za 200–400 Kč měsíčně.</p>
+    <div class="why">
+      <h3>Proč se platí i měsíčně?</h3>
+      <p class="why-lead">Web není jednorázová věc. Měsíční platba pokrývá, aby váš web fungoval a byl pořád aktuální, aniž byste se o cokoli museli starat.</p>
+      <div class="why-grid">
+        <div><h4>Kontrola funkčnosti</h4><p>Pravidelně kontroluju, že web běží, načítá se rychle a všechno na něm funguje, i na mobilu.</p></div>
+        <div><h4>Změny v nabídce</h4><p>Změnila se cena, otevírací doba nebo služby? Napíšete mi a já to na webu upravím.</p></div>
+        <div><h4>Nové věci na web</h4><p>Chcete přidat akci, novinku, fotky nebo novou sekci? Doplním ji za vás.</p></div>
+      </div>
+    </div>
   </section>
 
   <section id="omne">
