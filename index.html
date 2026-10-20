@@ -133,6 +133,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .badge{font-family:var(--body);font-size:13px;font-weight:700;background:var(--accent);color:#fff;padding:6px 12px;border-radius:999px;letter-spacing:.02em;white-space:nowrap}
 .amount{font-family:var(--display);font-size:44px;font-weight:600;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .amount small{font-size:16px;color:var(--muted);font-weight:400;letter-spacing:0}
+.once{margin-top:-12px;font-size:14px;color:var(--muted)}
 .price ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px;color:var(--muted)}
 .price li::before{content:"✓";color:var(--accent);margin-right:10px;font-weight:600}
 .note{margin-top:20px;font-size:14px;color:var(--muted)}
@@ -330,17 +331,20 @@ footer{padding-block:48px;display:flex;justify-content:space-between;flex-wrap:w
     <div class="prices">
       <div class="price">
         <div class="name">Start</div>
-        <div class="amount">4 900 <small>Kč</small></div>
-        <ul><li>Jednostránkový web</li><li>Služby, ceník, otevírací doba</li><li>Mapa a kontakt</li><li>Optimalizace pro mobil</li></ul>
+        <div class="amount">1 500 <small>Kč / měsíc</small></div>
+        <p class="once">nebo jednorázově 4 900 Kč</p>
+        <ul><li>Jednostránkový web</li><li>Nové nebo vaše logo na celém webu</li><li>Služby, ceník, otevírací doba</li><li>Mapa a kontakt</li><li>Optimalizace pro mobil</li></ul>
       </div>
       <div class="price pick">
         <div class="name">Podnik <span class="badge">Nejčastější</span></div>
-        <div class="amount">9 900 <small>Kč</small></div>
-        <ul><li>Vše ze Startu</li><li>Až 5 podstránek</li><li>Obsah, který si měníte sami</li><li>Rezervace nebo poptávkový formulář</li><li>Profil na Google Mapách</li></ul>
+        <div class="amount">1 999 <small>Kč / měsíc</small></div>
+        <p class="once">nebo jednorázově 9 900 Kč</p>
+        <ul><li>Vše ze Startu</li><li>Nové nebo vaše logo na celém webu</li><li>Obsah, který si měníte sami</li><li>Profil na Google Mapách</li></ul>
       </div>
       <div class="price">
         <div class="name">Kompletní vizuál</div>
-        <div class="amount">16 900 <small>Kč</small></div>
+        <div class="amount">2 299 <small>Kč / měsíc</small></div>
+        <p class="once">nebo jednorázově 16 900 Kč</p>
         <ul><li>Vše z balíčku Podnik</li><li>Logo a barevný styl</li><li>Vizitky a letáky</li><li>10 šablon na sociální sítě</li></ul>
       </div>
     </div>
