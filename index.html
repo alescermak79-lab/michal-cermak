@@ -1,523 +1,454 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Michal Čermák – moderní weby a grafika s pomocí AI pro podniky se zastaralým webem. První návrh do 48 hodin zdarma, hotovo obvykle do 7 dnů.">
-<meta name="author" content="Michal Čermák">
-<meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0d0c0b" media="(prefers-color-scheme: dark)">
-<link rel="canonical" href="https://alescermak79-lab.github.io/michal-cermak/">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>mc – weby tvořené s AI</title>
+<meta name="description" content="Rychlé, přehledné weby na míru. Stavím je s pomocí AI, ladím ručně.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314161B'/%3E%3Cpath d='M43.4 20.75A17.5 17.5 0 1 0 43.4 43.25' fill='none' stroke='%23fff' stroke-width='4.5' stroke-linecap='round'/%3E%3Ccircle cx='49' cy='32' r='3' fill='%23fff'/%3E%3Cpath d='M21 36V32a4.5 4.5 0 0 1 9 0V36M30 32a4.5 4.5 0 0 1 9 0V36' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:title" content="mc – weby tvořené s AI">
+<meta property="og:description" content="Přehledné weby pro malé firmy. Hotovo do 7 dnů, cena předem.">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="cs_CZ">
-<meta property="og:site_name" content="Michal Čermák">
-<meta property="og:title" content="Michal Čermák – Váš web zestárl. Omladíme ho.">
-<meta property="og:description" content="Moderní weby a grafika pro podniky. První návrh do 48 hodin zdarma.">
-<meta property="og:url" content="https://alescermak79-lab.github.io/michal-cermak/">
-<meta property="og:image" content="https://alescermak79-lab.github.io/michal-cermak/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Michal Čermák – weby a grafika","url":"https://alescermak79-lab.github.io/michal-cermak/","image":"https://alescermak79-lab.github.io/michal-cermak/og.png","description":"Moderní weby a grafika s pomocí AI pro podniky se zastaralým webem.","areaServed":"CZ","founder":{"@type":"Person","name":"Michal Čermák"}}</script>
-<title>Michal Čermák</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* Layout: Apple-like single column, huge quiet type, one live "phone" showcase as the hero moment */
 :root{
-  --bg:#fbfaf8; --bg-2:#f2f0ec; --fg:#141312; --muted:#6e6a64; --line:#e4e0da;
-  --accent:#d9472b; --accent-soft:#fbe6e0; --card:#ffffff; --amber:#d27a00; --amber-bg:#ffb627; --amber-ink:#2a1a00;
-  --display:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --body:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --bg:#FFFFFF; --bg2:#F4F6F9; --ink:#14161B; --mute:#5A6272; --line:rgba(20,22,27,.13); --dot:#3D6FE0;
+  --head:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box; color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0d0c0b; --bg-2:#171614; --fg:#f4f2ee; --muted:#9a958e; --line:#2a2825;
-  --accent:#ff6a4d; --accent-soft:#3a1d16; --card:#1a1917; --amber:#ffb627; --amber-bg:#ffb627; --amber-ink:#2a1a00; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0d0c0b; --bg-2:#171614; --fg:#f4f2ee; --muted:#9a958e; --line:#2a2825;
-  --accent:#ff6a4d; --accent-soft:#3a1d16; --card:#1a1917; --amber:#ffb627; --amber-bg:#ffb627; --amber-ink:#2a1a00; color-scheme:dark}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-inline:20px}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.wrap{max-width:1080px;margin-inline:auto}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-0.035em;line-height:1.04}
-p{margin:0}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.lead{font-size:clamp(19px,2.2vw,23px);color:var(--muted);max-width:34ch;line-height:1.45}
-section{padding-block:clamp(72px,11vw,140px)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid var(--dot);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+svg.mark{display:block}
+.ring{stroke-dasharray:420;stroke-dashoffset:0;animation:draw 1.6s cubic-bezier(.6,.1,.2,1) both}
+@keyframes draw{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+.pulse{animation:pop .5s 1.3s both cubic-bezier(.3,1.6,.5,1);transform-origin:233px 155px}
+@keyframes pop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.ring,.pulse{animation:none}}
 
-/* nav */
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;margin-inline:-20px;padding:14px 20px;
-  background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.logo{font-weight:600;letter-spacing:-0.02em;text-decoration:none;font-size:16px}
-.logo span{color:var(--accent)}
-.links{display:flex;gap:24px;font-size:14px}
-.links a{text-decoration:none;color:var(--muted)}
-.links a:hover{color:var(--fg)}
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--fg);color:var(--bg);text-decoration:none;border:0;cursor:pointer;
-  font:500 15px/1 var(--body);padding:14px 22px;border-radius:999px;transition:transform .2s,opacity .2s}
-.btn:hover{transform:translateY(-1px);opacity:.9}
-.btn.small{padding:9px 16px;font-size:14px}
-.btn.ghost{background:transparent;color:var(--accent);padding-inline:4px}
-@media (max-width:720px){.links{display:none}}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.nav{display:flex;gap:28px}
+.nav a{text-decoration:none;color:var(--mute);font-size:15px;transition:color .2s}
+.nav a:hover{color:var(--ink)}
+section{scroll-margin-top:72px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font:600 24px var(--head);letter-spacing:.04em}
+.btn{display:inline-block;text-decoration:none;font:500 16px var(--body);padding:13px 22px;border-radius:999px;border:1px solid var(--ink);transition:background .2s,color .2s}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn.solid:hover{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--bg)}
 
-/* hero */
-.hero{padding-block:clamp(56px,9vw,110px) clamp(40px,6vw,72px);text-align:center}
-.hero .eyebrow{margin-bottom:22px}
-.hero h1{font-size:clamp(46px,8.6vw,104px);font-weight:600;max-width:14ch;margin-inline:auto}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero .lead{margin:26px auto 0;text-align:center}
-.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:center;padding:72px 0 96px}
+h1{font:700 clamp(40px,6.4vw,76px)/1.02 var(--head);letter-spacing:-.025em;margin:0 0 24px}
+.lead{font-size:19px;color:var(--mute);max-width:46ch;margin:0 0 36px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.big{justify-self:center;width:min(100%,300px);aspect-ratio:1;border-radius:22%;background:var(--bg2);display:grid;place-items:center;border:1px solid var(--line)}
+.big svg{width:78%}
 
-/* showcase */
-.stage{position:relative;margin-top:clamp(48px,7vw,80px);display:flex;justify-content:center;align-items:flex-end;gap:clamp(16px,4vw,48px);flex-wrap:wrap}
-.phone{width:270px;max-width:100%;aspect-ratio:9/19;border-radius:44px;background:#111;padding:10px;box-shadow:0 40px 80px -30px rgba(20,10,5,.35),0 0 0 1px var(--line)}
-.screen{height:100%;border-radius:35px;overflow:hidden;background:#fff8f0;color:#2a1a12;display:flex;flex-direction:column;font-size:12px;text-align:left}
-.phone.alt .screen{background:#f3f5f0;color:#18231a}
-.notch{width:86px;height:22px;background:#111;border-radius:0 0 14px 14px;margin:0 auto}
-.s-head{padding:14px 18px 0;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:13px}
-.s-hero{margin:12px 12px 0;border-radius:20px;padding:18px;color:#fff;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;
-  background:radial-gradient(circle at 70% 30%,#f5b041 0 12%,transparent 13%),radial-gradient(circle at 30% 55%,#7a1f12 0 7%,transparent 8%),radial-gradient(circle at 62% 66%,#7a1f12 0 6%,transparent 7%),radial-gradient(circle at 50% 50%,#e85d3a 0 46%,#c9882f 47% 53%,#3b1a10 54%)}
-.s-hero b{font-size:20px;letter-spacing:-.02em;line-height:1.1}
-.phone.alt .s-hero{background:radial-gradient(circle at 75% 25%,#cfe3b5 0 16%,transparent 17%),linear-gradient(140deg,#3e6b45,#1f3a26)}
-.s-list{padding:12px 16px;display:grid;gap:8px}
-.s-item{display:flex;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.08);padding-bottom:7px}
-.s-item span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.s-btn{margin:auto 14px 16px;background:#2a1a12;color:#fff;text-align:center;border-radius:14px;padding:11px;font-weight:600}
-.phone.alt .s-btn{background:#1f3a26}
-.phone.side{transform:translateY(-28px) rotate(-3deg)}
-.phone.side2{transform:translateY(-28px) rotate(3deg)}
-@media (max-width:860px){.phone.side,.phone.side2{display:none}}
-.caption{text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:22px}
+section{padding:80px 0;border-top:1px solid var(--line)}
+h2{font:600 clamp(28px,4vw,42px)/1.1 var(--head);letter-spacing:-.02em;margin:0 0 40px;max-width:20ch}
 
-/* statement */
-.statement h2{font-size:clamp(34px,5.4vw,64px);font-weight:600;max-width:20ch}
-.statement h2 .dim{color:var(--muted)}
+.rows>div{display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:26px 0;border-top:1px solid var(--line)}
+.rows>div:last-child{border-bottom:1px solid var(--line)}
+.rows h3{font:600 22px var(--head);margin:0}
+.rows p{margin:0;color:var(--mute);max-width:56ch}
 
-/* work */
-.work{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-@media (max-width:900px){.work{grid-template-columns:1fr}}
-.proj{display:flex;flex-direction:column;text-decoration:none;color:inherit;border-radius:28px;overflow:hidden;background:var(--bg-2);transition:transform .25s}
-.proj:hover{transform:translateY(-4px)}
-.shot{aspect-ratio:16/11;max-width:100%;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;position:relative}
-.shot b{font-family:var(--display);font-size:24px;letter-spacing:-.03em;line-height:1.1;max-width:14ch}
-.shot small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
-.shot .pill{position:absolute;top:18px;left:18px;font-size:11px;font-weight:600;padding:6px 11px;border-radius:999px}
-.shot.hw{background:radial-gradient(circle at 78% 30%,#ff8a1f 0 15%,#c9560d 16% 18%,transparent 19%),radial-gradient(circle at 80% 18%,#3b6b2a 0 3%,transparent 4%),linear-gradient(160deg,#2a1240,#120818);color:#ffe9d1}
-.shot.hw .pill{background:#ff8a1f;color:#1b0b26}
-.shot.bee{background:radial-gradient(circle at 80% 28%,#f2b632 0 13%,transparent 14%),repeating-linear-gradient(60deg,#f6e3b4 0 18px,#f1d89d 18px 36px);color:#3a2208}
-.shot.bee .pill{background:#3a2208;color:#f6e3b4}
-.shot.cat{background:radial-gradient(circle at 80% 28%,#f5b200 0 11%,transparent 12%),linear-gradient(160deg,#0f3a34,#082320);color:#fffcf3}
-.shot.cat .pill{background:#f5b200;color:#082320}
-.proj .meta{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px}
-.proj h3{font-size:22px;font-weight:600;letter-spacing:-.02em}
-.proj p{color:var(--muted);font-size:15px}
-.proj .go{margin-top:6px;font-size:14px;color:var(--accent);font-weight:500}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.plan{padding:32px 28px;display:flex;flex-direction:column;gap:14px}
+.plan+.plan{border-left:1px solid var(--line)}
+.plan.main{background:var(--bg2)}
+.plan h3{font:600 24px var(--head);margin:0}
+.price{font:700 34px var(--head);letter-spacing:-.02em;margin:0}
+.price small{font:400 15px var(--body);color:var(--mute);letter-spacing:0}
+.plan ul{list-style:none;padding:0;margin:0;color:var(--mute);display:grid;gap:8px;flex:1}
+.plan li::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--dot);margin-right:10px;vertical-align:middle}
+.note{color:var(--mute);font-size:15px;margin:20px 0 0}
+.monthly{border-top:1px solid var(--line);padding-top:16px}
+.monthly .price{font-size:22px;margin:0 0 6px}
+.monthly p:last-child{margin:0;color:var(--mute);font-size:15px}
 
-/* services */
-.head{display:flex;flex-direction:column;gap:14px;margin-bottom:48px}
-.head h2{font-size:clamp(36px,5vw,58px);font-weight:600}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-@media (max-width:720px){.grid{grid-template-columns:1fr}}
-.tile{background:var(--bg-2);border-radius:28px;padding:34px;display:flex;flex-direction:column;gap:12px;min-height:250px}
-.tile h3{font-size:28px;font-weight:600}
-.tile p{color:var(--muted);max-width:40ch}
-.tile .tag{margin-top:auto;align-self:flex-start;font-family:var(--body);font-size:14px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:6px 12px;border-radius:999px}
-.tile.wide{grid-column:1/-1;background:var(--fg);color:var(--bg)}
-.tile.wide p{color:color-mix(in srgb,var(--bg) 70%,var(--fg))}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:s}
+ol.steps li{counter-increment:s;border-top:2px solid var(--ink);padding-top:16px}
+ol.steps li::before{content:counter(s);font:700 15px var(--head);color:var(--dot);display:block;margin-bottom:6px}
+ol.steps h3{font:600 20px var(--head);margin:0 0 6px}
+ol.steps p{margin:0;color:var(--mute);font-size:16px}
 
-/* process */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;border-top:1px solid var(--line);padding-top:32px}
-@media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:480px){.steps{grid-template-columns:1fr}}
-.step .n{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:14px}
-.step h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
-.step p{color:var(--muted);font-size:15px}
-
-/* pricing */
-.prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-@media (max-width:860px){.prices{grid-template-columns:1fr}}
-.price{border:1px solid var(--line);border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:18px;background:var(--card)}
-.price.pick{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
-.price .name{font-weight:600;font-size:20px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.badge{font-family:var(--body);font-size:13px;font-weight:700;background:var(--accent);color:#fff;padding:6px 12px;border-radius:999px;letter-spacing:.02em;white-space:nowrap}
-.amount{font-family:var(--display);font-size:48px;font-weight:700;line-height:1;color:var(--amber);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
-.amount small{font-size:16px;color:var(--muted);font-weight:400;letter-spacing:0}
-.save{align-self:flex-start;margin-bottom:-6px;background:var(--amber-bg);color:var(--amber-ink);font-size:14px;font-weight:700;padding:5px 12px;border-radius:999px}
-.was{margin-top:-14px;font-size:16px;color:var(--muted)}
-.was s{text-decoration-thickness:1.5px;font-weight:500}
-.monthly{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font-size:16px;color:var(--muted)}
-.monthly b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
-.price ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px;color:var(--muted)}
-.price li::before{content:"✓";color:var(--accent);margin-right:10px;font-weight:600}
-.note{margin-top:20px;font-size:14px;color:var(--muted)}
-
-.why{margin-top:40px;background:var(--fg);color:var(--bg);border-radius:32px;padding:clamp(28px,5vw,56px);display:grid;gap:14px;position:relative;overflow:hidden}
-.why::after{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--amber-bg) 45%,transparent),transparent 70%);pointer-events:none}
-.why .eyebrow{color:var(--amber-bg)}
-.why h3{font-size:clamp(28px,4vw,40px);font-weight:600;max-width:18ch}
-.why-lead{color:color-mix(in srgb,var(--bg) 72%,var(--fg));max-width:56ch;font-size:17px}
-.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px;position:relative;z-index:1}
-@media (max-width:760px){.why-grid{grid-template-columns:1fr}}
-.why-card{background:color-mix(in srgb,var(--bg) 8%,var(--fg));border:1px solid color-mix(in srgb,var(--bg) 14%,var(--fg));border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:10px;transition:transform .25s,border-color .25s}
-.why-card:hover{transform:translateY(-3px);border-color:var(--amber-bg)}
-.ico{width:46px;height:46px;border-radius:14px;background:var(--amber-bg);color:var(--amber-ink);display:grid;place-items:center}
-.ico svg{width:24px;height:24px}
-.why-card h4{margin:6px 0 0;font-size:19px;font-weight:600;letter-spacing:-.01em}
-.why-card p{color:color-mix(in srgb,var(--bg) 70%,var(--fg));font-size:15px}
-
-/* trust strip */
-.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
-.trust span{display:inline-flex;align-items:center;gap:8px}
-.trust svg{width:18px;height:18px;color:var(--accent);flex:none}
-
-/* faq */
-.faq{display:grid;gap:10px;max-width:820px}
-.faq details{background:var(--bg-2);border-radius:20px;padding:0 24px}
-.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.work{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.shot{background:#fff;border-radius:16px;overflow:hidden;color:#2A2420;border:1px solid var(--line);box-shadow:0 20px 50px rgba(20,22,27,.16)}
+.shot .bar{display:flex;gap:6px;padding:10px 14px;background:#ECE7DF}
+.shot .bar i{width:9px;height:9px;border-radius:50%;background:#BDB5A8}
+.sb{padding:30px 22px 34px;text-align:center}
+.sb b{display:block;font:700 24px/1.2 var(--head)}
+.sb b em{font-style:normal;color:#8B2635}
+.sb .pill{display:inline-block;margin-top:16px;background:#8B2635;color:#fff;font:600 13px var(--body);padding:11px 24px;border-radius:999px}
+.sb .tags{display:flex;gap:6px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.sb .tags span{font:500 11px var(--body);padding:5px 11px;border-radius:999px;background:#E8F1F7}
+.work h3{font:600 28px var(--head);margin:0 0 12px;letter-spacing:-.01em}
+.work p{color:var(--mute);margin:0 0 18px;max-width:46ch}
+.work ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;color:var(--mute)}
+.work li::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--dot);margin-right:10px;vertical-align:middle}
+.contact{text-align:left}
+.contact h2{max-width:16ch}
+.facts{list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px;padding:0;margin:32px 0 0;color:var(--mute);font-size:15px}
+.facts li::before,.faq summary::after{color:var(--dot)}
+.facts li::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--dot);margin-right:9px;vertical-align:middle}
+.about p{max-width:62ch;color:var(--mute);font-size:19px;margin:0 0 16px}
+.faq details{border-top:1px solid var(--line);padding:18px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font:600 19px var(--head);list-style:none;display:flex;justify-content:space-between;gap:16px}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--accent);transition:transform .2s;flex:none}
-.faq details[open] summary::after{transform:rotate(45deg)}
-.faq details p{color:var(--muted);padding-bottom:22px;max-width:62ch}
+.faq summary::after{content:"+";font-size:24px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:12px 0 0;color:var(--mute);max-width:60ch}
+.form{display:grid;gap:16px;max-width:560px;margin-top:8px}
+.form label{display:grid;gap:6px;font-size:15px;color:var(--mute)}
+.form input,.form select,.form textarea{font:400 17px var(--body);background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:13px 14px;width:100%}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--dot);outline:none}
+.form button{justify-self:start;cursor:pointer}
+.hint{font-size:14px;color:var(--mute);margin:0}
+.hint a{color:var(--ink)}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:16px;top:calc(16px + env(safe-area-inset-top,0px));background:#fff;color:#14161B;padding:10px 14px;border-radius:8px;z-index:20}
+.calc{margin-top:20px;padding:26px 28px;border:1px solid var(--line);border-radius:20px}
+.calc h3{font:600 22px var(--head);margin:0 0 16px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font:500 15px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer;transition:background .2s,color .2s}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.out{margin:18px 0 0;color:var(--mute)}
+.out b{display:block;font:700 34px var(--head);color:var(--ink);letter-spacing:-.02em}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+button.btn{cursor:pointer}
+.demo{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.demo[hidden]{display:none}
+.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--mute)}
+.demo-bar .btn{padding:8px 16px;font-size:14px;flex-shrink:0}
+.demo iframe{flex:1;width:100%;border:0;background:#fff}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 
-/* skip link */
-.skip{position:absolute;left:-9999px;top:8px;z-index:20;background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;text-decoration:none}
-.skip:focus{left:16px}
-
-/* about */
-.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(32px,6vw,80px);align-items:center}
-@media (max-width:760px){.about{grid-template-columns:1fr}}
-.portrait{aspect-ratio:4/5;max-width:100%;border-radius:32px;background:linear-gradient(160deg,var(--bg-2),var(--accent-soft));display:grid;place-items:center;position:relative;overflow:hidden}
-.portrait .mono{font-family:var(--display);font-size:clamp(90px,14vw,150px);font-weight:600;letter-spacing:-.06em;color:var(--accent)}
-.portrait .age{position:absolute;left:20px;bottom:20px;background:var(--card);border-radius:999px;padding:8px 14px;font-family:var(--mono);font-size:12px}
-.about h2{font-size:clamp(34px,4.6vw,54px);font-weight:600;margin-bottom:22px}
-.about p{color:var(--muted);max-width:52ch}
-.about p+p{margin-top:14px}
-.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.facts span{border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px}
-
-/* contact */
-.contact{background:var(--bg-2);border-radius:40px;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
-@media (max-width:760px){.contact{grid-template-columns:1fr}}
-.contact h2{font-size:clamp(36px,5vw,58px);font-weight:600;margin-bottom:18px}
-.contact .lead{font-size:19px}
-.direct{margin-top:28px;display:grid;gap:6px;font-size:15px}
-.direct b{font-weight:500;user-select:all}
-form{display:grid;gap:12px}
-label{font-size:13px;color:var(--muted);display:grid;gap:6px}
-input,select,textarea{font:inherit;font-size:16px;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;width:100%}
-textarea{min-height:110px;resize:vertical}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.sent{background:var(--card);border-radius:14px;padding:16px;font-size:15px}
-
-footer{padding-block:56px 40px;margin-top:40px;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:32px;font-size:14px;color:var(--muted)}
-@media (max-width:720px){footer{grid-template-columns:1fr}}
-footer .logo{color:var(--fg);font-size:18px}
-footer h4{margin:0 0 12px;font-size:13px;font-weight:600;color:var(--fg);letter-spacing:.06em;text-transform:uppercase}
-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-footer a{text-decoration:none;color:var(--muted)}
-footer a:hover{color:var(--fg)}
-.foot-bottom{grid-column:1/-1;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1px solid var(--line);font-size:13px}
-
-@media (prefers-reduced-motion:no-preference){
-  .hero h1,.hero .lead,.cta-row,.stage{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
-  .hero .lead{animation-delay:.08s}.cta-row{animation-delay:.16s}.stage{animation-delay:.24s}
-  @keyframes rise{from{transform:translateY(18px)}to{transform:none}}
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;padding:40px 0 64px}
+  .big{justify-self:start;width:180px}
+  .rows>div{grid-template-columns:1fr;gap:8px}
+  .plans{grid-template-columns:1fr}
+  .plan+.plan{border-left:0;border-top:1px solid var(--line)}
+  ol.steps{grid-template-columns:1fr 1fr}
+  section{padding:56px 0}
 }
+@media (max-width:820px){.work{grid-template-columns:1fr;gap:28px}}
+@media (max-width:480px){ol.steps{grid-template-columns:1fr}}
+.nav{gap:36px}
+.nav a{font-size:18px;font-weight:500;color:var(--ink);opacity:.72;padding:8px 2px;transition:opacity .2s}
+.nav a:hover{opacity:1}
+@media (max-width:820px){header{flex-wrap:wrap;row-gap:6px}.nav{order:3;width:100%;gap:26px;overflow-x:auto;padding:0 0 4px}.nav a{font-size:16px;white-space:nowrap}section{scroll-margin-top:124px}}
+::selection{background:#8FB4FF;color:#14161B}
+h1,h2{text-wrap:balance}
+p{text-wrap:pretty}
+header{border-bottom:1px solid rgba(20,22,27,.08)}
+.hero{position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;z-index:-1;right:0;top:-40px;width:min(560px,90%);aspect-ratio:1;background:radial-gradient(closest-side,rgba(61,111,224,.13),rgba(61,111,224,0));pointer-events:none}
+.big{background:#14161B;border-color:#14161B;box-shadow:0 30px 70px rgba(20,22,27,.28)}
+.btn{transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.btn.solid{box-shadow:0 8px 24px rgba(20,22,27,.16)}
+.btn:hover{transform:translateY(-2px)}
+.rows>div{transition:background .25s}
+.rows>div:hover{background:rgba(20,22,27,.03)}
+.plan.main{background:linear-gradient(180deg,#F7F9FE,#EEF2FA);box-shadow:inset 0 2px 0 var(--dot)}
+.plan li,.work li,.facts li{position:relative;padding-left:18px}
+.plan li::before,.work li::before,.facts li::before{position:absolute;left:0;top:.62em;margin:0}
+.out b{background:linear-gradient(90deg,#14161B,#3D6FE0);-webkit-background-clip:text;background-clip:text;color:transparent}
+ol.steps li::before{content:counter(s,decimal-leading-zero);font-size:24px;letter-spacing:.02em}
+.faq summary{transition:color .2s}
+.faq summary:hover{color:var(--dot)}
+.form input::placeholder,.form textarea::placeholder{color:#6B7180}
+.form input:focus,.form select:focus,.form textarea:focus{box-shadow:0 0 0 3px rgba(61,111,224,.18)}
+@media (min-width:821px){.hero{padding:96px 0 120px}section{padding:104px 0}}
+.mailbox{margin-top:28px;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--bg2);max-width:560px}
+.mailbox p{margin:0 0 14px}
+.mb-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.mailbox textarea{width:100%;font:400 15px/1.5 var(--body);background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px;resize:vertical;margin-bottom:12px}
+.monthly p:not(.price){margin:0;color:var(--mute);font-size:15px}
+.monthly .addon{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.monthly .addon b{color:var(--ink)}
+.chk{display:flex;align-items:center;gap:10px;margin-top:16px;color:var(--mute);font-size:16px;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--dot)}
+.chk.off{opacity:.5}
+.tagline{font:600 clamp(20px,2.6vw,28px)/1.3 var(--head);letter-spacing:-.01em;color:var(--dot);margin:-6px 0 18px}
+.err{color:#C5221F;font-size:14px}
+.err[hidden]{display:none}
+.form .invalid{border-color:#C5221F;background:#FDF2F2}
+.form .invalid:focus{box-shadow:0 0 0 3px rgba(197,34,31,.18)}
+.brand .mark{width:52px;height:52px;padding:9px;background:#14161B;border-radius:14px}
+footer .mark{width:36px;height:36px;padding:6px;background:#14161B;border-radius:10px}
+.fab{display:none}
+@media (max-width:820px){
+  body{padding-bottom:88px}
+  header{position:static;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0;padding:14px 0 8px}
+  .brand{font-size:22px}
+  .brand .mark{width:44px;height:44px;padding:8px;border-radius:12px}
+  section{scroll-margin-top:16px}
+  .wrap{padding:0 20px}
+  .big{width:120px}
+  .cta .btn{flex:1 1 100%;text-align:center}
+  .seg button{flex:1 1 auto}
+  #copyAddr{max-width:100%;overflow-wrap:anywhere;font-size:15px;text-align:left}
+  .form button,.mb-actions .btn{width:100%;justify-self:stretch;text-align:center}
+  .demo-bar span{display:none}
+  .demo-bar{justify-content:flex-end}
+  .demo-bar .btn{padding:10px 20px}
+  .fab{display:flex;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:30;justify-content:center;padding:15px 22px;border-radius:999px;background:#14161B;color:#FFFFFF;text-decoration:none;font:500 17px var(--body);box-shadow:0 10px 30px rgba(20,22,27,.3);transition:opacity .25s,transform .25s}
+  .fab.hide{opacity:0;pointer-events:none;transform:translateY(12px)}
+}
+@media (hover:none){.btn:hover{transform:none}.rows>div:hover{background:none}}
 </style>
 </head>
 <body>
+<a class="skip" href="#top">Přeskočit na obsah</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="98 87 152 136">
+    <path class="ring" d="M214.4 117.7 A58 58 0 1 0 214.4 192.3" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+    <circle class="pulse" cx="233" cy="155" r="7" fill="#fff"/>
+    <path d="M148 167 V154 a11 11 0 0 1 22 0 V167 M170 154 a11 11 0 0 1 22 0 V167" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>
 
-<a class="skip" href="#weby">Přeskočit na obsah</a>
-<nav>
-  <div class="wrap">
-    <a class="logo" href="#top">Michal Čermák<span>.</span></a>
-    <div class="links">
-      <a href="#weby">Moje weby</a><a href="#sluzby">Služby</a><a href="#postup">Postup</a><a href="#cenik">Ceník</a><a href="#omne">O mně</a><a href="#faq">Otázky</a>
-    </div>
-    <a class="btn small" href="#kontakt">Napište mi</a>
-  </div>
-</nav>
-
-<main class="wrap" id="top">
-  <header class="hero">
-    <p class="eyebrow">Weby a grafika s pomocí AI</p>
-    <h1>Váš web zestárl. <em>Omladíme</em> ho.</h1>
-    <p class="lead">Přestavím zastaralý web vašeho podniku na moderní prezentaci, která funguje na mobilu a přivádí zákazníky. Pro řemeslníky, salony, servisy, obchody i restaurace.</p>
-    <div class="cta-row">
-      <a class="btn" href="#kontakt">Chci nový web</a>
-      <a class="btn ghost" href="#sluzby">Co umím ›</a>
-    </div>
-
-    <div class="stage" aria-label="Ukázky návrhů webů pro podniky">
-      <div class="phone side alt" aria-hidden="true">
-        <div class="screen">
-          <div class="notch"></div>
-          <div class="s-head"><span>Autoservis Novák</span><span>☰</span></div>
-          <div class="s-hero"><small>Servis všech značek</small><b>Přezutí na zimu bez čekání</b></div>
-          <div class="s-list">
-            <div class="s-item"><span>Přezutí kol</span><span>590 Kč</span></div>
-            <div class="s-item"><span>Výměna oleje</span><span>890 Kč</span></div>
-            <div class="s-item"><span>Příprava na STK</span><span>1 200 Kč</span></div>
-          </div>
-          <div class="s-btn">Objednat termín</div>
-        </div>
-      </div>
-      <div class="phone">
-        <div class="screen">
-          <div class="notch"></div>
-          <div class="s-head"><span>Pizzeria Forno</span><span>☰</span></div>
-          <div class="s-hero"><small>Z pece na dřevo</small><b>Neapolská pizza do 20 minut</b></div>
-          <div class="s-list">
-            <div class="s-item"><span>Margherita</span><span>189 Kč</span></div>
-            <div class="s-item"><span>Diavola</span><span>229 Kč</span></div>
-            <div class="s-item"><span>Quattro formaggi</span><span>239 Kč</span></div>
-            <div class="s-item"><span>Prosciutto e funghi</span><span>235 Kč</span></div>
-          </div>
-          <div class="s-btn">Objednat s sebou</div>
-        </div>
-      </div>
-      <div class="phone side2" aria-hidden="true">
-        <div class="screen">
-          <div class="notch"></div>
-          <div class="s-head"><span>Salon Lucie</span><span>☰</span></div>
-          <div class="s-hero" style="background:linear-gradient(150deg,#c9a28c,#4a2f3a)"><small>Kadeřnictví a kosmetika</small><b>Volný termín ještě tento týden</b></div>
-          <div class="s-list">
-            <div class="s-item"><span>Dámský střih</span><span>650 Kč</span></div>
-            <div class="s-item"><span>Barvení</span><span>od 1 100 Kč</span></div>
-            <div class="s-item"><span>Pánský střih</span><span>350 Kč</span></div>
-          </div>
-          <div class="s-btn">Rezervovat online</div>
-        </div>
-      </div>
-    </div>
-    <p class="caption">Ukázkové návrhy · smyšlené podniky</p>
-    <div class="trust">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>První návrh do 48 hodin zdarma</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Hotovo obvykle do 7 dnů</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Komunikujete přímo se mnou</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Weby stavěné pro mobil</span>
-    </div>
+<div class="wrap">
+  <header>
+    <a class="brand" href="#top" aria-label="mc – úvod">
+      <svg class="mark" width="56" height="50" viewBox="98 87 152 136" aria-hidden="true"><path d="M214.4 117.7 A58 58 0 1 0 214.4 192.3" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/><circle cx="233" cy="155" r="8" fill="#FFFFFF"/><path d="M148 167 V154 a11 11 0 0 1 22 0 V167 M170 154 a11 11 0 0 1 22 0 V167" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      mc
+    </a>
+    <nav class="nav" aria-label="Hlavní menu"><a href="#ukazky">Ukázka</a><a href="#balicky">Balíčky</a><a href="#postup">Postup</a><a href="#faq">Otázky</a></nav>
+    <a class="btn ghost" href="#kontakt">Napsat mi</a>
   </header>
 
-  <section class="statement">
-    <h2>Zákazník se o vás rozhodne za pár vteřin v telefonu. <span class="dim">Starý web z roku 2012 ho pošle ke konkurenci.</span></h2>
-  </section>
-
-  <section id="weby">
-    <div class="head">
-      <p class="eyebrow">Moje weby</p>
-      <h2>Co jsem už vytvořil.</h2>
-    </div>
-    <div class="work">
-      <a class="proj" href="https://alescermak79-lab.github.io/vcelarstvi-lada/" target="_blank" rel="noopener">
-        <div class="shot bee"><span class="pill">Prodej online</span><small>Jižní Morava</small><b>Med z Kačkovca</b></div>
-        <div class="meta">
-          <h3>Včelař Láda</h3>
-          <p>Web malého včelaře s příběhem o úlech u maringotky a objednávkou medu ve sklenicích 250 g, 500 g a 1 kg.</p>
-          <span class="go">Otevřít web ↗</span>
-        </div>
-      </a>
-      <a class="proj" href="https://alescermak79-lab.github.io/daisyazyl-podpora/" target="_blank" rel="noopener">
-        <div class="shot cat"><span class="pill">Neziskovka</span><small>Daisy azyl</small><b>Druhá šance pro kočičky</b></div>
-        <div class="meta">
-          <h3>Daisy azyl</h3>
-          <p>Kampaň na pravidelné dary pro kočičí azyl. Příběhy zvířat a QR platba trvalého příkazu přímo v telefonu.</p>
-          <span class="go">Otevřít web ↗</span>
-        </div>
-      </a>
-      <a class="proj" href="https://alescermak79-lab.github.io/dynova-stezka/" target="_blank" rel="noopener">
-        <div class="shot hw"><span class="pill">Webová aplikace</span><small>Sousedská akce</small><b>Sousedský Halloween</b></div>
-        <div class="meta">
-          <h3>Sousedský Halloween</h3>
-          <p>Mapa domů, kde děti dostanou sladkosti, s plánováním trasy a navigací k dalšímu domu přímo v mobilu.</p>
-          <span class="go">Otevřít web ↗</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <section id="sluzby">
-    <div class="head">
-      <p class="eyebrow">Služby</p>
-      <h2>Všechno, co podnik online potřebuje.</h2>
-    </div>
-    <div class="grid">
-      <div class="tile">
-        <h3>Redesign starého webu</h3>
-        <p>Převezmu obsah vašeho současného webu a postavím ho znovu: čistě, rychle a hlavně pro mobil. Služby, ceník, kontakt a tlačítko „zavolat“ na jedno klepnutí.</p>
-        <span class="tag">Hotovo obvykle do 7 dnů</span>
-      </div>
-      <div class="tile">
-        <h3>Nový web od nuly</h3>
-        <p>Nemáte web vůbec? Připravím ho včetně textů a fotek. Ceník, rezervace, poptávkový formulář nebo polední menu podle toho, co děláte.</p>
-        <span class="tag">Texty i fotky pomůžu připravit</span>
-      </div>
-      <div class="tile">
-        <h3>Logo a vizuál</h3>
-        <p>Logo, barvy a písmo, které k vám sedí. Od vizitek a letáků přes polep auta až po ceduli na provozovnu.</p>
-        <span class="tag">2–3 návrhy na výběr</span>
-      </div>
-      <div class="tile">
-        <h3>Vidět na Googlu</h3>
-        <p>Založím a vyladím váš profil na Google Mapách: fotky, otevírací doba, odkaz na web. Zákazníci vás najdou, když hledají služby ve vašem okolí.</p>
-        <span class="tag">Google Mapy · vyhledávání · recenze</span>
-      </div>
-      <div class="tile wide">
-        <h3>Proč s pomocí AI?</h3>
-        <p>Umělá inteligence mi pomáhá s návrhy, texty i úpravou fotek. Díky tomu pracuju rychleji a vy platíte méně než v klasické agentuře. Výsledek ale vždycky ladím ručně, aby vypadal jako vy, ne jako šablona.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="postup">
-    <div class="head">
-      <p class="eyebrow">Jak spolupráce probíhá</p>
-      <h2>Od starého webu k novému za týden.</h2>
-    </div>
-    <div class="steps">
-      <div class="step"><p class="n">01</p><h3>Krátký hovor</h3><p>Projdu váš současný web, zastavím se u vás nebo zavoláme. Řeknete mi, co vám na něm vadí.</p></div>
-      <div class="step"><p class="n">02</p><h3>Návrh do 48 hodin</h3><p>Pošlu vám první podobu webu nebo grafiky. Zdarma a nezávazně.</p></div>
-      <div class="step"><p class="n">03</p><h3>Úpravy</h3><p>Doladíme texty, fotky a barvy. Dokud nejste spokojení, pracuju dál.</p></div>
-      <div class="step"><p class="n">04</p><h3>Spuštění</h3><p>Web dám online, napojím na Google Mapy a ukážu vám, jak si ceník nebo novinky měnit sami.</p></div>
-    </div>
-  </section>
-
-  <section id="cenik">
-    <div class="head">
-      <p class="eyebrow">Ceník</p>
-      <h2>Jasné ceny, žádná překvapení.</h2>
-    </div>
-    <div class="prices">
-      <div class="price">
-        <div class="name">Start</div>
-        <span class="save">Ušetříte 9 %</span>
-        <div class="amount">4 000 <small>Kč</small></div>
-        <p class="was"><s>4 400 Kč</s></p>
-        <ul><li>Jednostránkový web</li><li>Nové nebo vaše logo na celém webu</li><li>Služby, ceník, otevírací doba</li><li>Mapa a kontakt</li><li>Optimalizace pro mobil</li></ul>
-      </div>
-      <div class="price pick">
-        <div class="name">Podnik <span class="badge">Nejčastější</span></div>
-        <span class="save">Ušetříte 10 %</span>
-        <div class="amount">4 499 <small>Kč</small></div>
-        <p class="was"><s>5 000 Kč</s></p>
-        <ul><li>Vše ze Startu</li><li>Nové nebo vaše logo na celém webu</li><li>Obsah, který si měníte sami</li><li>Profil na Google Mapách</li></ul>
-        <p class="monthly">+ <b>1 199 Kč</b> měsíčně</p>
-      </div>
-      <div class="price">
-        <div class="name">Web a sociální sítě</div>
-        <span class="save">Ušetříte 8 %</span>
-        <div class="amount">5 499 <small>Kč</small></div>
-        <p class="was"><s>6 000 Kč</s></p>
-        <ul><li>Vše z balíčku Podnik</li><li>Logo a barevný styl</li><li>Vizitky a letáky</li><li>Pravidelné příspěvky na sociální sítě, když mi dodáte dostatek materiálu</li><li>Každý měsíc vám pošlu krátké shrnutí, jak se daří</li></ul>
-        <p class="monthly">+ <b>1 690 Kč</b> měsíčně</p>
-      </div>
-    </div>
-    <p class="note">Uvedené ceny jsou konečné. Doménu a hosting vám zařídím, obvykle stojí 200–400 Kč měsíčně.</p>
-    <div class="why">
-      <p class="eyebrow">Měsíční péče</p>
-      <h3>Proč se platí i měsíčně?</h3>
-      <p class="why-lead">Web není jednorázová věc. Měsíční platba pokrývá, aby váš web fungoval a byl pořád aktuální, aniž byste se o cokoli museli starat. Týká se balíčků Podnik a Web a sociální sítě, Start je jen jednorázový.</p>
-      <div class="why-grid">
-        <div class="why-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><h4>Kontrola funkčnosti</h4><p>Pravidelně kontroluju, že web běží, načítá se rychle a všechno na něm funguje, i na mobilu.</p></div>
-        <div class="why-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><h4>Změny v nabídce</h4><p>Změnila se cena, otevírací doba nebo služby? Napíšete mi a já to na webu upravím.</p></div>
-        <div class="why-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></svg></span><h4>Nové věci na web</h4><p>Chcete přidat akci, novinku, fotky nebo novou sekci? Doplním ji za vás.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="omne">
-    <div class="about">
-      <div class="portrait" aria-hidden="true"><span class="mono">MČ</span><span class="age">14 let · AI &amp; web</span></div>
+  <main id="top">
+    <div class="hero">
       <div>
-        <p class="eyebrow" style="margin-bottom:16px">O mně</p>
-        <h2>Ahoj, jsem Michal.</h2>
-        <p>Je mi 14 a internet je můj svět odjakživa. Naplno jsem se pustil do práce s umělou inteligencí a webovým designem, protože mě baví vidět, jak dobrý web promění malý podnik.</p>
-        <p>Nejsem velká agentura. Komunikujete přímo se mnou, odpovídám rychle a na výsledku mi záleží. Rád se zastavím osobně, poznám, jak fungujete, a pak navrhnu web, který vám přivede zákazníky.</p>
-        <div class="facts"><span>Weby</span><span>Redesign</span><span>Grafika</span><span>AI nástroje</span><span>Sociální sítě</span></div>
+        <h1>Web, který máte hotový za dny, ne za měsíce.</h1>
+        <p class="tagline">Zajistím, aby u vás nakupovalo více lidí.</p>
+        <p class="lead">Stavím přehledné weby pro malé firmy a živnostníky. AI mi zrychlí práci, o výsledku rozhoduju já. Platíte za hotový web, ne za čekání.</p>
+        <div class="cta">
+          <a class="btn solid" href="#kontakt">Nezávazná poptávka</a>
+          <a class="btn ghost" href="#balicky">Ceny a balíčky</a>
+        </div>
+        <ul class="facts"><li>Hotovo do 7 dnů</li><li>Hezky i v mobilu</li><li>Cena předem</li></ul>
+      </div>
+      <div class="big" aria-hidden="true">
+        <svg class="mark" viewBox="98 87 152 136"><path class="ring" d="M214.4 117.7 A58 58 0 1 0 214.4 192.3" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/><circle class="pulse" cx="233" cy="155" r="7" fill="#FFFFFF"/><path d="M148 167 V154 a11 11 0 0 1 22 0 V167 M170 154 a11 11 0 0 1 22 0 V167" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </div>
-  </section>
 
-  <section id="faq">
-    <div class="head">
-      <p class="eyebrow">Časté otázky</p>
-      <h2>Na co se mě ptáte nejčastěji.</h2>
-    </div>
-    <div class="faq">
-      <details><summary>Jak dlouho trvá, než bude web hotový?</summary><p>První návrh vám pošlu do 48 hodin. Celý web je hotový obvykle do 7 dnů, záleží hlavně na tom, jak rychle si spolu doladíme texty a fotky.</p></details>
-      <details><summary>Co od vás budu potřebovat?</summary><p>Stačí základní informace o podniku: co děláte, ceník, otevírací dobu a kontakty. Pokud máte fotky a logo, pošlete je. Když ne, s texty i fotkami vám pomůžu.</p></details>
-      <details><summary>Co když se mi návrh nebude líbit?</summary><p>První návrh je zdarma a nezávazný. Když se vám nebude líbit, upravím ho. Na webu pracuju, dokud nejste spokojení.</p></details>
-      <details><summary>Bude web fungovat na mobilu?</summary><p>Ano. Každý web navrhuju nejdřív pro telefon, protože odtud k vám přichází většina zákazníků. Samozřejmě funguje i na počítači a tabletu.</p></details>
-      <details><summary>Musím si sám řešit doménu a hosting?</summary><p>Nemusíte. Doménu i hosting vám zařídím a web spustím. Obvykle stojí 200–400 Kč měsíčně.</p></details>
-      <details><summary>Co když budu chtít na webu později něco změnit?</summary><p>U balíčků s měsíční platbou mi jen napíšete a změnu udělám. U balíčku Start vám při spuštění ukážu, jak si ceník nebo novinky měnit sami.</p></details>
-    </div>
-  </section>
-
-  <section id="kontakt" style="padding-top:0">
-    <div class="contact">
-      <div>
-        <p class="eyebrow" style="margin-bottom:16px">Kontakt</p>
-        <h2>Pojďme to probrat.</h2>
-        <p class="lead">Napište mi pár vět o svém podniku. Ozvu se do 24 hodin s nápadem, co by vám pomohlo.</p>
-        <div class="direct">
-          <span>E-mail: <b id="mail">ahoj@michalcermak.cz</b></span>
+    <section id="ukazky">
+      <h2>Ukázka z praxe</h2>
+      <div class="work">
+        <div class="shot" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="sb">
+            <b>Šťavnatý <em>kebab</em><br>čerstvě pro vás</b>
+            <span class="pill">Objednat online</span>
+            <div class="tags"><span>Döner</span><span>Dürüm</span><span>Talíře</span><span>Nápoje</span></div>
+          </div>
+        </div>
+        <div>
+          <h3>Kebab – ukázkový web</h3>
+          <p>Web restaurace s online objednávkou. Zákazník vybere jídlo, košík se počítá sám a hotová objednávka přijde majiteli přes WhatsApp.</p>
+          <ul>
+            <li>Jídelní lístek s kategoriemi a filtrem</li>
+            <li>Košík, který si pamatuje výběr</li>
+            <li>Recenze, mapa a otevírací doba</li>
+            <li>Světlý i tmavý režim, mobil na prvním místě</li>
+          </ul>
+          <p style="margin:26px 0 0"><button class="btn solid" type="button" id="demoOpen">Projít si celý web</button></p>
         </div>
       </div>
-      <form id="f" novalidate>
-        <label for="jmeno">Vaše jméno<input id="jmeno" name="jmeno" required placeholder="Jana Nováková"></label>
-        <label for="podnik">Název podniku<input id="podnik" name="podnik" placeholder="Truhlářství Dvořák"></label>
-        <label for="web">Současný web (pokud máte)<input id="web" name="web" placeholder="www.vas-podnik.cz"></label>
-        <label for="typ">Co potřebujete
-          <select id="typ" name="typ"><option>Předělat starý web</option><option>Nový web</option><option>Logo a vizuál</option><option>Zatím nevím</option></select>
-        </label>
-        <label for="zprava">Zpráva<textarea id="zprava" name="zprava" placeholder="Náš web je starý a na mobilu se špatně čte…"></textarea></label>
-        <button class="btn" type="submit" style="justify-self:start">Odeslat poptávku</button>
-        <p class="sent" id="ok" hidden>Díky! Otevřel se vám e-mail s předvyplněnou zprávou, stačí ho odeslat. Pokud se neotevřel, napište mi přímo na adresu vlevo.</p>
-        <p class="note" style="margin-top:4px">Vaše údaje použiju jen k odpovědi na poptávku.</p>
+    </section>
+
+    <section id="proc">
+      <h2>Proč web s AI od mě</h2>
+      <div class="rows">
+        <div><h3>Rychleji</h3><p>První návrh vidíte do 3 dnů. AI zvládne rutinu, já se věnuju tomu, aby web dával smysl vašim zákazníkům.</p></div>
+        <div><h3>Jasně</h3><p>Žádný zbytečný chaos. Každá stránka má jeden úkol: aby zákazník pochopil, co nabízíte, a ozval se.</p></div>
+        <div><h3>Za rozumnou cenu</h3><p>Rychlejší výroba znamená nižší cenu. Vše je domluvené předem, bez skrytých položek.</p></div>
+      </div>
+    </section>
+
+    <section id="balicky">
+      <h2>Tři balíčky, jasné ceny</h2>
+      <div class="plans">
+        <div class="plan">
+          <h3>Vizitka</h3>
+          <p class="price">4 000 Kč <small>jednorázově</small></p>
+          <ul><li>Vaše logo a barvy na celém webu</li><li>Mapa, otevírací doba a tlačítko pro rychlé zavolání</li><li>Odkazy na vaše sociální sítě</li><li>Rychlé načítání a zabezpečený web</li><li>Upravím fotky a krátké video na web</li><li>Hezky vypadá i v mobilu</li><li>Hotovo do 7 dnů</li></ul>
+          <div class="monthly"><p class="price">+ 3 000 Kč <small>za měsíc</small></p><p>Správa sociálních sítí: plán příspěvků, 8 příspěvků a 2 krátká videa měsíčně, obrázky a měsíční shrnutí.</p></div>
+        </div>
+        <div class="plan main">
+          <h3>Firemní web</h3>
+          <p class="price">4 300 Kč <small>jednorázově</small></p>
+          <ul><li>Vaše logo a barvy na celém webu</li><li>Mapa, otevírací doba a tlačítko pro rychlé zavolání</li><li>Odkazy na vaše sociální sítě</li><li>Rychlé načítání a zabezpečený web</li><li>Upravím fotky a krátké video na web</li><li>Hezky vypadá i v mobilu</li><li>Hotovo do 7 dnů</li></ul>
+          <div class="monthly"><p class="price">+ 3 500 Kč <small>za měsíc</small></p><p>Správa sociálních sítí: plán příspěvků, 16 příspěvků a 4 krátká videa měsíčně, obrázky a měsíční shrnutí.</p></div>
+        </div>
+        <div class="plan">
+          <h3>Web a vytvoření sociálních sítí</h3>
+          <p class="price">5 000 Kč <small>jednorázově</small></p>
+          <ul><li>Všechno z firemního webu</li><li>Nastavím vám Facebook a Instagram</li><li>Hezky vypadá i v mobilu</li><li>Hotovo do 7 dnů</li></ul>
+          <div class="monthly"><p class="price">+ 4 000 Kč <small>za měsíc</small></p><p>Správa sociálních sítí: plán příspěvků, minimálně 20 fotek a 5 krátkých videí měsíčně a měsíční shrnutí.</p></div>
+        </div>
+      </div>
+      <div class="calc">
+        <h3>Kolik zaplatíte za první rok?</h3>
+        <div class="seg" role="group" aria-label="Vyberte balíček"><button type="button" data-o="4000" data-m="3000" aria-pressed="false">Vizitka</button><button type="button" data-o="4300" data-m="3500" aria-pressed="true">Firemní web</button><button type="button" data-o="5000" data-m="4000" aria-pressed="false">Web a vytvoření sociálních sítí</button></div>
+        <label class="chk"><input type="checkbox" id="soc"> Přidat správu sociálních sítí (<span id="socp">+ 1 500 Kč</span> za měsíc)</label>
+        <p class="out"><b id="ct"></b><span id="cd"></span><span id="cy" style="display:block;margin-top:6px"></span></p>
+      </div>
+      <p class="note">Web vám postavím jednorázově. Sociální sítě si můžete nechat spravovat za měsíční platbu. Ceny jsou orientační, přesnou cenu vám řeknu po krátkém hovoru zdarma.</p>
+    </section>
+
+    <section id="postup">
+      <h2>Jak spolupráce probíhá</h2>
+      <ol class="steps">
+        <li><h3>Zavoláme si</h3><p>Řeknete mi, co děláte a koho chcete oslovit.</p></li>
+        <li><h3>Dostanete návrh</h3><p>Napíšete mi a já vám pošlu návrh webu. První verzi uvidíte do 3 dnů.</p></li>
+        <li><h3>Společně doladíme</h3><p>Připomínky zapracuju, dokud nebudete spokojení.</p></li>
+        
+      </ol>
+    </section>
+
+    <section id="o-mne">
+      <h2>Kdo za tím stojí</h2>
+      <div class="about">
+        <p>Je mi 14 let, ale jako content manager a marketér jsem velmi zkušený. Pomáhám firmám získat víc zákazníků: dělám přehledné weby, základní střih videí, nastavuju sociální sítě a pravidelně tvořím obsah.</p>
+        <p>Weby stavím s pomocí AI, protože je to rychlejší a levnější. Každý web ale projdu a doladím sám, aby působil profesionálně a dával smysl vašim zákazníkům.</p>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Časté otázky</h2>
+      <div class="faq">
+        <details><summary>Jak dlouho trvá, než bude web hotový?</summary><p>U všech balíčků do 7 dnů. První návrh uvidíte do 3 dnů.</p></details>
+        <details><summary>Bude web vypadat dobře v mobilu?</summary><p>Ano. Každý web dělám tak, aby byl přehledný na telefonu i na počítači.</p></details>
+        <details><summary>Kolik web opravdu stojí?</summary><p>Jednorázová cena za výrobu je uvedená u každého balíčku. K tomu můžete mít správu sociálních sítí od 3 000 Kč měsíčně. Přesnou cenu vám řeknu po krátkém hovoru zdarma.</p></details>
+        <details><summary>Co je v měsíční platbě?</summary><p>Měsíční platba je za správu sociálních sítí: plán příspěvků, příspěvky a krátká videa, obrázky a měsíční shrnutí. U Vizitky je to 8 příspěvků a 2 videa za 3 000 Kč, u Firemního webu 16 příspěvků a 4 videa za 3 500 Kč. U balíčku Web a vytvoření sociálních sítí je to minimálně 20 fotek a 5 krátkých videí za 4 000 Kč.</p></details>
+        <details><summary>Dělá web opravdu AI?</summary><p>AI mi pomáhá pracovat rychle. O vzhledu, textech i funkcích rozhoduju já a každý web si před předáním prohlédnu.</p></details>
+        <details><summary>Můžu si nejdřív něco prohlédnout?</summary><p>Ano, ukázkový web si můžete projít výše. Jak by vypadal ten váš, vám řeknu po krátkém hovoru zdarma.</p></details>
+      </div>
+    </section>
+
+    <section id="kontakt" class="contact">
+      <h2>Řekněte mi, jaký web potřebujete</h2>
+      <p class="lead">Napište mi pár vět o tom, co děláte, a já vám pošlu návrh webu. Odpovím do 3 dnů.</p>
+      <p style="margin:0 0 28px"><button class="btn solid" type="button" id="copyAddr">cermakmichal440@gmail.com</button> <span class="hint">Klepnutím adresu zkopírujete.</span></p>
+      <form id="f" class="form" novalidate>
+        <label>Jméno *<input id="fn" autocomplete="name" required><span class="err" id="en" hidden></span></label>
+        <label>Telefon nebo e-mail *<input id="fc" autocomplete="email" required><span class="err" id="ec" hidden></span></label>
+        <label>Balíček<select id="fp"><option>Vizitka</option><option selected>Firemní web</option><option>Web a vytvoření sociálních sítí</option><option>Ještě nevím</option></select></label>
+        <label>Zpráva<textarea id="fm" rows="4" placeholder="Čím se zabýváte a co od webu čekáte?"></textarea></label>
+        <button class="btn solid" type="submit">Připravit e-mail</button>
+        <p class="hint">Zpráva se připraví a ukáže se hned pod formulářem. Stačí ji zkopírovat a poslat e-mailem. Nebo napište přímo na <b>cermakmichal440@gmail.com</b>. Údaje použiju jen k odpovědi na vaši poptávku.</p>
       </form>
-    </div>
-  </section>
+      <div id="mailbox" class="mailbox" hidden>
+        <p><b>Zpráva je připravená.</b> Zkopírujte ji a pošlete e-mailem:</p>
+        <div class="mb-actions">
+          <button id="mbCopy" type="button" class="btn solid">Zkopírovat zprávu</button>
+        </div>
+        <textarea id="mbText" readonly rows="8" aria-label="Připravená zpráva"></textarea>
+        <p class="hint">Pošlete ji na <b>cermakmichal440@gmail.com</b>.</p>
+      </div>
+    </section>
+  </main>
+</div>
 
-  <footer>
-    <div>
-      <a class="logo" href="#top">Michal Čermák<span>.</span></a>
-      <p style="margin-top:12px;max-width:34ch">Moderní weby a grafika pro podniky, které chtějí na internetu vypadat tak dobře, jak pracují.</p>
-    </div>
-    <div>
-      <h4>Web</h4>
-      <ul><li><a href="#weby">Moje weby</a></li><li><a href="#sluzby">Služby</a></li><li><a href="#cenik">Ceník</a></li><li><a href="#faq">Časté otázky</a></li></ul>
-    </div>
-    <div>
-      <h4>Kontakt</h4>
-      <ul><li>ahoj@michalcermak.cz</li><li><a href="#kontakt">Poslat poptávku</a></li></ul>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 Michal Čermák</span>
-      <span>Navrženo s pomocí AI, doladěno ručně.</span>
-    </div>
-  </footer>
-</main>
-
+<footer>
+  <div class="wrap">
+    <span style="display:flex;align-items:center;gap:10px"><svg class="mark" width="34" height="30" viewBox="98 87 152 136" aria-hidden="true"><path d="M214.4 117.7 A58 58 0 1 0 214.4 192.3" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/><circle cx="233" cy="155" r="8" fill="#FFFFFF"/><path d="M148 167 V154 a11 11 0 0 1 22 0 V167 M170 154 a11 11 0 0 1 22 0 V167" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></svg> mc – weby tvořené s AI</span>
+    <span>cermakmichal440@gmail.com · © 2026 mc</span>
+  </div>
+</footer>
 <script>
-document.getElementById('f').addEventListener('submit',function(e){
-  e.preventDefault();
-  var j=document.getElementById('jmeno');
-  if(!j.value.trim()){j.focus();j.style.borderColor='var(--accent)';return;}
-  var v=function(id){return document.getElementById(id).value.trim();};
-  var to=document.getElementById('mail').textContent.trim();
-  var subj='Poptávka: '+v('typ')+(v('podnik')?' – '+v('podnik'):'');
-  var body='Jméno: '+v('jmeno')+'\nPodnik: '+v('podnik')+'\nSoučasný web: '+v('web')+'\nCo potřebuji: '+v('typ')+'\n\n'+v('zprava');
-  window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
-  document.getElementById('ok').hidden=false;
+var $=function(i){return document.getElementById(i)};
+var TO='cermakmichal440@gmail.com';
+(function(){var fab=document.getElementById('fab'),k=document.getElementById('kontakt');if(fab&&k&&'IntersectionObserver' in window){new IntersectionObserver(function(es){fab.classList.toggle('hide',es[0].isIntersecting)}).observe(k)}})();
+function mark(i,e,ok,msg){var f=$(i),r=$(e);f.classList.toggle('invalid',!ok);f.setAttribute('aria-invalid',!ok);r.textContent=msg;r.hidden=ok}
+$('fn').addEventListener('input',function(){mark('fn','en',true,'')});
+$('fc').addEventListener('input',function(){mark('fc','ec',true,'')});
+function copyText(txt,cb){
+  function fb(){var ok=false;try{var a=document.createElement('textarea');a.value=txt;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();ok=document.execCommand('copy');a.remove()}catch(x){}cb(ok)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){cb(true)},fb)}else{fb()}
+}
+$('copyAddr').addEventListener('click',function(){
+  var b=this,old=b.textContent;
+  copyText(TO,function(ok){b.textContent=ok?'Zkopírováno':'Označte a zkopírujte ručně';setTimeout(function(){b.textContent=old},2200)});
 });
+$('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var n=$('fn').value.trim(),c=$('fc').value.trim(),m=$('fm').value.trim(),pk=$('fp').value;
+  var okN=n.length>0,okC=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c)||c.replace(/\D/g,'').length>=9;
+  mark('fn','en',okN,'Vyplňte prosím jméno.');
+  mark('fc','ec',okC,c?'Zadejte platný e-mail nebo telefon.':'Vyplňte prosím e-mail nebo telefon.');
+  if(!okN||!okC){$('mailbox').hidden=true;$(okN?'fc':'fn').focus();return}
+  var s='Poptávka webu – '+pk;
+  var b='Dobrý den,\n\nmám zájem o balíček: '+pk+'.\n\nJméno: '+n+'\nKontakt: '+c+(m?'\n\n'+m:'')+'\n\nDěkuji.';
+  $('mbText').value='Předmět: '+s+'\n\n'+b;
+  $('mailbox').hidden=false;
+  $('mailbox').scrollIntoView({behavior:'smooth',block:'center'});
+});
+$('mbCopy').addEventListener('click',function(){
+  var btn=this,ta=$('mbText');
+  function done(ok){btn.textContent=ok?'Zkopírováno':'Označeno, zkopírujte ručně'}
+  ta.focus();ta.select();
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ta.value).then(function(){done(true)},function(){var ok=false;try{ok=document.execCommand('copy')}catch(x){}done(ok)});
+  }else{var ok=false;try{ok=document.execCommand('copy')}catch(x){}done(ok)}
+});
+</script>
+<script>
+(function(){
+  var bs=document.querySelectorAll('.seg button'),ct=document.getElementById('ct'),cd=document.getElementById('cd');
+  function f(n){return n.toLocaleString('cs-CZ')+' Kč'}
+  var soc=document.getElementById('soc'),cur=null;
+  function set(b){
+    cur=b;
+    bs.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    var o=+b.dataset.o,m=soc.checked?+b.dataset.m:0;document.getElementById('socp').textContent='+ '+f(+b.dataset.m);
+    ct.textContent=f(o+12*m);
+    cd.textContent=f(o)+' za výrobu'+(m?' a 12× '+f(m)+' za správu sociálních sítí':'');
+    document.getElementById('cy').textContent=m?'Od druhého roku platíte už jen '+f(12*m)+' za rok.':'';
+  }
+  bs.forEach(function(b){b.addEventListener('click',function(){set(b)})});
+  soc.addEventListener('change',function(){set(cur)});
+  set(document.querySelector('.seg [aria-pressed="true"]'));
+  if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
+    document.querySelectorAll('section > *').forEach(function(el){el.classList.add('rv');io.observe(el)});
+  }
+})();
+</script>
+<a class="fab" id="fab" href="#kontakt">Napsat mi</a>
+<div id="demo" class="demo" hidden role="dialog" aria-modal="true" aria-label="Ukázkový web Kebab">
+  <div class="demo-bar"><span>Ukázkový web od mc. Můžete si ho proklikat a vyzkoušet objednávku.</span><button type="button" id="demoClose" class="btn ghost">Zavřít</button></div>
+  <iframe id="demoFrame" title="Ukázkový web Kebab" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
+</div>
+<script>
+var KEBAB="<!DOCTYPE html>\n<html lang=\"cs\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>Kebab — online objednávka<\/title>\n<meta name=\"description\" content=\"Čerstvý döner, dürüm, boxy a talíře. Objednejte si online k vyzvednutí nebo rozvozu.\">\n<meta property=\"og:title\" content=\"Kebab\">\n<meta property=\"og:description\" content=\"Čerstvý kebab — objednejte si online.\">\n<meta property=\"og:type\" content=\"website\">\n<meta name=\"theme-color\" content=\"#8B2635\">\n<style>\n:root{\n  --bg:#FFFFFF; --bg-soft:#F3F7FA; --card:#FFFFFF; --text:#2A2420; --muted:#8A8178;\n  --wine:#8B2635; --wine-dark:#6E1E2A; --gold:#B08D57; --blue:#6E9FC2; --blue-soft:#E8F1F7;\n  --border:#ECE7DF;\n  padding-top: env(safe-area-inset-top,0px);\n  padding-bottom: env(safe-area-inset-bottom,0px);\n}\n@media (prefers-color-scheme: dark){\n  :root:not([data-theme=\"light\"]){ --bg:#171512; --bg-soft:#1D2024; --card:#201D19; --text:#F2EFE9; --muted:#A9A39A; --border:#38332C; --blue-soft:#1E2A33; }\n}\n:root[data-theme=\"dark\"]{ --bg:#171512; --bg-soft:#1D2024; --card:#201D19; --text:#F2EFE9; --muted:#A9A39A; --border:#38332C; --blue-soft:#1E2A33; }\nhtml{scroll-padding-top:calc(76px + env(safe-area-inset-top,0px));}\n*{box-sizing:border-box;}\nbody{margin:0;background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;}\nheader{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:30;\n  padding:calc(12px + env(safe-area-inset-top,0px)) 20px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;}\n@media (prefers-color-scheme: dark){ header{background:rgba(23,21,18,.9);} }\nheader svg{height:38px;width:auto;flex-shrink:0;cursor:pointer;}\nnav{display:flex;gap:2px;}\nnav a{position:relative;color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.3px;padding:9px 14px;border-radius:30px;transition:.15s;cursor:pointer;}\nnav a:hover{color:var(--text);background:var(--bg-soft);}\n.nav-badge{display:none;position:absolute;top:2px;right:2px;background:var(--wine);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;align-items:center;justify-content:center;padding:0 4px;}\n.nav-badge.show{display:flex;}\n.map-link{display:inline-flex;align-items:center;gap:4px;color:var(--blue);text-decoration:none;font-size:13px;font-weight:600;margin-top:10px;}\n.map-link:hover{text-decoration:underline;}\n\n.hero{position:relative;padding:60px 20px 50px;text-align:center;overflow:hidden;}\n.hero::before{content:\"\";position:absolute;top:-80px;right:-60px;width:260px;height:260px;border-radius:50%;background:var(--blue-soft);z-index:0;}\n.hero::after{content:\"\";position:absolute;bottom:-100px;left:-80px;width:220px;height:220px;border-radius:50%;background:#FBEEE4;z-index:0;}\n@media (prefers-color-scheme: dark){ .hero::after{background:#2A2017;} }\n.hero>*{position:relative;z-index:1;}\n.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.5px;color:var(--wine);background:#FBEDE9;border-radius:20px;padding:6px 16px;margin-bottom:20px;}\n@media (prefers-color-scheme: dark){ .tag{background:#2E1A1C;} }\n.hero h1{font-size:clamp(30px,6vw,46px);font-weight:700;letter-spacing:-.5px;margin:0 0 16px;line-height:1.2;}\n.hero h1 span{color:var(--wine);}\n.hero p{color:var(--muted);max-width:460px;margin:0 auto 32px;font-size:16px;line-height:1.6;}\n.btn-huge{display:inline-flex;align-items:center;gap:10px;background:var(--wine);color:#fff;padding:20px 44px;border-radius:50px;text-decoration:none;font-size:17px;font-weight:600;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(139,38,53,.28);transition:.15s;}\n.btn-huge:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(139,38,53,.34);}\n.rating-badge{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:22px;font-size:13px;color:var(--muted);}\n.rating-badge .stars{color:var(--gold);}\n.rating-badge strong{color:var(--text);}\n\n.cat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;max-width:860px;margin:0 auto;padding:0 20px 60px;}\n.cat-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px 14px;text-align:center;cursor:pointer;transition:.15s;}\n.cat-card:hover{box-shadow:0 10px 24px rgba(0,0,0,.06);border-color:var(--blue);}\n.cat-card .ic{width:44px;height:44px;border-radius:14px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:20px;}\n.cat-card span{font-size:13px;font-weight:500;}\n\nsection{max-width:960px;margin:0 auto;padding:60px 20px;}\n.section-head{text-align:center;margin-bottom:40px;}\n.eyebrow{font-size:11px;letter-spacing:3px;color:var(--blue);margin-bottom:10px;font-weight:600;}\nh2{font-weight:700;letter-spacing:-.3px;margin:0;font-size:28px;}\n\n.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}\n.testimonial{background:var(--bg-soft);border-radius:16px;padding:22px;}\n.testimonial .stars{color:var(--gold);font-size:13px;margin-bottom:10px;display:block;}\n.testimonial p{color:var(--text);font-size:14px;line-height:1.6;margin:0 0 10px;}\n.testimonial span{font-size:12px;color:var(--muted);}\n\n.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:520px;margin:0 auto;}\n.contact-block{background:var(--bg-soft);border-radius:16px;padding:20px;}\n.contact-block h4{font-size:11px;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;margin:0 0 10px;font-weight:700;}\n.contact-block p{margin:0 0 4px;font-size:14px;}\n.hours-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;}\n.hours-row span:first-child{color:var(--muted);}\nfooter{text-align:center;padding:36px 20px calc(36px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:12px;border-top:1px solid var(--border);}\n\n/* ORDER VIEW */\n#view-order{display:none;}\n.order-head{display:flex;align-items:center;gap:14px;padding:18px 20px;max-width:960px;margin:0 auto;}\n.back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px;cursor:pointer;background:none;border:none;padding:8px 12px;border-radius:20px;}\n.back-btn:hover{background:var(--bg-soft);color:var(--text);}\n.order-title{max-width:960px;margin:0 auto;padding:0 20px 10px;}\n.order-title h2{font-size:26px;}\n.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 auto 30px;max-width:960px;padding:0 20px;}\n.chip{font-size:12.5px;letter-spacing:.3px;padding:9px 18px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s;font-weight:500;}\n.chip:hover{border-color:var(--blue);color:var(--text);}\n.chip.active{background:var(--blue);border-color:var(--blue);color:#fff;}\n#menu-cats{max-width:960px;margin:0 auto;padding:0 20px 30px;}\n.cat{margin-bottom:34px;}\n.cat h3{font-size:14px;font-weight:700;letter-spacing:.5px;color:var(--text);margin-bottom:16px;}\n.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}\n.item{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;display:flex;flex-direction:column;transition:.15s;}\n.item:hover{box-shadow:0 8px 22px rgba(0,0,0,.06);border-color:var(--blue);}\n.item-thumb{width:100%;height:84px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:12px;}\n.item-top{display:flex;justify-content:space-between;align-items:center;gap:10px;}\n.item-top h4{font-size:15px;font-weight:600;margin:0;}\n.price{color:var(--wine);font-weight:800;white-space:nowrap;font-size:19px;}\n.item p{color:var(--muted);font-size:13px;margin:6px 0 14px;line-height:1.5;flex-grow:1;}\n.item-actions{display:flex;align-items:center;gap:10px;}\n.stepper{display:flex;align-items:center;gap:10px;background:var(--bg-soft);border-radius:10px;padding:4px 6px;}\n.stepper button{background:none;border:none;color:var(--text);font-size:16px;width:26px;height:26px;border-radius:7px;cursor:pointer;line-height:1;}\n.stepper button:hover{background:var(--card);}\n.stepper span{min-width:16px;text-align:center;font-size:14px;font-weight:600;}\n.item-actions .add-btn{flex:1;padding:10px;background:var(--bg-soft);border:none;color:var(--text);border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:.3px;transition:.15s;}\n.item-actions .add-btn:hover{background:var(--blue);color:#fff;}\n.order-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}\n.order-line:last-of-type{border-bottom:none;}\n.order-line .ol-name{font-size:13px;flex:1;}\n.order-line .ol-sum{font-size:13px;font-weight:600;color:var(--text);min-width:64px;text-align:right;}\n.order-line .stepper button{width:22px;height:22px;font-size:14px;}\n.ol-remove{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0 4px;}\n.ol-remove:hover{color:var(--wine);}\n.note{font-size:12px;color:var(--muted);text-align:center;max-width:960px;margin:20px auto 100px;padding:0 20px;}\n\n.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:0 auto 40px;max-width:960px;padding:0 20px;text-align:center;}\n.step{background:var(--bg-soft);border-radius:16px;padding:20px 14px;}\n.step-num{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:13px;font-weight:700;}\n.step p{font-size:13px;color:var(--muted);margin:0;}\n.step strong{display:block;font-size:14px;font-weight:700;margin-bottom:4px;color:var(--text);}\n\n#order-form{max-width:460px;margin:0 auto 60px;display:none;flex-direction:column;gap:12px;background:var(--bg-soft);border-radius:18px;padding:28px;}\n#order-form.show{display:flex;}\n#order-items{font-size:13px;color:var(--muted);line-height:1.7;padding-bottom:12px;border-bottom:1px solid var(--border);}\n#order-form input,#order-form textarea{padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:14px;font-family:inherit;}\n#order-form label{font-size:12px;color:var(--muted);letter-spacing:.3px;margin-bottom:-6px;font-weight:600;}\n#form-error{color:#c0392b;font-size:13px;display:none;margin:0;}\n.field-error{color:#c0392b;font-size:12px;display:none;margin-top:-6px;}\n#order-form input.invalid{border-color:#c0392b;}\n#confirm{display:none;text-align:center;color:var(--wine);font-weight:600;margin:0 auto 0;max-width:460px;padding:0 20px;}\n#satisfaction{display:none;text-align:center;max-width:460px;margin:18px auto 60px;padding:24px 20px;background:var(--bg-soft);border-radius:18px;}\n#satisfaction p{margin:0 0 14px;font-size:14px;color:var(--muted);}\n.stars-input{display:flex;justify-content:center;gap:6px;font-size:30px;line-height:1;}\n.stars-input span{cursor:pointer;color:var(--border);transition:.1s;}\n.stars-input span:hover,.stars-input span.sel{color:var(--gold);}\n#rating-thanks{display:none;margin-top:14px;font-size:13px;color:var(--text);}\n#rating-thanks a{color:var(--blue);font-weight:600;}\n\n.qr-card{display:flex;align-items:center;gap:20px;background:var(--bg-soft);border-radius:18px;padding:20px;max-width:420px;margin:30px auto 0;flex-wrap:wrap;justify-content:center;text-align:left;}\n.qr-card svg{width:110px;height:110px;flex-shrink:0;background:#fff;border-radius:10px;padding:6px;}\n.qr-card div p{margin:0 0 4px;font-size:13px;color:var(--muted);max-width:220px;}\n.qr-card div strong{font-size:14px;}\n\n#cart{position:fixed;bottom:16px;left:16px;right:16px;background:var(--text);color:var(--bg);border-radius:20px;\n  padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px));display:none;z-index:20;box-shadow:0 10px 30px rgba(0,0,0,.2);}\n#cart.show{display:block;}\n.cart-row{display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;flex-wrap:wrap;gap:10px;}\n#cart-summary{font-size:14px;}\n#cart-total{font-weight:700;color:var(--gold);margin-right:10px;}\n.cart-row .btn-small{background:var(--blue);color:#fff;border:none;padding:10px 20px;border-radius:14px;font-size:13px;font-weight:600;cursor:pointer;}\n<\/style>\n<\/head>\n<body>\n\n<header>\n  <svg viewBox=\"0 0 900 300\" role=\"img\" aria-label=\"Kebab logo\" onclick=\"goHome()\">\n    <circle cx=\"130\" cy=\"150\" r=\"88\" fill=\"none\" stroke=\"#8B2635\" stroke-width=\"1.5\"/>\n    <circle cx=\"130\" cy=\"150\" r=\"78\" fill=\"none\" stroke=\"#B08D57\" stroke-width=\"1\"/>\n    <g stroke=\"#8B2635\" stroke-width=\"2.5\" stroke-linecap=\"round\" fill=\"none\">\n      <line x1=\"130\" y1=\"95\" x2=\"130\" y2=\"205\"/>\n      <line x1=\"106\" y1=\"118\" x2=\"154\" y2=\"118\"/>\n      <line x1=\"100\" y1=\"150\" x2=\"160\" y2=\"150\"/>\n      <line x1=\"106\" y1=\"182\" x2=\"154\" y2=\"182\"/>\n    <\/g>\n    <circle cx=\"130\" cy=\"95\" r=\"3.5\" fill=\"#B08D57\"/>\n    <circle cx=\"130\" cy=\"205\" r=\"3.5\" fill=\"#B08D57\"/>\n    <line x1=\"256\" y1=\"80\" x2=\"256\" y2=\"220\" stroke=\"#B08D57\" stroke-width=\"1\"/>\n    <text x=\"290\" y=\"152\" font-family=\"'Helvetica Neue', Arial, sans-serif\" font-size=\"52\" font-weight=\"300\" letter-spacing=\"6\" style=\"fill:var(--text)\">KEBAB<\/text>\n    <text x=\"290\" y=\"195\" font-family=\"'Helvetica Neue', Arial, sans-serif\" font-size=\"24\" font-weight=\"400\" fill=\"#8B2635\" letter-spacing=\"9\">BISTRO<\/text>\n    <line x1=\"290\" y1=\"212\" x2=\"700\" y2=\"212\" stroke=\"#B08D57\" stroke-width=\"0.75\"/>\n    <text x=\"290\" y=\"234\" font-family=\"'Helvetica Neue', Arial, sans-serif\" font-size=\"12\" letter-spacing=\"4\" style=\"fill:var(--muted)\">UKÁZKOVÝ WEB<\/text>\n  <\/svg>\n  <nav>\n    <a onclick=\"goHome()\">Domů<\/a>\n    <a onclick=\"goOrder('Vše')\">Objednat<span class=\"nav-badge\" id=\"nav-badge\"><\/span><\/a>\n    <a onclick=\"goHome('kontakt')\">Kontakt<\/a>\n  <\/nav>\n<\/header>\n\n<div id=\"view-home\">\n  <div class=\"hero\">\n    <span class=\"tag\">🥙 Otevřeno denně<\/span>\n    <h1>Šťavnatý <span>kebab<\/span><br>čerstvě pro vás<\/h1>\n    <p>Grilované maso, čerstvá zelenina a domácí omáčky — každý den, k vyzvednutí nebo s rozvozem.<\/p>\n    <button class=\"btn-huge\" onclick=\"goOrder('Vše')\">Objednat online →<\/button>\n    <div class=\"rating-badge\"><span class=\"stars\">★★★★★<\/span> <strong>4.7/5<\/strong> podle ukázkových hodnocení<\/div>\n  <\/div>\n\n  <div class=\"cat-cards\">\n    <div class=\"cat-card\" onclick=\"goOrder('Döner kebab')\"><div class=\"ic\" style=\"background:var(--blue-soft);\">🥙<\/div><span>Döner<\/span><\/div>\n    <div class=\"cat-card\" onclick=\"goOrder('Dürüm kebab')\"><div class=\"ic\" style=\"background:#FBEDE9;\">🌯<\/div><span>Dürüm<\/span><\/div>\n    <div class=\"cat-card\" onclick=\"goOrder('Velký kebab talíř')\"><div class=\"ic\" style=\"background:var(--blue-soft);\">🍽️<\/div><span>Talíře<\/span><\/div>\n    <div class=\"cat-card\" onclick=\"goOrder('Vegetariánská jídla')\"><div class=\"ic\" style=\"background:#FBEDE9;\">🥗<\/div><span>Veget.<\/span><\/div>\n    <div class=\"cat-card\" onclick=\"goOrder('Nápoje')\"><div class=\"ic\" style=\"background:var(--blue-soft);\">🥤<\/div><span>Nápoje<\/span><\/div>\n    <div class=\"cat-card\" onclick=\"goOrder('Dezerty')\"><div class=\"ic\" style=\"background:#FBEDE9;\">🍯<\/div><span>Dezerty<\/span><\/div>\n  <\/div>\n\n  <section id=\"recenze\">\n    <div class=\"section-head\">\n      <div class=\"eyebrow\">UKÁZKOVÉ RECENZE<\/div>\n      <h2>Hodnocení 4.7/5<\/h2>\n    <\/div>\n    <div class=\"testimonials\">\n      <div class=\"testimonial\"><span class=\"stars\">★★★★★<\/span><p>Maso šťavnaté, zelenina čerstvá a omáčka přesně ta pravá. Dám si zase.<\/p><span>Martin<\/span><\/div>\n      <div class=\"testimonial\"><span class=\"stars\">★★★★★<\/span><p>Objednávka přišla rychle a ještě teplá. Velká porce za rozumnou cenu.<\/p><span>Lucie<\/span><\/div>\n      <div class=\"testimonial\"><span class=\"stars\">★★★★☆<\/span><p>Dürüm výborný, hranolky mohly být o něco křupavější. Jinak spokojenost.<\/p><span>Petr<\/span><\/div>\n    <\/div>\n  <\/section>\n\n  <section id=\"kontakt\">\n    <div class=\"section-head\">\n      <div class=\"eyebrow\">NAJDETE NÁS<\/div>\n      <h2>Kontakt<\/h2>\n    <\/div>\n    <div class=\"contact-grid\">\n      <div class=\"contact-block\">\n        <h4>Adresa<\/h4>\n        <p>Vaše ulice 123<\/p>\n        <p>123 45 Vaše město<\/p>\n        <a class=\"map-link\" href=\"https://www.google.com/maps\" target=\"_blank\" rel=\"noopener\">📍 Zobrazit na mapě<\/a>\n        <h4 style=\"margin-top:18px;\">Spojení<\/h4>\n        <p><a href=\"tel:+420000000000\" style=\"color:inherit;text-decoration:none;\">+420 000 000 000<\/a><\/p>\n        <p><a href=\"mailto:info@vasefirma.cz\" style=\"color:inherit;text-decoration:none;\">info@vasefirma.cz<\/a><\/p>\n        <p style=\"font-size:11px;color:var(--muted);margin-top:8px;\">Objednávky z webu přijímáme na WhatsApp <a href=\"https://wa.me/420000000000\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);\">000 000 000<\/a><\/p>\n      <\/div>\n      <div class=\"contact-block\">\n        <h4>Otevírací doba<\/h4>\n        <div class=\"hours-row\"><span>Po–Pá<\/span><span>10:00–21:00<\/span><\/div>\n        <div class=\"hours-row\"><span>So–Ne<\/span><span>11:00–21:00<\/span><\/div>\n      <\/div>\n    <\/div>\n  <div class=\"qr-card\">\n    <svg style=\"width:110px;height:110px;flex-shrink:0;background:#fff;border-radius:10px;padding:6px;\" viewBox=\"0 0 328 328\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"crispEdges\"><rect width=\"328\" height=\"328\" fill=\"#fff\"/><g fill=\"#1A1A1A\"><rect x=\"48\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"48\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"56\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"64\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"72\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"80\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"88\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"96\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"104\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"104\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"104\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"104\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"104\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"112\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"104\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"120\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"104\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"128\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"104\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"136\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"104\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"144\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"152\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"104\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"160\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"104\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"216\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"168\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"216\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"176\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"104\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"184\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"192\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"200\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"216\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"208\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"216\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"216\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"216\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"216\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"216\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"216\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"216\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"224\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"160\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"232\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"216\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"240\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"216\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"248\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"152\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"192\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"216\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"264\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"256\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"128\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"224\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"248\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"256\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"272\" y=\"264\" width=\"8\" height=\"8\"/><rect x=\"48\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"56\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"64\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"72\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"80\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"88\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"96\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"112\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"120\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"136\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"144\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"168\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"176\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"184\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"200\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"208\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"232\" y=\"272\" width=\"8\" height=\"8\"/><rect x=\"240\" y=\"272\" width=\"8\" height=\"8\"/><\/g><\/svg>\n    <div>\n      <strong>Naskenujte a objednejte<\/strong>\n      <p>QR kód vede přímo na tento web — dejte ho na stůl, krabičku nebo vizitku.<\/p>\n    <\/div>\n  <\/div>\n<\/section>\n\n  <footer>Vaše ulice 123, 123 45 Vaše město · <a href=\"tel:+420000000000\" style=\"color:inherit;\">+420 000 000 000<\/a><br>© 2026 Kebab. Všechna práva vyhrazena.<\/footer>\n<\/div>\n\n<div id=\"view-order\">\n  <div class=\"order-head\">\n    <button class=\"back-btn\" onclick=\"goHome()\">← Zpět na web<\/button>\n  <\/div>\n  <div class=\"order-title\">\n    <div class=\"eyebrow\">JÍDELNÍ LÍSTEK<\/div>\n    <h2>Vyberte si jídlo<\/h2>\n  <\/div>\n  <div class=\"chips\" id=\"menu-chips\"><\/div>\n  <div id=\"menu-cats\"><\/div>\n  <p class=\"note\">Ceny jsou uvedené od základní varianty (velikost/příloha může cenu mírně navýšit).<\/p>\n\n  <div class=\"steps\">\n    <div class=\"step\"><div class=\"step-num\">1<\/div><strong>Vyberte jídlo<\/strong><p>Přidejte položky výše<\/p><\/div>\n    <div class=\"step\"><div class=\"step-num\">2<\/div><strong>Vyplňte údaje<\/strong><p>Jméno a telefon<\/p><\/div>\n    <div class=\"step\"><div class=\"step-num\">3<\/div><strong>Vyzvedněte si<\/strong><p>Objednávku připravíme<\/p><\/div>\n  <\/div>\n\n  <form id=\"order-form\" onsubmit=\"event.preventDefault(); submitOrder(); return false;\">\n    <div id=\"order-items\">Zatím jste nic nepřidali.<\/div>\n    <label>Jméno a příjmení<\/label>\n    <input type=\"text\" id=\"cust-name\" placeholder=\"Jan Novák\" required oninput=\"this.classList.remove('invalid');document.getElementById('err-name').style.display='none';\">\n    <span class=\"field-error\" id=\"err-name\">Vyplňte prosím jméno a příjmení.<\/span>\n    <label>Telefon<\/label>\n    <input type=\"tel\" id=\"cust-phone\" placeholder=\"+420 777 123 456\" required oninput=\"this.classList.remove('invalid');document.getElementById('err-phone').style.display='none';\">\n    <span class=\"field-error\" id=\"err-phone\">Vyplňte prosím telefonní číslo.<\/span>\n    <label>Poznámka (nepovinné)<\/label>\n    <textarea id=\"cust-note\" placeholder=\"Např. bez cibule\" rows=\"2\"><\/textarea>\n    <button type=\"button\" class=\"btn-huge\" style=\"justify-content:center;font-size:15px;padding:16px;\" onclick=\"submitOrder()\">Odeslat objednávku<\/button>\n    <p id=\"form-error\">Váš košík je prázdný — nejdřív prosím přidejte alespoň jedno jídlo.<\/p>\n    <p style=\"font-size:11px;color:var(--muted);text-align:center;margin:0;\">Odesláním souhlasíte se zpracováním jména a telefonu pouze za účelem vyřízení této objednávky.<\/p>\n  <\/form>\n  <p id=\"confirm\">Děkujeme! Otevíráme WhatsApp s vaší objednávkou — stačí zprávu odeslat a brzy se vám ozveme na potvrzení.<\/p>\n  <div id=\"satisfaction\">\n    <p>Jak jste byli spokojeni s objednávkou?<\/p>\n    <div class=\"stars-input\" id=\"stars-input\">\n      <span data-v=\"1\" onclick=\"rate(1)\">★<\/span><span data-v=\"2\" onclick=\"rate(2)\">★<\/span><span data-v=\"3\" onclick=\"rate(3)\">★<\/span><span data-v=\"4\" onclick=\"rate(4)\">★<\/span><span data-v=\"5\" onclick=\"rate(5)\">★<\/span>\n    <\/div>\n    <p id=\"rating-thanks\"><\/p>\n  <\/div>\n<\/div>\n\n<div id=\"cart\">\n  <div class=\"cart-row\">\n    <span id=\"cart-summary\">Košík je prázdný<\/span>\n    <span><span id=\"cart-total\"><\/span><button class=\"btn-small\" onclick=\"scrollToCheckout()\">K objednávce<\/button><\/span>\n  <\/div>\n<\/div>\n\n<script>\nconst menu = [\n  {cat:\"Döner kebab\",n:\"Döner klasický\",d:\"Maso, salát, dresing, chléb\",p:165},\n  {cat:\"Döner kebab\",n:\"Döner se sýrem\",d:\"Maso, salát, sýr, dresing a chléb\",p:175},\n  {cat:\"Döner kebab\",n:\"Super Döner\",d:\"Maso, salát, sýr, olivy, dresing a chléb\",p:199},\n  {cat:\"Döner kebab\",n:\"Mega Döner\",d:\"Více masa, salát, dresing a chléb\",p:209},\n  {cat:\"Döner kebab\",n:\"Speciál Döner\",d:\"Jen maso, dresing a chléb\",p:209},\n  {cat:\"French Tacos\",n:\"French Tacos klasik\",d:\"Maso, hranolky, čedar\",p:239},\n  {cat:\"French Tacos\",n:\"French Tacos Strips\",d:\"Stripsy, hranolky, čedar\",p:239},\n  {cat:\"Dürüm kebab\",n:\"Dürüm klasický\",d:\"Maso, salát, dresing a tortilla\",p:185},\n  {cat:\"Dürüm kebab\",n:\"Dürüm se sýrem\",d:\"Maso, salát, sýr, dresing a tortilla\",p:199},\n  {cat:\"Dürüm kebab\",n:\"Super Dürüm\",d:\"Maso, salát, olivy, sýr, dresing a tortilla\",p:229},\n  {cat:\"Dürüm kebab\",n:\"Speciál Dürüm\",d:\"Jen maso, dresing a tortilla\",p:235},\n  {cat:\"Dürüm kebab\",n:\"Mega Dürüm\",d:\"Více masa, salát, dresing a tortilla\",p:229},\n  {cat:\"Dürüm kebab\",n:\"Dürüm s hranolkami\",d:\"Maso, salát, hranolky, dresing a tortilla\",p:239},\n  {cat:\"Velký kebab talíř\",n:\"Velký kebab talíř s hranolkami\",d:\"Maso, salát, dresing, hranolky\",p:269},\n  {cat:\"Velký kebab talíř\",n:\"Speciál velký talíř\",d:\"Jen maso, dresing, chléb\",p:259},\n  {cat:\"Velký kebab talíř\",n:\"Velký kebab talíř s chlebem\",d:\"Maso, salát, dresing a chléb\",p:219},\n  {cat:\"Velký kebab talíř\",n:\"Velký talíř se sýrem\",d:\"Maso, salát, sýr, dresing, chléb\",p:229},\n  {cat:\"Velký kebab talíř\",n:\"Super velký talíř\",d:\"Maso, salát, olivy, sýr, dresing, chléb\",p:259},\n  {cat:\"Kebab box\",n:\"Velký kebab box s hranolkami\",d:\"Maso, salát, hranolky, dresing\",p:159},\n  {cat:\"Kebab box\",n:\"Malý kebab box s hranolkami\",d:\"Maso, salát, hranolky, dresing\",p:129},\n  {cat:\"Stripsy\",n:\"Velký strips talíř\",d:\"8 ks stripsů, hranolky, dresing\",p:319},\n  {cat:\"Stripsy\",n:\"Velký strips box\",d:\"4 ks stripsů, hranolky, dresing\",p:219},\n  {cat:\"Hranolky\",n:\"Malé hranolky\",d:\"Čerstvě smažené hranolky\",p:75},\n  {cat:\"Hranolky\",n:\"Velké hranolky\",d:\"Čerstvě smažené hranolky\",p:129},\n  {cat:\"Vegetariánská jídla\",n:\"Falafel Dürüm\",d:\"Falafel, salát, dresing a tortilla\",p:175},\n  {cat:\"Vegetariánská jídla\",n:\"Falafel velký talíř\",d:\"Falafel, salát, dresing a chléb\",p:195},\n  {cat:\"Vegetariánská jídla\",n:\"Halloumi Dürüm\",d:\"Halloumi sýr, salát, dresing a tortilla\",p:189},\n  {cat:\"Vegetariánská jídla\",n:\"Halloumi velký talíř\",d:\"Halloumi sýr, salát, dresing a chléb\",p:209},\n  {cat:\"Saláty\",n:\"Míchaný salát\",d:\"Salát, okurky, rajčata, sýr, cibule, dresink\",p:135},\n  {cat:\"Saláty\",n:\"Kuřecí salát\",d:\"Kuřecí maso, salát, okurky, rajčata, sýr, cibule, dresink\",p:159},\n  {cat:\"Nápoje\",n:\"Coca-Cola / Fanta / Mango 330 ml\",d:\"Chlazený nápoj v plechovce\",p:35},\n  {cat:\"Nápoje\",n:\"Ayran 250 ml\",d:\"Tradiční slaný jogurtový nápoj\",p:39},\n  {cat:\"Nápoje\",n:\"Fuze Tea 500 ml\",d:\"Černý nebo jablečný čaj\",p:49},\n  {cat:\"Nápoje\",n:\"Coca-Cola / Coca-Cola Zero / Sprite 500 ml\",d:\"Chlazený nápoj v lahvi\",p:49},\n  {cat:\"Dezerty\",n:\"Baklava pistáciová\",d:\"Vrstvené těsto s pistáciovou náplní a medovým sirupem\",p:55},\n  {cat:\"Dezerty\",n:\"Baklava ořechová\",d:\"Vrstvené těsto s vlašskými ořechy, medem a skořicí\",p:55},\n];\n\nlet cart = {};\nlet qtyPicker = {};\nlet activeCat = 'Vše';\n\nfunction saveCart(){\n  try{ localStorage.setItem('kebabCart', JSON.stringify(cart)); }catch(e){}\n}\nfunction loadCart(){\n  try{\n    const raw = localStorage.getItem('kebabCart');\n    if(raw) cart = JSON.parse(raw) || {};\n  }catch(e){ cart = {}; }\n}\n\nconst catIcon = {\n  \"Döner kebab\":{e:\"🥙\",c:\"var(--blue-soft)\"},\n  \"French Tacos\":{e:\"🌮\",c:\"#FBEDE9\"},\n  \"Dürüm kebab\":{e:\"🌯\",c:\"var(--blue-soft)\"},\n  \"Velký kebab talíř\":{e:\"🍽️\",c:\"#FBEDE9\"},\n  \"Kebab box\":{e:\"🍱\",c:\"var(--blue-soft)\"},\n  \"Stripsy\":{e:\"🍗\",c:\"#FBEDE9\"},\n  \"Hranolky\":{e:\"🍟\",c:\"var(--blue-soft)\"},\n  \"Vegetariánská jídla\":{e:\"🥗\",c:\"#FBEDE9\"},\n  \"Saláty\":{e:\"🥗\",c:\"var(--blue-soft)\"},\n  \"Nápoje\":{e:\"🥤\",c:\"#FBEDE9\"},\n  \"Dezerty\":{e:\"🍯\",c:\"var(--blue-soft)\"},\n};\n\nfunction renderChips(){\n  const cats = ['Vše', ...new Set(menu.map(m=>m.cat))];\n  document.getElementById('menu-chips').innerHTML = cats.map(cat=>\n    `<button class=\"chip${cat===activeCat?' active':''}\" onclick=\"filterCat('${cat}')\">${cat}<\/button>`\n  ).join('');\n}\n\nfunction filterCat(cat){\n  activeCat = cat;\n  renderChips();\n  renderMenu();\n}\n\nfunction renderMenu(){\n  const cats = [...new Set(menu.map(m=>m.cat))].filter(c=>activeCat==='Vše'||c===activeCat);\n  const wrap = document.getElementById('menu-cats');\n  wrap.innerHTML = cats.map(cat=>{\n    const items = menu.filter(m=>m.cat===cat);\n    return `<div class=\"cat\"><h3>${cat}<\/h3><div class=\"menu-grid\">` +\n      items.map((item)=>{\n        const i = menu.indexOf(item);\n        const q = qtyPicker[i] || 1;\n        const icon = catIcon[item.cat] || {e:\"🍴\",c:\"var(--bg-soft)\"};\n        return `<div class=\"item\">\n          <div class=\"item-thumb\" style=\"background:${icon.c};\">${icon.e}<\/div>\n          <div class=\"item-top\"><h4>${item.n}<\/h4><span class=\"price\">${item.p} Kč<\/span><\/div>\n          <p>${item.d}<\/p>\n          <div class=\"item-actions\">\n            <div class=\"stepper\">\n              <button onclick=\"changeQty(${i},-1)\">−<\/button>\n              <span id=\"qty-${i}\">${q}<\/span>\n              <button onclick=\"changeQty(${i},1)\">+<\/button>\n            <\/div>\n            <button class=\"add-btn\" onclick=\"addItem(${i})\">Přidat<\/button>\n          <\/div>\n        <\/div>`;\n      }).join('') + `<\/div><\/div>`;\n  }).join('');\n}\n\nfunction changeQty(i,delta){\n  const cur = qtyPicker[i] || 1;\n  qtyPicker[i] = Math.max(1, cur + delta);\n  const el = document.getElementById('qty-'+i);\n  if(el) el.textContent = qtyPicker[i];\n}\n\nfunction addItem(i){\n  const q = qtyPicker[i] || 1;\n  if(cart[i]) cart[i].q += q; else cart[i] = {item:menu[i], q:q};\n  qtyPicker[i] = 1;\n  const el = document.getElementById('qty-'+i);\n  if(el) el.textContent = 1;\n  document.getElementById('confirm').style.display = 'none';\n  document.getElementById('satisfaction').style.display = 'none';\n  document.getElementById('stars-input').querySelectorAll('span').forEach(s=>s.classList.remove('sel'));\n  document.getElementById('rating-thanks').style.display = 'none';\n  updateCart();\n}\n\nfunction cartLineQty(i,delta){\n  if(!cart[i]) return;\n  cart[i].q += delta;\n  if(cart[i].q <= 0) delete cart[i];\n  updateCart();\n}\n\nfunction removeCartLine(i){\n  delete cart[i];\n  updateCart();\n}\n\nfunction updateCart(){\n  const bar = document.getElementById('cart');\n  const summary = document.getElementById('cart-summary');\n  const total = document.getElementById('cart-total');\n  const orderItems = document.getElementById('order-items');\n  const entries = Object.entries(cart);\n  const totalQty = entries.reduce((a,[,v])=>a+v.q,0);\n  saveCart();\n  const badge = document.getElementById('nav-badge');\n  if(badge){\n    if(totalQty > 0){ badge.textContent = totalQty; badge.classList.add('show'); }\n    else { badge.classList.remove('show'); }\n  }\n  if(entries.length === 0){\n    bar.classList.remove('show');\n    orderItems.innerHTML = 'Zatím jste nic nepřidali.';\n    return;\n  }\n  bar.classList.add('show');\n  const sum = entries.reduce((a,[,v])=>a+v.item.p*v.q,0);\n  summary.textContent = totalQty + (totalQty===1?' kus':' kusů') + ' v košíku';\n  total.textContent = sum.toLocaleString('cs-CZ') + ' Kč';\n  const lines = entries.map(([i,v])=>`\n    <div class=\"order-line\">\n      <span class=\"ol-name\">${v.item.n}<\/span>\n      <div class=\"stepper\">\n        <button onclick=\"cartLineQty(${i},-1)\">−<\/button>\n        <span>${v.q}<\/span>\n        <button onclick=\"cartLineQty(${i},1)\">+<\/button>\n      <\/div>\n      <span class=\"ol-sum\">${v.item.p*v.q} Kč<\/span>\n      <button class=\"ol-remove\" onclick=\"removeCartLine(${i})\">×<\/button>\n    <\/div>`).join('');\n  orderItems.innerHTML = '<strong>Vaše objednávka:<\/strong>' + lines + '<div class=\"order-line\" style=\"border:none;font-weight:700;\"><span>Celkem<\/span><span class=\"ol-sum\">'+sum.toLocaleString('cs-CZ')+' Kč<\/span><\/div>';\n  document.getElementById('order-form').classList.add('show');\n}\n\nfunction submitOrder(){\n  const nameInput = document.getElementById('cust-name');\n  const phoneInput = document.getElementById('cust-phone');\n  const name = nameInput.value.trim();\n  const phone = phoneInput.value.trim();\n  const note = document.getElementById('cust-note').value.trim();\n  const errName = document.getElementById('err-name');\n  const errPhone = document.getElementById('err-phone');\n  const err = document.getElementById('form-error');\n  const entries = Object.entries(cart);\n\n  let valid = true;\n  if(!name){ errName.style.display = 'block'; nameInput.classList.add('invalid'); valid = false; }\n  else { errName.style.display = 'none'; nameInput.classList.remove('invalid'); }\n  if(!phone){ errPhone.style.display = 'block'; phoneInput.classList.add('invalid'); valid = false; }\n  else { errPhone.style.display = 'none'; phoneInput.classList.remove('invalid'); }\n\n  if(!valid || entries.length===0){\n    err.style.display = entries.length===0 ? 'block' : 'none';\n    return;\n  }\n  err.style.display = 'none';\n\n  const sum = entries.reduce((a,[,v])=>a+v.item.p*v.q,0);\n  const lines = entries.map(([,v])=>'- '+v.item.n+(v.q>1?' ×'+v.q:'')+' ('+(v.item.p*v.q)+' Kč)').join('\\n');\n  const msg = 'Nová objednávka z webu\\n\\n'+lines+'\\n\\nCelkem: '+sum+' Kč\\n\\nJméno: '+name+'\\nTelefon: '+phone+(note?'\\nPoznámka: '+note:'');\n  const waUrl = 'https://wa.me/420000000000?text='+encodeURIComponent(msg);\n\n  document.getElementById('order-form').classList.remove('show');\n  document.getElementById('confirm').style.display = 'block';\n  document.getElementById('satisfaction').style.display = 'block';\n  document.getElementById('cart').classList.remove('show');\n  cart = {};\n  renderMenu();\n  updateCart();\n\n  window.open(waUrl, '_blank', 'noopener');\n}\n\nfunction rate(v){\n  document.querySelectorAll('#stars-input span').forEach(s=>{\n    s.classList.toggle('sel', parseInt(s.dataset.v) <= v);\n  });\n  const thanks = document.getElementById('rating-thanks');\n  thanks.style.display = 'block';\n  if(v >= 4){\n    thanks.innerHTML = 'Děkujeme! Moc nás potěší, když nám <a href=\"https://www.google.com/maps\" target=\"_blank\" rel=\"noopener\">necháte recenzi na Google<\/a>.';\n  } else {\n    thanks.innerHTML = 'Děkujeme za zpětnou vazbu — příště si na tom dáme víc záležet. Pokud chcete, napište nám přímo přes <a href=\"https://wa.me/420000000000\" target=\"_blank\" rel=\"noopener\">WhatsApp<\/a>.';\n  }\n}\n\nfunction goOrder(cat){\n  activeCat = cat || 'Vše';\n  document.getElementById('view-home').style.display = 'none';\n  document.getElementById('view-order').style.display = 'block';\n  renderChips();\n  renderMenu();\n  window.scrollTo({top:0,behavior:'auto'});\n}\n\nfunction goHome(scrollTo){\n  document.getElementById('view-order').style.display = 'none';\n  document.getElementById('view-home').style.display = 'block';\n  window.scrollTo({top:0,behavior:'auto'});\n  if(scrollTo){\n    const target = document.getElementById(scrollTo);\n    if(target){\n      setTimeout(()=>{\n        const headerH = document.querySelector('header').offsetHeight;\n        const y = target.getBoundingClientRect().top + window.pageYOffset - headerH - 10;\n        window.scrollTo({top:Math.max(y,0),behavior:'smooth'});\n      },0);\n    }\n  }\n}\n\nfunction scrollToCheckout(){\n  const orderView = document.getElementById('view-order');\n  if(orderView.style.display !== 'block'){\n    document.getElementById('view-home').style.display = 'none';\n    orderView.style.display = 'block';\n    renderChips();\n    renderMenu();\n  }\n  setTimeout(()=>{\n    const target = document.getElementById('order-form');\n    const headerH = document.querySelector('header').offsetHeight;\n    const y = target.getBoundingClientRect().top + window.pageYOffset - headerH - 10;\n    window.scrollTo({top:Math.max(y,0),behavior:'smooth'});\n  },0);\n}\n\nloadCart();\nupdateCart();\n<\/script>\n\n<\/body>\n<\/html>\n";
+(function(){
+  var box=document.getElementById('demo'),fr=document.getElementById('demoFrame'),op=document.getElementById('demoOpen'),cl=document.getElementById('demoClose');
+  function open(){
+    if(!fr.srcdoc)fr.srcdoc=KEBAB;
+    box.hidden=false;document.body.style.overflow='hidden';cl.focus();
+  }
+  function close(){box.hidden=true;document.body.style.overflow='';op.focus();}
+  op.addEventListener('click',open);
+  cl.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!box.hidden)close()});
+})();
 </script>
 </body>
 </html>

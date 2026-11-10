@@ -1,5 +1,6 @@
-# Michal Čermák
+# mc – weby tvořené s AI
 
-Osobní web – moderní weby a grafika s pomocí AI pro podniky.
+Jednostránkový web nabízející tvorbu webů. Celý web je v jednom souboru `index.html`
+(včetně vložené ukázky Kebab), nepotřebuje žádný server ani instalaci.
 
-Živě: https://alescermak79-lab.github.io/michal-cermak/
+Otevřete `index.html` v prohlížeči.
