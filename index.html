@@ -345,14 +345,14 @@ footer .mark{width:36px;height:36px;padding:6px;background:#14161B;border-radius
     <section id="kontakt" class="contact">
       <h2>Řekněte mi, jaký web potřebujete</h2>
       <p class="lead">Napište mi pár vět o tom, co děláte, a já vám pošlu návrh webu. Odpovím do 3 dnů.</p>
-      <p style="margin:0 0 28px"><button class="btn solid" type="button" id="copyAddr">cermakmichal440@gmail.com</button> <span class="hint">Klepnutím adresu zkopírujete.</span></p>
+      <p style="margin:0 0 28px"><button class="btn solid" type="button" id="copyAddr">poptavky@michal-cermak.cz</button> <span class="hint">Klepnutím adresu zkopírujete.</span></p>
       <form id="f" class="form" novalidate>
         <label>Jméno *<input id="fn" autocomplete="name" required><span class="err" id="en" hidden></span></label>
         <label>Telefon nebo e-mail *<input id="fc" autocomplete="email" required><span class="err" id="ec" hidden></span></label>
         <label>Balíček<select id="fp"><option>Vizitka</option><option selected>Firemní web</option><option>Web a vytvoření sociálních sítí</option><option>Ještě nevím</option></select></label>
         <label>Zpráva<textarea id="fm" rows="4" placeholder="Čím se zabýváte a co od webu čekáte?"></textarea></label>
         <button class="btn solid" type="submit">Připravit e-mail</button>
-        <p class="hint">Zpráva se připraví a ukáže se hned pod formulářem. Stačí ji zkopírovat a poslat e-mailem. Nebo napište přímo na <b>cermakmichal440@gmail.com</b>. Údaje použiju jen k odpovědi na vaši poptávku.</p>
+        <p class="hint">Zpráva se připraví a ukáže se hned pod formulářem. Stačí ji zkopírovat a poslat e-mailem. Nebo napište přímo na <b>poptavky@michal-cermak.cz</b>. Údaje použiju jen k odpovědi na vaši poptávku.</p>
       </form>
       <div id="mailbox" class="mailbox" hidden>
         <p><b>Zpráva je připravená.</b> Zkopírujte ji a pošlete e-mailem:</p>
@@ -360,7 +360,7 @@ footer .mark{width:36px;height:36px;padding:6px;background:#14161B;border-radius
           <button id="mbCopy" type="button" class="btn solid">Zkopírovat zprávu</button>
         </div>
         <textarea id="mbText" readonly rows="8" aria-label="Připravená zpráva"></textarea>
-        <p class="hint">Pošlete ji na <b>cermakmichal440@gmail.com</b>.</p>
+        <p class="hint">Pošlete ji na <b>poptavky@michal-cermak.cz</b>.</p>
       </div>
     </section>
   </main>
@@ -369,12 +369,12 @@ footer .mark{width:36px;height:36px;padding:6px;background:#14161B;border-radius
 <footer>
   <div class="wrap">
     <span style="display:flex;align-items:center;gap:10px"><svg class="mark" width="34" height="30" viewBox="98 87 152 136" aria-hidden="true"><path d="M214.4 117.7 A58 58 0 1 0 214.4 192.3" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/><circle cx="233" cy="155" r="8" fill="#FFFFFF"/><path d="M148 167 V154 a11 11 0 0 1 22 0 V167 M170 154 a11 11 0 0 1 22 0 V167" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></svg> mc – weby tvořené s AI</span>
-    <span>cermakmichal440@gmail.com · © 2026 mc</span>
+    <span>poptavky@michal-cermak.cz · © 2026 mc</span>
   </div>
 </footer>
 <script>
 var $=function(i){return document.getElementById(i)};
-var TO='cermakmichal440@gmail.com';
+var TO='poptavky@michal-cermak.cz';
 (function(){var fab=document.getElementById('fab'),k=document.getElementById('kontakt');if(fab&&k&&'IntersectionObserver' in window){new IntersectionObserver(function(es){fab.classList.toggle('hide',es[0].isIntersecting)}).observe(k)}})();
 function mark(i,e,ok,msg){var f=$(i),r=$(e);f.classList.toggle('invalid',!ok);f.setAttribute('aria-invalid',!ok);r.textContent=msg;r.hidden=ok}
 $('fn').addEventListener('input',function(){mark('fn','en',true,'')});
