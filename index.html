@@ -123,6 +123,7 @@ ol.steps p{margin:0;color:var(--mute);font-size:16px}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .out{margin:18px 0 0;color:var(--mute)}
 .out b{display:block;font:700 34px var(--head);color:var(--ink);letter-spacing:-.02em}
+#cd{display:block;margin-top:6px;font:600 20px var(--head);color:var(--ink);letter-spacing:-.01em}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .rv.in{opacity:1;transform:none}
 button.btn{cursor:pointer}
@@ -419,11 +420,11 @@ $('mbCopy').addEventListener('click',function(){
     bs.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
     soc.closest('label').style.display='none';var o=+b.dataset.o,m=+b.dataset.m;document.getElementById('socp').textContent='+ '+f(+b.dataset.m);
     if(m){
-      ct.textContent=f(m)+' měsíčně';
-      cd.textContent='+ jednorázově '+f(o)+' za výrobu webu';
+      ct.textContent=f(o)+' za výrobu webu';
+      cd.textContent='+ '+f(m)+' měsíčně za správu sociálních sítí';
       document.getElementById('cy').textContent='Za první rok celkem '+f(o+12*m)+'.';
     }else{
-      ct.textContent=f(o)+' jednorázově';
+      ct.textContent=f(o)+' za výrobu webu';
       cd.textContent='Žádné měsíční platby.';
       document.getElementById('cy').textContent='';
     }
