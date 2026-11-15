@@ -304,7 +304,7 @@ footer .mark{width:36px;height:36px;padding:6px;background:#14161B;border-radius
         </div>
       </div>
       <div class="calc">
-        <h3>Kolik zaplatíte za první rok?</h3>
+        <h3>Kolik zaplatíte?</h3>
         <div class="seg" role="group" aria-label="Vyberte balíček"><button type="button" data-o="4000" data-m="0" aria-pressed="false">Jednorázový web</button><button type="button" data-o="4300" data-m="3500" aria-pressed="true">Firemní web</button><button type="button" data-o="5000" data-m="4000" aria-pressed="false">Web a vytvoření sociálních sítí</button></div>
         <label class="chk"><input type="checkbox" id="soc"> Přidat správu sociálních sítí (<span id="socp">+ 1 500 Kč</span> za měsíc)</label>
         <p class="out"><b id="ct"></b><span id="cd"></span><span id="cy" style="display:block;margin-top:6px"></span></p>
@@ -418,9 +418,15 @@ $('mbCopy').addEventListener('click',function(){
     cur=b;
     bs.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
     soc.closest('label').style.display='none';var o=+b.dataset.o,m=+b.dataset.m;document.getElementById('socp').textContent='+ '+f(+b.dataset.m);
-    ct.textContent=f(o+12*m);
-    cd.textContent=f(o)+' za výrobu'+(m?' a 12× '+f(m)+' za správu sociálních sítí':'');
-    document.getElementById('cy').textContent=m?'Od druhého roku platíte už jen '+f(12*m)+' za rok.':'';
+    if(m){
+      ct.textContent=f(m)+' měsíčně';
+      cd.textContent='+ jednorázově '+f(o)+' za výrobu webu';
+      document.getElementById('cy').textContent='Za první rok celkem '+f(o+12*m)+'.';
+    }else{
+      ct.textContent=f(o)+' jednorázově';
+      cd.textContent='Žádné měsíční platby.';
+      document.getElementById('cy').textContent='';
+    }
   }
   bs.forEach(function(b){b.addEventListener('click',function(){set(b)})});
   soc.addEventListener('change',function(){set(cur)});
