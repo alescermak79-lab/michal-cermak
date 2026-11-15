@@ -285,10 +285,10 @@ footer .mark{width:36px;height:36px;padding:6px;background:#14161B;border-radius
       <h2>Tři balíčky, jasné ceny</h2>
       <div class="plans">
         <div class="plan">
-          <h3>Vizitka</h3>
+          <h3>Jednorázový web</h3>
           <p class="price">4 000 Kč <small>jednorázově</small></p>
           <ul><li>Vaše logo a barvy na celém webu</li><li>Mapa, otevírací doba a tlačítko pro rychlé zavolání</li><li>Odkazy na vaše sociální sítě</li><li>Rychlé načítání a zabezpečený web</li><li>Upravím fotky a krátké video na web</li><li>Hezky vypadá i v mobilu</li><li>Hotovo do 7 dnů</li></ul>
-          <div class="monthly"><p class="price">+ 3 000 Kč <small>za měsíc</small></p><p>Správa sociálních sítí: plán příspěvků, 8 příspěvků a 2 krátká videa měsíčně, obrázky a měsíční shrnutí.</p></div>
+          <div class="monthly"><p class="price">Bez měsíčních plateb</p><p>Zaplatíte jednou a web je váš. Žádné další poplatky za správu.</p></div>
         </div>
         <div class="plan main">
           <h3>Firemní web</h3>
@@ -305,7 +305,7 @@ footer .mark{width:36px;height:36px;padding:6px;background:#14161B;border-radius
       </div>
       <div class="calc">
         <h3>Kolik zaplatíte za první rok?</h3>
-        <div class="seg" role="group" aria-label="Vyberte balíček"><button type="button" data-o="4000" data-m="3000" aria-pressed="false">Vizitka</button><button type="button" data-o="4300" data-m="3500" aria-pressed="true">Firemní web</button><button type="button" data-o="5000" data-m="4000" aria-pressed="false">Web a vytvoření sociálních sítí</button></div>
+        <div class="seg" role="group" aria-label="Vyberte balíček"><button type="button" data-o="4000" data-m="0" aria-pressed="false">Jednorázový web</button><button type="button" data-o="4300" data-m="3500" aria-pressed="true">Firemní web</button><button type="button" data-o="5000" data-m="4000" aria-pressed="false">Web a vytvoření sociálních sítí</button></div>
         <label class="chk"><input type="checkbox" id="soc"> Přidat správu sociálních sítí (<span id="socp">+ 1 500 Kč</span> za měsíc)</label>
         <p class="out"><b id="ct"></b><span id="cd"></span><span id="cy" style="display:block;margin-top:6px"></span></p>
       </div>
@@ -349,7 +349,7 @@ footer .mark{width:36px;height:36px;padding:6px;background:#14161B;border-radius
       <form id="f" class="form" novalidate>
         <label>Jméno *<input id="fn" autocomplete="name" required><span class="err" id="en" hidden></span></label>
         <label>Telefon nebo e-mail *<input id="fc" autocomplete="email" required><span class="err" id="ec" hidden></span></label>
-        <label>Balíček<select id="fp"><option>Vizitka</option><option selected>Firemní web</option><option>Web a vytvoření sociálních sítí</option><option>Ještě nevím</option></select></label>
+        <label>Balíček<select id="fp"><option>Jednorázový web</option><option selected>Firemní web</option><option>Web a vytvoření sociálních sítí</option><option>Ještě nevím</option></select></label>
         <label>Zpráva<textarea id="fm" rows="4" placeholder="Čím se zabýváte a co od webu čekáte?"></textarea></label>
         <button class="btn solid" type="submit">Připravit e-mail</button>
         <p class="hint">Zpráva se připraví a ukáže se hned pod formulářem. Stačí ji zkopírovat a poslat e-mailem. Nebo napište přímo na <b>poptavky@michal-cermak.cz</b>. Údaje použiju jen k odpovědi na vaši poptávku.</p>
@@ -417,7 +417,7 @@ $('mbCopy').addEventListener('click',function(){
   function set(b){
     cur=b;
     bs.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
-    var o=+b.dataset.o,m=soc.checked?+b.dataset.m:0;document.getElementById('socp').textContent='+ '+f(+b.dataset.m);
+    soc.closest('label').style.display=+b.dataset.m?'':'none';var o=+b.dataset.o,m=soc.checked?+b.dataset.m:0;document.getElementById('socp').textContent='+ '+f(+b.dataset.m);
     ct.textContent=f(o+12*m);
     cd.textContent=f(o)+' za výrobu'+(m?' a 12× '+f(m)+' za správu sociálních sítí':'');
     document.getElementById('cy').textContent=m?'Od druhého roku platíte už jen '+f(12*m)+' za rok.':'';
