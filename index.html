@@ -417,7 +417,7 @@ $('mbCopy').addEventListener('click',function(){
   function set(b){
     cur=b;
     bs.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
-    soc.closest('label').style.display=+b.dataset.m?'':'none';var o=+b.dataset.o,m=soc.checked?+b.dataset.m:0;document.getElementById('socp').textContent='+ '+f(+b.dataset.m);
+    soc.closest('label').style.display='none';var o=+b.dataset.o,m=+b.dataset.m;document.getElementById('socp').textContent='+ '+f(+b.dataset.m);
     ct.textContent=f(o+12*m);
     cd.textContent=f(o)+' za výrobu'+(m?' a 12× '+f(m)+' za správu sociálních sítí':'');
     document.getElementById('cy').textContent=m?'Od druhého roku platíte už jen '+f(12*m)+' za rok.':'';
