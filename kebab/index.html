@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kebab — online objednávka</title>
+<meta name="description" content="Čerstvý döner, dürüm, boxy a talíře. Objednejte si online k vyzvednutí nebo rozvozu.">
+<meta property="og:title" content="Kebab">
+<meta property="og:description" content="Čerstvý kebab — objednejte si online.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#8B2635">
+<style>
+:root{
+  --bg:#FFFFFF; --bg-soft:#F3F7FA; --card:#FFFFFF; --text:#2A2420; --muted:#8A8178;
+  --wine:#8B2635; --wine-dark:#6E1E2A; --gold:#B08D57; --blue:#6E9FC2; --blue-soft:#E8F1F7;
+  --border:#ECE7DF;
+  padding-top: env(safe-area-inset-top,0px);
+  padding-bottom: env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#171512; --bg-soft:#1D2024; --card:#201D19; --text:#F2EFE9; --muted:#A9A39A; --border:#38332C; --blue-soft:#1E2A33; }
+}
+:root[data-theme="dark"]{ --bg:#171512; --bg-soft:#1D2024; --card:#201D19; --text:#F2EFE9; --muted:#A9A39A; --border:#38332C; --blue-soft:#1E2A33; }
+html{scroll-padding-top:calc(76px + env(safe-area-inset-top,0px));}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+header{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:30;
+  padding:calc(12px + env(safe-area-inset-top,0px)) 20px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+@media (prefers-color-scheme: dark){ header{background:rgba(23,21,18,.9);} }
+header svg{height:38px;width:auto;flex-shrink:0;cursor:pointer;}
+nav{display:flex;gap:2px;}
+nav a{position:relative;color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.3px;padding:9px 14px;border-radius:30px;transition:.15s;cursor:pointer;}
+nav a:hover{color:var(--text);background:var(--bg-soft);}
+.nav-badge{display:none;position:absolute;top:2px;right:2px;background:var(--wine);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;align-items:center;justify-content:center;padding:0 4px;}
+.nav-badge.show{display:flex;}
+.map-link{display:inline-flex;align-items:center;gap:4px;color:var(--blue);text-decoration:none;font-size:13px;font-weight:600;margin-top:10px;}
+.map-link:hover{text-decoration:underline;}
+
+.hero{position:relative;padding:90px 20px 80px;text-align:center;overflow:hidden;color:#fff;background:#1d1410 url("https://images.unsplash.com/photo-1699728088614-7d1d4277414b?auto=format&fit=crop&w=1600&q=70") center 40%/cover no-repeat;}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,12,8,.55) 0%,rgba(20,12,8,.45) 45%,rgba(20,12,8,.8) 100%);z-index:0;}
+.hero>*{position:relative;z-index:1;}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.5px;color:#fff;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);border-radius:20px;padding:6px 16px;margin-bottom:20px;}
+.hero h1{font-size:clamp(30px,6vw,46px);font-weight:700;letter-spacing:-.5px;margin:0 0 16px;line-height:1.2;}
+.hero h1{text-shadow:0 2px 18px rgba(0,0,0,.45);}
+.hero h1 span{color:#FFB869;}
+.hero p{color:rgba(255,255,255,.88);max-width:460px;margin:0 auto 32px;font-size:16px;line-height:1.6;}
+.btn-huge{display:inline-flex;align-items:center;gap:10px;background:var(--wine);color:#fff;padding:20px 44px;border-radius:50px;text-decoration:none;font-size:17px;font-weight:600;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(139,38,53,.28);transition:.15s;}
+.btn-huge:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(139,38,53,.34);}
+.rating-badge{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:22px;font-size:13px;color:rgba(255,255,255,.8);}
+.rating-badge .stars{color:var(--gold);}
+.rating-badge strong{color:#fff;}
+
+.cat-cards{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;max-width:1000px;margin:-36px auto 0;padding:0 20px 60px;position:relative;z-index:2;}
+@media (max-width:760px){.cat-cards{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:460px){.cat-cards{grid-template-columns:repeat(2,1fr);}}
+.cat-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:0 0 14px;text-align:center;cursor:pointer;transition:.2s;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.08);}
+.cat-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;margin-bottom:12px;transition:transform .4s;background:var(--bg-soft);}
+.cat-card:hover img{transform:scale(1.06);}
+.cat-card:hover{box-shadow:0 10px 24px rgba(0,0,0,.06);border-color:var(--blue);}
+.cat-card .ic{width:44px;height:44px;border-radius:14px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.cat-card span{font-size:14px;font-weight:600;}
+
+section{max-width:960px;margin:0 auto;padding:60px 20px;}
+.section-head{text-align:center;margin-bottom:40px;}
+.eyebrow{font-size:11px;letter-spacing:3px;color:var(--blue);margin-bottom:10px;font-weight:600;}
+h2{font-weight:700;letter-spacing:-.3px;margin:0;font-size:28px;}
+
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+.testimonial{background:var(--bg-soft);border-radius:16px;padding:22px;}
+.testimonial .stars{color:var(--gold);font-size:13px;margin-bottom:10px;display:block;}
+.testimonial p{color:var(--text);font-size:14px;line-height:1.6;margin:0 0 10px;}
+.testimonial span{font-size:12px;color:var(--muted);}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:520px;margin:0 auto;}
+.contact-block{background:var(--bg-soft);border-radius:16px;padding:20px;}
+.contact-block h4{font-size:11px;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;margin:0 0 10px;font-weight:700;}
+.contact-block p{margin:0 0 4px;font-size:14px;}
+.hours-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;}
+.hours-row span:first-child{color:var(--muted);}
+footer{text-align:center;padding:36px 20px calc(36px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:12px;border-top:1px solid var(--border);}
+
+/* ORDER VIEW */
+#view-order{display:none;}
+.order-head{display:flex;align-items:center;gap:14px;padding:18px 20px;max-width:960px;margin:0 auto;}
+.back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px;cursor:pointer;background:none;border:none;padding:8px 12px;border-radius:20px;}
+.back-btn:hover{background:var(--bg-soft);color:var(--text);}
+.order-title{max-width:960px;margin:0 auto;padding:0 20px 10px;}
+.order-title h2{font-size:26px;}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 auto 30px;max-width:960px;padding:0 20px;}
+.chip{font-size:12.5px;letter-spacing:.3px;padding:9px 18px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s;font-weight:500;}
+.chip:hover{border-color:var(--blue);color:var(--text);}
+.chip.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+#menu-cats{max-width:960px;margin:0 auto;padding:0 20px 30px;}
+.cat{margin-bottom:34px;}
+.cat h3{font-size:14px;font-weight:700;letter-spacing:.5px;color:var(--text);margin-bottom:16px;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.item{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;display:flex;flex-direction:column;transition:.15s;}
+.item:hover{box-shadow:0 8px 22px rgba(0,0,0,.06);border-color:var(--blue);}
+.item-thumb{width:100%;height:150px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:12px;overflow:hidden;}
+.item-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.item:hover .item-thumb img{transform:scale(1.05);}
+.gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:200px 200px;gap:12px;}
+.gallery figure{margin:0;border-radius:18px;overflow:hidden;position:relative;}
+.gallery figure:first-child{grid-row:span 2;}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery figcaption{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;padding:6px 12px;border-radius:20px;}
+@media (max-width:600px){.gallery{grid-template-columns:1fr 1fr;grid-template-rows:220px 150px;}.gallery figure:first-child{grid-column:span 2;grid-row:auto;}}
+.item-top{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.item-top h4{font-size:15px;font-weight:600;margin:0;}
+.price{color:var(--wine);font-weight:800;white-space:nowrap;font-size:19px;}
+.item p{color:var(--muted);font-size:13px;margin:6px 0 14px;line-height:1.5;flex-grow:1;}
+.item-actions{display:flex;align-items:center;gap:10px;}
+.stepper{display:flex;align-items:center;gap:10px;background:var(--bg-soft);border-radius:10px;padding:4px 6px;}
+.stepper button{background:none;border:none;color:var(--text);font-size:16px;width:26px;height:26px;border-radius:7px;cursor:pointer;line-height:1;}
+.stepper button:hover{background:var(--card);}
+.stepper span{min-width:16px;text-align:center;font-size:14px;font-weight:600;}
+.item-actions .add-btn{flex:1;padding:10px;background:var(--bg-soft);border:none;color:var(--text);border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:.3px;transition:.15s;}
+.item-actions .add-btn:hover{background:var(--blue);color:#fff;}
+.order-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.order-line:last-of-type{border-bottom:none;}
+.order-line .ol-name{font-size:13px;flex:1;}
+.order-line .ol-sum{font-size:13px;font-weight:600;color:var(--text);min-width:64px;text-align:right;}
+.order-line .stepper button{width:22px;height:22px;font-size:14px;}
+.ol-remove{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0 4px;}
+.ol-remove:hover{color:var(--wine);}
+.note{font-size:12px;color:var(--muted);text-align:center;max-width:960px;margin:20px auto 100px;padding:0 20px;}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:0 auto 40px;max-width:960px;padding:0 20px;text-align:center;}
+.step{background:var(--bg-soft);border-radius:16px;padding:20px 14px;}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:13px;font-weight:700;}
+.step p{font-size:13px;color:var(--muted);margin:0;}
+.step strong{display:block;font-size:14px;font-weight:700;margin-bottom:4px;color:var(--text);}
+
+#order-form{max-width:460px;margin:0 auto 60px;display:none;flex-direction:column;gap:12px;background:var(--bg-soft);border-radius:18px;padding:28px;}
+#order-form.show{display:flex;}
+#order-items{font-size:13px;color:var(--muted);line-height:1.7;padding-bottom:12px;border-bottom:1px solid var(--border);}
+#order-form input,#order-form textarea{padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:14px;font-family:inherit;}
+#order-form label{font-size:12px;color:var(--muted);letter-spacing:.3px;margin-bottom:-6px;font-weight:600;}
+#form-error{color:#c0392b;font-size:13px;display:none;margin:0;}
+.field-error{color:#c0392b;font-size:12px;display:none;margin-top:-6px;}
+#order-form input.invalid{border-color:#c0392b;}
+#confirm{display:none;text-align:center;color:var(--wine);font-weight:600;margin:0 auto 0;max-width:460px;padding:0 20px;}
+#satisfaction{display:none;text-align:center;max-width:460px;margin:18px auto 60px;padding:24px 20px;background:var(--bg-soft);border-radius:18px;}
+#satisfaction p{margin:0 0 14px;font-size:14px;color:var(--muted);}
+.stars-input{display:flex;justify-content:center;gap:6px;font-size:30px;line-height:1;}
+.stars-input span{cursor:pointer;color:var(--border);transition:.1s;}
+.stars-input span:hover,.stars-input span.sel{color:var(--gold);}
+#rating-thanks{display:none;margin-top:14px;font-size:13px;color:var(--text);}
+#rating-thanks a{color:var(--blue);font-weight:600;}
+
+.qr-card{display:flex;align-items:center;gap:20px;background:var(--bg-soft);border-radius:18px;padding:20px;max-width:420px;margin:30px auto 0;flex-wrap:wrap;justify-content:center;text-align:left;}
+.qr-card svg{width:110px;height:110px;flex-shrink:0;background:#fff;border-radius:10px;padding:6px;}
+.qr-card div p{margin:0 0 4px;font-size:13px;color:var(--muted);max-width:220px;}
+.qr-card div strong{font-size:14px;}
+
+#cart{position:fixed;bottom:16px;left:16px;right:16px;background:var(--text);color:var(--bg);border-radius:20px;
+  padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px));display:none;z-index:20;box-shadow:0 10px 30px rgba(0,0,0,.2);}
+#cart.show{display:block;}
+.cart-row{display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;flex-wrap:wrap;gap:10px;}
+#cart-summary{font-size:14px;}
+#cart-total{font-weight:700;color:var(--gold);margin-right:10px;}
+.cart-row .btn-small{background:var(--blue);color:#fff;border:none;padding:10px 20px;border-radius:14px;font-size:13px;font-weight:600;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+  <svg viewBox="0 0 900 300" role="img" aria-label="Kebab logo" onclick="goHome()">
+    <circle cx="130" cy="150" r="88" fill="none" stroke="#8B2635" stroke-width="1.5"/>
+    <circle cx="130" cy="150" r="78" fill="none" stroke="#B08D57" stroke-width="1"/>
+    <g stroke="#8B2635" stroke-width="2.5" stroke-linecap="round" fill="none">
+      <line x1="130" y1="95" x2="130" y2="205"/>
+      <line x1="106" y1="118" x2="154" y2="118"/>
+      <line x1="100" y1="150" x2="160" y2="150"/>
+      <line x1="106" y1="182" x2="154" y2="182"/>
+    </g>
+    <circle cx="130" cy="95" r="3.5" fill="#B08D57"/>
+    <circle cx="130" cy="205" r="3.5" fill="#B08D57"/>
+    <line x1="256" y1="80" x2="256" y2="220" stroke="#B08D57" stroke-width="1"/>
+    <text x="290" y="152" font-family="'Helvetica Neue', Arial, sans-serif" font-size="52" font-weight="300" letter-spacing="6" style="fill:var(--text)">KEBAB</text>
+    <text x="290" y="195" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="400" fill="#8B2635" letter-spacing="9">BISTRO</text>
+    <line x1="290" y1="212" x2="700" y2="212" stroke="#B08D57" stroke-width="0.75"/>
+    <text x="290" y="234" font-family="'Helvetica Neue', Arial, sans-serif" font-size="12" letter-spacing="4" style="fill:var(--muted)">UKÁZKOVÝ WEB</text>
+  </svg>
+  <nav>
+    <a onclick="goHome()">Domů</a>
+    <a onclick="goOrder('Vše')">Objednat<span class="nav-badge" id="nav-badge"></span></a>
+    <a onclick="goHome('kontakt')">Kontakt</a>
+  </nav>
+</header>
+
+<div id="view-home">
+  <div class="hero">
+    <span class="tag">🥙 Otevřeno denně</span>
+    <h1>Šťavnatý <span>kebab</span><br>čerstvě pro vás</h1>
+    <p>Grilované maso, čerstvá zelenina a domácí omáčky — každý den, k vyzvednutí nebo s rozvozem.</p>
+    <button class="btn-huge" onclick="goOrder('Vše')">Objednat online →</button>
+    <div class="rating-badge"><span class="stars">★★★★★</span> <strong>4.7/5</strong> podle ukázkových hodnocení</div>
+  </div>
+
+  <div class="cat-cards">
+    <div class="cat-card" onclick="goOrder('Döner kebab')"><img src="https://images.unsplash.com/photo-1699728088614-7d1d4277414b?auto=format&fit=crop&w=500&q=70" alt="Döner kebab v housce" loading="lazy"><span>Döner</span></div>
+    <div class="cat-card" onclick="goOrder('Dürüm kebab')"><img src="https://images.unsplash.com/photo-1591027059759-7b3a539fc110?auto=format&fit=crop&w=500&q=70" alt="Dürüm v tortille" loading="lazy"><span>Dürüm</span></div>
+    <div class="cat-card" onclick="goOrder('Velký kebab talíř')"><img src="https://images.unsplash.com/photo-1726947147359-65de4d245979?auto=format&fit=crop&w=500&q=70" alt="Kebab talíř s hranolky" loading="lazy"><span>Talíře</span></div>
+    <div class="cat-card" onclick="goOrder('Vegetariánská jídla')"><img src="https://images.unsplash.com/photo-1650939976004-9861867422e2?auto=format&fit=crop&w=500&q=70" alt="Hummus a čerstvá zelenina" loading="lazy"><span>Vegetariánské</span></div>
+    <div class="cat-card" onclick="goOrder('Nápoje')"><img src="https://images.unsplash.com/photo-1536252470153-1fa6046d8723?auto=format&fit=crop&w=500&q=70" alt="Vychlazené nápoje" loading="lazy"><span>Nápoje</span></div>
+    <div class="cat-card" onclick="goOrder('Dezerty')"><img src="https://images.unsplash.com/photo-1658413380634-e127bbaeeb7b?auto=format&fit=crop&w=500&q=70" alt="Baklava" loading="lazy"><span>Dezerty</span></div>
+  </div>
+
+  <section id="kuchyne">
+    <div class="section-head">
+      <div class="eyebrow">Z NAŠÍ KUCHYNĚ</div>
+      <h2>Grilujeme každý den čerstvě</h2>
+    </div>
+    <div class="gallery">
+      <figure><img src="https://images.unsplash.com/photo-1761207299561-05887fac97b1?auto=format&fit=crop&w=1000&q=70" alt="Rotující kebab na grilu" loading="lazy"><figcaption>Maso z vlastního grilu</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1676037150590-e771ac7e35ec?auto=format&fit=crop&w=600&q=70" alt="Talíř s masem a salátem" loading="lazy"><figcaption>Talíře plné chuti</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1752766074879-62b66c5f3477?auto=format&fit=crop&w=600&q=70" alt="Čerstvá rajčata a okurky" loading="lazy"><figcaption>Zelenina každé ráno</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="recenze">
+    <div class="section-head">
+      <div class="eyebrow">UKÁZKOVÉ RECENZE</div>
+      <h2>Hodnocení 4.7/5</h2>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial"><span class="stars">★★★★★</span><p>Maso šťavnaté, zelenina čerstvá a omáčka přesně ta pravá. Dám si zase.</p><span>Martin</span></div>
+      <div class="testimonial"><span class="stars">★★★★★</span><p>Objednávka přišla rychle a ještě teplá. Velká porce za rozumnou cenu.</p><span>Lucie</span></div>
+      <div class="testimonial"><span class="stars">★★★★☆</span><p>Dürüm výborný, hranolky mohly být o něco křupavější. Jinak spokojenost.</p><span>Petr</span></div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="section-head">
+      <div class="eyebrow">NAJDETE NÁS</div>
+      <h2>Kontakt</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-block">
+        <h4>Adresa</h4>
+        <p>Vaše ulice 123</p>
+        <p>123 45 Vaše město</p>
+        <a class="map-link" href="https://www.google.com/maps" target="_blank" rel="noopener">📍 Zobrazit na mapě</a>
+        <h4 style="margin-top:18px;">Spojení</h4>
+        <p><a href="tel:+420000000000" style="color:inherit;text-decoration:none;">+420 000 000 000</a></p>
+        <p><a href="mailto:info@vasefirma.cz" style="color:inherit;text-decoration:none;">info@vasefirma.cz</a></p>
+        <p style="font-size:11px;color:var(--muted);margin-top:8px;">Objednávky z webu přijímáme na WhatsApp <a href="https://wa.me/420000000000" target="_blank" rel="noopener" style="color:var(--blue);">000 000 000</a></p>
+      </div>
+      <div class="contact-block">
+        <h4>Otevírací doba</h4>
+        <div class="hours-row"><span>Po–Pá</span><span>10:00–21:00</span></div>
+        <div class="hours-row"><span>So–Ne</span><span>11:00–21:00</span></div>
+      </div>
+    </div>
+  <div class="qr-card">
+    <svg style="width:110px;height:110px;flex-shrink:0;background:#fff;border-radius:10px;padding:6px;" viewBox="0 0 328 328" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect width="328" height="328" fill="#fff"/><g fill="#1A1A1A"><rect x="48" y="48" width="8" height="8"/><rect x="56" y="48" width="8" height="8"/><rect x="64" y="48" width="8" height="8"/><rect x="72" y="48" width="8" height="8"/><rect x="80" y="48" width="8" height="8"/><rect x="88" y="48" width="8" height="8"/><rect x="96" y="48" width="8" height="8"/><rect x="112" y="48" width="8" height="8"/><rect x="120" y="48" width="8" height="8"/><rect x="128" y="48" width="8" height="8"/><rect x="136" y="48" width="8" height="8"/><rect x="152" y="48" width="8" height="8"/><rect x="176" y="48" width="8" height="8"/><rect x="184" y="48" width="8" height="8"/><rect x="192" y="48" width="8" height="8"/><rect x="224" y="48" width="8" height="8"/><rect x="232" y="48" width="8" height="8"/><rect x="240" y="48" width="8" height="8"/><rect x="248" y="48" width="8" height="8"/><rect x="256" y="48" width="8" height="8"/><rect x="264" y="48" width="8" height="8"/><rect x="272" y="48" width="8" height="8"/><rect x="48" y="56" width="8" height="8"/><rect x="96" y="56" width="8" height="8"/><rect x="136" y="56" width="8" height="8"/><rect x="144" y="56" width="8" height="8"/><rect x="152" y="56" width="8" height="8"/><rect x="184" y="56" width="8" height="8"/><rect x="200" y="56" width="8" height="8"/><rect x="224" y="56" width="8" height="8"/><rect x="272" y="56" width="8" height="8"/><rect x="48" y="64" width="8" height="8"/><rect x="64" y="64" width="8" height="8"/><rect x="72" y="64" width="8" height="8"/><rect x="80" y="64" width="8" height="8"/><rect x="96" y="64" width="8" height="8"/><rect x="120" y="64" width="8" height="8"/><rect x="136" y="64" width="8" height="8"/><rect x="152" y="64" width="8" height="8"/><rect x="160" y="64" width="8" height="8"/><rect x="168" y="64" width="8" height="8"/><rect x="192" y="64" width="8" height="8"/><rect x="200" y="64" width="8" height="8"/><rect x="224" y="64" width="8" height="8"/><rect x="240" y="64" width="8" height="8"/><rect x="248" y="64" width="8" height="8"/><rect x="256" y="64" width="8" height="8"/><rect x="272" y="64" width="8" height="8"/><rect x="48" y="72" width="8" height="8"/><rect x="64" y="72" width="8" height="8"/><rect x="72" y="72" width="8" height="8"/><rect x="80" y="72" width="8" height="8"/><rect x="96" y="72" width="8" height="8"/><rect x="128" y="72" width="8" height="8"/><rect x="136" y="72" width="8" height="8"/><rect x="144" y="72" width="8" height="8"/><rect x="152" y="72" width="8" height="8"/><rect x="176" y="72" width="8" height="8"/><rect x="184" y="72" width="8" height="8"/><rect x="200" y="72" width="8" height="8"/><rect x="208" y="72" width="8" height="8"/><rect x="224" y="72" width="8" height="8"/><rect x="240" y="72" width="8" height="8"/><rect x="248" y="72" width="8" height="8"/><rect x="256" y="72" width="8" height="8"/><rect x="272" y="72" width="8" height="8"/><rect x="48" y="80" width="8" height="8"/><rect x="64" y="80" width="8" height="8"/><rect x="72" y="80" width="8" height="8"/><rect x="80" y="80" width="8" height="8"/><rect x="96" y="80" width="8" height="8"/><rect x="128" y="80" width="8" height="8"/><rect x="136" y="80" width="8" height="8"/><rect x="144" y="80" width="8" height="8"/><rect x="152" y="80" width="8" height="8"/><rect x="176" y="80" width="8" height="8"/><rect x="184" y="80" width="8" height="8"/><rect x="192" y="80" width="8" height="8"/><rect x="200" y="80" width="8" height="8"/><rect x="224" y="80" width="8" height="8"/><rect x="240" y="80" width="8" height="8"/><rect x="248" y="80" width="8" height="8"/><rect x="256" y="80" width="8" height="8"/><rect x="272" y="80" width="8" height="8"/><rect x="48" y="88" width="8" height="8"/><rect x="96" y="88" width="8" height="8"/><rect x="120" y="88" width="8" height="8"/><rect x="136" y="88" width="8" height="8"/><rect x="144" y="88" width="8" height="8"/><rect x="176" y="88" width="8" height="8"/><rect x="184" y="88" width="8" height="8"/><rect x="192" y="88" width="8" height="8"/><rect x="224" y="88" width="8" height="8"/><rect x="272" y="88" width="8" height="8"/><rect x="48" y="96" width="8" height="8"/><rect x="56" y="96" width="8" height="8"/><rect x="64" y="96" width="8" height="8"/><rect x="72" y="96" width="8" height="8"/><rect x="80" y="96" width="8" height="8"/><rect x="88" y="96" width="8" height="8"/><rect x="96" y="96" width="8" height="8"/><rect x="112" y="96" width="8" height="8"/><rect x="128" y="96" width="8" height="8"/><rect x="144" y="96" width="8" height="8"/><rect x="160" y="96" width="8" height="8"/><rect x="176" y="96" width="8" height="8"/><rect x="192" y="96" width="8" height="8"/><rect x="208" y="96" width="8" height="8"/><rect x="224" y="96" width="8" height="8"/><rect x="232" y="96" width="8" height="8"/><rect x="240" y="96" width="8" height="8"/><rect x="248" y="96" width="8" height="8"/><rect x="256" y="96" width="8" height="8"/><rect x="264" y="96" width="8" height="8"/><rect x="272" y="96" width="8" height="8"/><rect x="112" y="104" width="8" height="8"/><rect x="120" y="104" width="8" height="8"/><rect x="152" y="104" width="8" height="8"/><rect x="168" y="104" width="8" height="8"/><rect x="200" y="104" width="8" height="8"/><rect x="48" y="112" width="8" height="8"/><rect x="56" y="112" width="8" height="8"/><rect x="72" y="112" width="8" height="8"/><rect x="80" y="112" width="8" height="8"/><rect x="96" y="112" width="8" height="8"/><rect x="120" y="112" width="8" height="8"/><rect x="144" y="112" width="8" height="8"/><rect x="160" y="112" width="8" height="8"/><rect x="168" y="112" width="8" height="8"/><rect x="176" y="112" width="8" height="8"/><rect x="184" y="112" width="8" height="8"/><rect x="200" y="112" width="8" height="8"/><rect x="208" y="112" width="8" height="8"/><rect x="224" y="112" width="8" height="8"/><rect x="272" y="112" width="8" height="8"/><rect x="64" y="120" width="8" height="8"/><rect x="72" y="120" width="8" height="8"/><rect x="88" y="120" width="8" height="8"/><rect x="104" y="120" width="8" height="8"/><rect x="128" y="120" width="8" height="8"/><rect x="136" y="120" width="8" height="8"/><rect x="168" y="120" width="8" height="8"/><rect x="192" y="120" width="8" height="8"/><rect x="200" y="120" width="8" height="8"/><rect x="232" y="120" width="8" height="8"/><rect x="240" y="120" width="8" height="8"/><rect x="256" y="120" width="8" height="8"/><rect x="264" y="120" width="8" height="8"/><rect x="48" y="128" width="8" height="8"/><rect x="64" y="128" width="8" height="8"/><rect x="88" y="128" width="8" height="8"/><rect x="96" y="128" width="8" height="8"/><rect x="104" y="128" width="8" height="8"/><rect x="120" y="128" width="8" height="8"/><rect x="136" y="128" width="8" height="8"/><rect x="144" y="128" width="8" height="8"/><rect x="160" y="128" width="8" height="8"/><rect x="168" y="128" width="8" height="8"/><rect x="192" y="128" width="8" height="8"/><rect x="208" y="128" width="8" height="8"/><rect x="240" y="128" width="8" height="8"/><rect x="256" y="128" width="8" height="8"/><rect x="48" y="136" width="8" height="8"/><rect x="72" y="136" width="8" height="8"/><rect x="80" y="136" width="8" height="8"/><rect x="104" y="136" width="8" height="8"/><rect x="112" y="136" width="8" height="8"/><rect x="144" y="136" width="8" height="8"/><rect x="168" y="136" width="8" height="8"/><rect x="184" y="136" width="8" height="8"/><rect x="200" y="136" width="8" height="8"/><rect x="224" y="136" width="8" height="8"/><rect x="240" y="136" width="8" height="8"/><rect x="248" y="136" width="8" height="8"/><rect x="272" y="136" width="8" height="8"/><rect x="48" y="144" width="8" height="8"/><rect x="64" y="144" width="8" height="8"/><rect x="88" y="144" width="8" height="8"/><rect x="96" y="144" width="8" height="8"/><rect x="104" y="144" width="8" height="8"/><rect x="120" y="144" width="8" height="8"/><rect x="128" y="144" width="8" height="8"/><rect x="136" y="144" width="8" height="8"/><rect x="160" y="144" width="8" height="8"/><rect x="168" y="144" width="8" height="8"/><rect x="200" y="144" width="8" height="8"/><rect x="224" y="144" width="8" height="8"/><rect x="272" y="144" width="8" height="8"/><rect x="48" y="152" width="8" height="8"/><rect x="64" y="152" width="8" height="8"/><rect x="128" y="152" width="8" height="8"/><rect x="152" y="152" width="8" height="8"/><rect x="176" y="152" width="8" height="8"/><rect x="224" y="152" width="8" height="8"/><rect x="232" y="152" width="8" height="8"/><rect x="240" y="152" width="8" height="8"/><rect x="248" y="152" width="8" height="8"/><rect x="256" y="152" width="8" height="8"/><rect x="264" y="152" width="8" height="8"/><rect x="272" y="152" width="8" height="8"/><rect x="48" y="160" width="8" height="8"/><rect x="56" y="160" width="8" height="8"/><rect x="64" y="160" width="8" height="8"/><rect x="80" y="160" width="8" height="8"/><rect x="96" y="160" width="8" height="8"/><rect x="104" y="160" width="8" height="8"/><rect x="120" y="160" width="8" height="8"/><rect x="144" y="160" width="8" height="8"/><rect x="160" y="160" width="8" height="8"/><rect x="168" y="160" width="8" height="8"/><rect x="176" y="160" width="8" height="8"/><rect x="200" y="160" width="8" height="8"/><rect x="208" y="160" width="8" height="8"/><rect x="224" y="160" width="8" height="8"/><rect x="232" y="160" width="8" height="8"/><rect x="240" y="160" width="8" height="8"/><rect x="256" y="160" width="8" height="8"/><rect x="272" y="160" width="8" height="8"/><rect x="48" y="168" width="8" height="8"/><rect x="56" y="168" width="8" height="8"/><rect x="64" y="168" width="8" height="8"/><rect x="88" y="168" width="8" height="8"/><rect x="104" y="168" width="8" height="8"/><rect x="112" y="168" width="8" height="8"/><rect x="128" y="168" width="8" height="8"/><rect x="168" y="168" width="8" height="8"/><rect x="192" y="168" width="8" height="8"/><rect x="208" y="168" width="8" height="8"/><rect x="216" y="168" width="8" height="8"/><rect x="224" y="168" width="8" height="8"/><rect x="240" y="168" width="8" height="8"/><rect x="256" y="168" width="8" height="8"/><rect x="272" y="168" width="8" height="8"/><rect x="88" y="176" width="8" height="8"/><rect x="96" y="176" width="8" height="8"/><rect x="120" y="176" width="8" height="8"/><rect x="136" y="176" width="8" height="8"/><rect x="152" y="176" width="8" height="8"/><rect x="160" y="176" width="8" height="8"/><rect x="168" y="176" width="8" height="8"/><rect x="176" y="176" width="8" height="8"/><rect x="192" y="176" width="8" height="8"/><rect x="208" y="176" width="8" height="8"/><rect x="216" y="176" width="8" height="8"/><rect x="232" y="176" width="8" height="8"/><rect x="248" y="176" width="8" height="8"/><rect x="48" y="184" width="8" height="8"/><rect x="64" y="184" width="8" height="8"/><rect x="104" y="184" width="8" height="8"/><rect x="128" y="184" width="8" height="8"/><rect x="144" y="184" width="8" height="8"/><rect x="160" y="184" width="8" height="8"/><rect x="192" y="184" width="8" height="8"/><rect x="200" y="184" width="8" height="8"/><rect x="208" y="184" width="8" height="8"/><rect x="240" y="184" width="8" height="8"/><rect x="256" y="184" width="8" height="8"/><rect x="264" y="184" width="8" height="8"/><rect x="48" y="192" width="8" height="8"/><rect x="56" y="192" width="8" height="8"/><rect x="64" y="192" width="8" height="8"/><rect x="80" y="192" width="8" height="8"/><rect x="88" y="192" width="8" height="8"/><rect x="96" y="192" width="8" height="8"/><rect x="112" y="192" width="8" height="8"/><rect x="120" y="192" width="8" height="8"/><rect x="136" y="192" width="8" height="8"/><rect x="168" y="192" width="8" height="8"/><rect x="200" y="192" width="8" height="8"/><rect x="232" y="192" width="8" height="8"/><rect x="240" y="192" width="8" height="8"/><rect x="248" y="192" width="8" height="8"/><rect x="272" y="192" width="8" height="8"/><rect x="48" y="200" width="8" height="8"/><rect x="56" y="200" width="8" height="8"/><rect x="128" y="200" width="8" height="8"/><rect x="152" y="200" width="8" height="8"/><rect x="160" y="200" width="8" height="8"/><rect x="224" y="200" width="8" height="8"/><rect x="232" y="200" width="8" height="8"/><rect x="248" y="200" width="8" height="8"/><rect x="256" y="200" width="8" height="8"/><rect x="48" y="208" width="8" height="8"/><rect x="56" y="208" width="8" height="8"/><rect x="64" y="208" width="8" height="8"/><rect x="72" y="208" width="8" height="8"/><rect x="80" y="208" width="8" height="8"/><rect x="96" y="208" width="8" height="8"/><rect x="112" y="208" width="8" height="8"/><rect x="120" y="208" width="8" height="8"/><rect x="128" y="208" width="8" height="8"/><rect x="136" y="208" width="8" height="8"/><rect x="144" y="208" width="8" height="8"/><rect x="160" y="208" width="8" height="8"/><rect x="168" y="208" width="8" height="8"/><rect x="176" y="208" width="8" height="8"/><rect x="208" y="208" width="8" height="8"/><rect x="216" y="208" width="8" height="8"/><rect x="224" y="208" width="8" height="8"/><rect x="232" y="208" width="8" height="8"/><rect x="240" y="208" width="8" height="8"/><rect x="248" y="208" width="8" height="8"/><rect x="256" y="208" width="8" height="8"/><rect x="264" y="208" width="8" height="8"/><rect x="112" y="216" width="8" height="8"/><rect x="128" y="216" width="8" height="8"/><rect x="184" y="216" width="8" height="8"/><rect x="192" y="216" width="8" height="8"/><rect x="208" y="216" width="8" height="8"/><rect x="240" y="216" width="8" height="8"/><rect x="248" y="216" width="8" height="8"/><rect x="48" y="224" width="8" height="8"/><rect x="56" y="224" width="8" height="8"/><rect x="64" y="224" width="8" height="8"/><rect x="72" y="224" width="8" height="8"/><rect x="80" y="224" width="8" height="8"/><rect x="88" y="224" width="8" height="8"/><rect x="96" y="224" width="8" height="8"/><rect x="128" y="224" width="8" height="8"/><rect x="136" y="224" width="8" height="8"/><rect x="144" y="224" width="8" height="8"/><rect x="152" y="224" width="8" height="8"/><rect x="168" y="224" width="8" height="8"/><rect x="192" y="224" width="8" height="8"/><rect x="200" y="224" width="8" height="8"/><rect x="208" y="224" width="8" height="8"/><rect x="224" y="224" width="8" height="8"/><rect x="240" y="224" width="8" height="8"/><rect x="248" y="224" width="8" height="8"/><rect x="48" y="232" width="8" height="8"/><rect x="96" y="232" width="8" height="8"/><rect x="120" y="232" width="8" height="8"/><rect x="136" y="232" width="8" height="8"/><rect x="160" y="232" width="8" height="8"/><rect x="168" y="232" width="8" height="8"/><rect x="176" y="232" width="8" height="8"/><rect x="184" y="232" width="8" height="8"/><rect x="208" y="232" width="8" height="8"/><rect x="240" y="232" width="8" height="8"/><rect x="264" y="232" width="8" height="8"/><rect x="272" y="232" width="8" height="8"/><rect x="48" y="240" width="8" height="8"/><rect x="64" y="240" width="8" height="8"/><rect x="72" y="240" width="8" height="8"/><rect x="80" y="240" width="8" height="8"/><rect x="96" y="240" width="8" height="8"/><rect x="112" y="240" width="8" height="8"/><rect x="144" y="240" width="8" height="8"/><rect x="200" y="240" width="8" height="8"/><rect x="208" y="240" width="8" height="8"/><rect x="216" y="240" width="8" height="8"/><rect x="224" y="240" width="8" height="8"/><rect x="232" y="240" width="8" height="8"/><rect x="240" y="240" width="8" height="8"/><rect x="248" y="240" width="8" height="8"/><rect x="264" y="240" width="8" height="8"/><rect x="272" y="240" width="8" height="8"/><rect x="48" y="248" width="8" height="8"/><rect x="64" y="248" width="8" height="8"/><rect x="72" y="248" width="8" height="8"/><rect x="80" y="248" width="8" height="8"/><rect x="96" y="248" width="8" height="8"/><rect x="112" y="248" width="8" height="8"/><rect x="152" y="248" width="8" height="8"/><rect x="168" y="248" width="8" height="8"/><rect x="176" y="248" width="8" height="8"/><rect x="184" y="248" width="8" height="8"/><rect x="208" y="248" width="8" height="8"/><rect x="216" y="248" width="8" height="8"/><rect x="264" y="248" width="8" height="8"/><rect x="272" y="248" width="8" height="8"/><rect x="48" y="256" width="8" height="8"/><rect x="64" y="256" width="8" height="8"/><rect x="72" y="256" width="8" height="8"/><rect x="80" y="256" width="8" height="8"/><rect x="96" y="256" width="8" height="8"/><rect x="120" y="256" width="8" height="8"/><rect x="128" y="256" width="8" height="8"/><rect x="144" y="256" width="8" height="8"/><rect x="152" y="256" width="8" height="8"/><rect x="168" y="256" width="8" height="8"/><rect x="176" y="256" width="8" height="8"/><rect x="192" y="256" width="8" height="8"/><rect x="200" y="256" width="8" height="8"/><rect x="208" y="256" width="8" height="8"/><rect x="216" y="256" width="8" height="8"/><rect x="232" y="256" width="8" height="8"/><rect x="240" y="256" width="8" height="8"/><rect x="256" y="256" width="8" height="8"/><rect x="264" y="256" width="8" height="8"/><rect x="272" y="256" width="8" height="8"/><rect x="48" y="264" width="8" height="8"/><rect x="96" y="264" width="8" height="8"/><rect x="112" y="264" width="8" height="8"/><rect x="120" y="264" width="8" height="8"/><rect x="128" y="264" width="8" height="8"/><rect x="136" y="264" width="8" height="8"/><rect x="144" y="264" width="8" height="8"/><rect x="176" y="264" width="8" height="8"/><rect x="224" y="264" width="8" height="8"/><rect x="232" y="264" width="8" height="8"/><rect x="248" y="264" width="8" height="8"/><rect x="256" y="264" width="8" height="8"/><rect x="272" y="264" width="8" height="8"/><rect x="48" y="272" width="8" height="8"/><rect x="56" y="272" width="8" height="8"/><rect x="64" y="272" width="8" height="8"/><rect x="72" y="272" width="8" height="8"/><rect x="80" y="272" width="8" height="8"/><rect x="88" y="272" width="8" height="8"/><rect x="96" y="272" width="8" height="8"/><rect x="112" y="272" width="8" height="8"/><rect x="120" y="272" width="8" height="8"/><rect x="136" y="272" width="8" height="8"/><rect x="144" y="272" width="8" height="8"/><rect x="168" y="272" width="8" height="8"/><rect x="176" y="272" width="8" height="8"/><rect x="184" y="272" width="8" height="8"/><rect x="200" y="272" width="8" height="8"/><rect x="208" y="272" width="8" height="8"/><rect x="232" y="272" width="8" height="8"/><rect x="240" y="272" width="8" height="8"/></g></svg>
+    <div>
+      <strong>Naskenujte a objednejte</strong>
+      <p>QR kód vede přímo na tento web — dejte ho na stůl, krabičku nebo vizitku.</p>
+    </div>
+  </div>
+</section>
+
+  <footer>Vaše ulice 123, 123 45 Vaše město · <a href="tel:+420000000000" style="color:inherit;">+420 000 000 000</a><br>© 2026 Kebab. Všechna práva vyhrazena.</footer>
+</div>
+
+<div id="view-order">
+  <div class="order-head">
+    <button class="back-btn" onclick="goHome()">← Zpět na web</button>
+  </div>
+  <div class="order-title">
+    <div class="eyebrow">JÍDELNÍ LÍSTEK</div>
+    <h2>Vyberte si jídlo</h2>
+  </div>
+  <div class="chips" id="menu-chips"></div>
+  <div id="menu-cats"></div>
+  <p class="note">Ceny jsou uvedené od základní varianty (velikost/příloha může cenu mírně navýšit).</p>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><strong>Vyberte jídlo</strong><p>Přidejte položky výše</p></div>
+    <div class="step"><div class="step-num">2</div><strong>Vyplňte údaje</strong><p>Jméno a telefon</p></div>
+    <div class="step"><div class="step-num">3</div><strong>Vyzvedněte si</strong><p>Objednávku připravíme</p></div>
+  </div>
+
+  <form id="order-form" onsubmit="event.preventDefault(); submitOrder(); return false;">
+    <div id="order-items">Zatím jste nic nepřidali.</div>
+    <label>Jméno a příjmení</label>
+    <input type="text" id="cust-name" placeholder="Jan Novák" required oninput="this.classList.remove('invalid');document.getElementById('err-name').style.display='none';">
+    <span class="field-error" id="err-name">Vyplňte prosím jméno a příjmení.</span>
+    <label>Telefon</label>
+    <input type="tel" id="cust-phone" placeholder="+420 777 123 456" required oninput="this.classList.remove('invalid');document.getElementById('err-phone').style.display='none';">
+    <span class="field-error" id="err-phone">Vyplňte prosím telefonní číslo.</span>
+    <label>Poznámka (nepovinné)</label>
+    <textarea id="cust-note" placeholder="Např. bez cibule" rows="2"></textarea>
+    <button type="button" class="btn-huge" style="justify-content:center;font-size:15px;padding:16px;" onclick="submitOrder()">Odeslat objednávku</button>
+    <p id="form-error">Váš košík je prázdný — nejdřív prosím přidejte alespoň jedno jídlo.</p>
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin:0;">Odesláním souhlasíte se zpracováním jména a telefonu pouze za účelem vyřízení této objednávky.</p>
+  </form>
+  <p id="confirm">Děkujeme! Otevíráme WhatsApp s vaší objednávkou — stačí zprávu odeslat a brzy se vám ozveme na potvrzení.</p>
+  <div id="satisfaction">
+    <p>Jak jste byli spokojeni s objednávkou?</p>
+    <div class="stars-input" id="stars-input">
+      <span data-v="1" onclick="rate(1)">★</span><span data-v="2" onclick="rate(2)">★</span><span data-v="3" onclick="rate(3)">★</span><span data-v="4" onclick="rate(4)">★</span><span data-v="5" onclick="rate(5)">★</span>
+    </div>
+    <p id="rating-thanks"></p>
+  </div>
+</div>
+
+<div id="cart">
+  <div class="cart-row">
+    <span id="cart-summary">Košík je prázdný</span>
+    <span><span id="cart-total"></span><button class="btn-small" onclick="scrollToCheckout()">K objednávce</button></span>
+  </div>
+</div>
+
+<script>
+const menu = [
+  {cat:"Döner kebab",n:"Döner klasický",d:"Maso, salát, dresing, chléb",p:165},
+  {cat:"Döner kebab",n:"Döner se sýrem",d:"Maso, salát, sýr, dresing a chléb",p:175},
+  {cat:"Döner kebab",n:"Super Döner",d:"Maso, salát, sýr, olivy, dresing a chléb",p:199},
+  {cat:"Döner kebab",n:"Mega Döner",d:"Více masa, salát, dresing a chléb",p:209},
+  {cat:"Döner kebab",n:"Speciál Döner",d:"Jen maso, dresing a chléb",p:209},
+  {cat:"French Tacos",n:"French Tacos klasik",d:"Maso, hranolky, čedar",p:239},
+  {cat:"French Tacos",n:"French Tacos Strips",d:"Stripsy, hranolky, čedar",p:239},
+  {cat:"Dürüm kebab",n:"Dürüm klasický",d:"Maso, salát, dresing a tortilla",p:185},
+  {cat:"Dürüm kebab",n:"Dürüm se sýrem",d:"Maso, salát, sýr, dresing a tortilla",p:199},
+  {cat:"Dürüm kebab",n:"Super Dürüm",d:"Maso, salát, olivy, sýr, dresing a tortilla",p:229},
+  {cat:"Dürüm kebab",n:"Speciál Dürüm",d:"Jen maso, dresing a tortilla",p:235},
+  {cat:"Dürüm kebab",n:"Mega Dürüm",d:"Více masa, salát, dresing a tortilla",p:229},
+  {cat:"Dürüm kebab",n:"Dürüm s hranolkami",d:"Maso, salát, hranolky, dresing a tortilla",p:239},
+  {cat:"Velký kebab talíř",n:"Velký kebab talíř s hranolkami",d:"Maso, salát, dresing, hranolky",p:269},
+  {cat:"Velký kebab talíř",n:"Speciál velký talíř",d:"Jen maso, dresing, chléb",p:259},
+  {cat:"Velký kebab talíř",n:"Velký kebab talíř s chlebem",d:"Maso, salát, dresing a chléb",p:219},
+  {cat:"Velký kebab talíř",n:"Velký talíř se sýrem",d:"Maso, salát, sýr, dresing, chléb",p:229},
+  {cat:"Velký kebab talíř",n:"Super velký talíř",d:"Maso, salát, olivy, sýr, dresing, chléb",p:259},
+  {cat:"Kebab box",n:"Velký kebab box s hranolkami",d:"Maso, salát, hranolky, dresing",p:159},
+  {cat:"Kebab box",n:"Malý kebab box s hranolkami",d:"Maso, salát, hranolky, dresing",p:129},
+  {cat:"Stripsy",n:"Velký strips talíř",d:"8 ks stripsů, hranolky, dresing",p:319},
+  {cat:"Stripsy",n:"Velký strips box",d:"4 ks stripsů, hranolky, dresing",p:219},
+  {cat:"Hranolky",n:"Malé hranolky",d:"Čerstvě smažené hranolky",p:75},
+  {cat:"Hranolky",n:"Velké hranolky",d:"Čerstvě smažené hranolky",p:129},
+  {cat:"Vegetariánská jídla",n:"Falafel Dürüm",d:"Falafel, salát, dresing a tortilla",p:175},
+  {cat:"Vegetariánská jídla",n:"Falafel velký talíř",d:"Falafel, salát, dresing a chléb",p:195},
+  {cat:"Vegetariánská jídla",n:"Halloumi Dürüm",d:"Halloumi sýr, salát, dresing a tortilla",p:189},
+  {cat:"Vegetariánská jídla",n:"Halloumi velký talíř",d:"Halloumi sýr, salát, dresing a chléb",p:209},
+  {cat:"Saláty",n:"Míchaný salát",d:"Salát, okurky, rajčata, sýr, cibule, dresink",p:135},
+  {cat:"Saláty",n:"Kuřecí salát",d:"Kuřecí maso, salát, okurky, rajčata, sýr, cibule, dresink",p:159},
+  {cat:"Nápoje",n:"Coca-Cola / Fanta / Mango 330 ml",d:"Chlazený nápoj v plechovce",p:35},
+  {cat:"Nápoje",n:"Ayran 250 ml",d:"Tradiční slaný jogurtový nápoj",p:39},
+  {cat:"Nápoje",n:"Fuze Tea 500 ml",d:"Černý nebo jablečný čaj",p:49},
+  {cat:"Nápoje",n:"Coca-Cola / Coca-Cola Zero / Sprite 500 ml",d:"Chlazený nápoj v lahvi",p:49},
+  {cat:"Dezerty",n:"Baklava pistáciová",d:"Vrstvené těsto s pistáciovou náplní a medovým sirupem",p:55},
+  {cat:"Dezerty",n:"Baklava ořechová",d:"Vrstvené těsto s vlašskými ořechy, medem a skořicí",p:55},
+];
+
+let cart = {};
+let qtyPicker = {};
+let activeCat = 'Vše';
+
+function saveCart(){
+  try{ localStorage.setItem('kebabCart', JSON.stringify(cart)); }catch(e){}
+}
+function loadCart(){
+  try{
+    const raw = localStorage.getItem('kebabCart');
+    if(raw) cart = JSON.parse(raw) || {};
+  }catch(e){ cart = {}; }
+}
+
+const catIcon = {
+  "Döner kebab":{e:"🥙",c:"var(--blue-soft)"},
+  "French Tacos":{e:"🌮",c:"#FBEDE9"},
+  "Dürüm kebab":{e:"🌯",c:"var(--blue-soft)"},
+  "Velký kebab talíř":{e:"🍽️",c:"#FBEDE9"},
+  "Kebab box":{e:"🍱",c:"var(--blue-soft)"},
+  "Stripsy":{e:"🍗",c:"#FBEDE9"},
+  "Hranolky":{e:"🍟",c:"var(--blue-soft)"},
+  "Vegetariánská jídla":{e:"🥗",c:"#FBEDE9"},
+  "Saláty":{e:"🥗",c:"var(--blue-soft)"},
+  "Nápoje":{e:"🥤",c:"#FBEDE9"},
+  "Dezerty":{e:"🍯",c:"var(--blue-soft)"},
+};
+
+const catPhoto = {"Döner kebab": "1699728088614-7d1d4277414b", "French Tacos": "1562059390-a761a084768e", "Dürüm kebab": "1591027059759-7b3a539fc110", "Velký kebab talíř": "1726947147359-65de4d245979", "Kebab box": "1740591872076-ab39ee7edb4a", "Stripsy": "1627662055487-551888db3aa8", "Hranolky": "1526230427044-d092040d48dc", "Vegetariánská jídla": "1650939976004-9861867422e2", "Saláty": "1752766074879-62b66c5f3477", "Nápoje": "1536252470153-1fa6046d8723", "Dezerty": "1658413380634-e127bbaeeb7b"};
+function photoUrl(id,w){ return "https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w="+w+"&q=70"; }
+
+function renderChips(){
+  const cats = ['Vše', ...new Set(menu.map(m=>m.cat))];
+  document.getElementById('menu-chips').innerHTML = cats.map(cat=>
+    `<button class="chip${cat===activeCat?' active':''}" onclick="filterCat('${cat}')">${cat}</button>`
+  ).join('');
+}
+
+function filterCat(cat){
+  activeCat = cat;
+  renderChips();
+  renderMenu();
+}
+
+function renderMenu(){
+  const cats = [...new Set(menu.map(m=>m.cat))].filter(c=>activeCat==='Vše'||c===activeCat);
+  const wrap = document.getElementById('menu-cats');
+  wrap.innerHTML = cats.map(cat=>{
+    const items = menu.filter(m=>m.cat===cat);
+    return `<div class="cat"><h3>${cat}</h3><div class="menu-grid">` +
+      items.map((item)=>{
+        const i = menu.indexOf(item);
+        const q = qtyPicker[i] || 1;
+        const icon = catIcon[item.cat] || {e:"🍴",c:"var(--bg-soft)"};
+        return `<div class="item">
+          <div class="item-thumb" style="background:${icon.c};">${catPhoto[item.cat] ? `<img src="${photoUrl(catPhoto[item.cat],600)}" alt="${item.n}" loading="lazy" onerror="this.parentNode.textContent='${icon.e}'">` : icon.e}</div>
+          <div class="item-top"><h4>${item.n}</h4><span class="price">${item.p} Kč</span></div>
+          <p>${item.d}</p>
+          <div class="item-actions">
+            <div class="stepper">
+              <button onclick="changeQty(${i},-1)">−</button>
+              <span id="qty-${i}">${q}</span>
+              <button onclick="changeQty(${i},1)">+</button>
+            </div>
+            <button class="add-btn" onclick="addItem(${i})">Přidat</button>
+          </div>
+        </div>`;
+      }).join('') + `</div></div>`;
+  }).join('');
+}
+
+function changeQty(i,delta){
+  const cur = qtyPicker[i] || 1;
+  qtyPicker[i] = Math.max(1, cur + delta);
+  const el = document.getElementById('qty-'+i);
+  if(el) el.textContent = qtyPicker[i];
+}
+
+function addItem(i){
+  const q = qtyPicker[i] || 1;
+  if(cart[i]) cart[i].q += q; else cart[i] = {item:menu[i], q:q};
+  qtyPicker[i] = 1;
+  const el = document.getElementById('qty-'+i);
+  if(el) el.textContent = 1;
+  document.getElementById('confirm').style.display = 'none';
+  document.getElementById('satisfaction').style.display = 'none';
+  document.getElementById('stars-input').querySelectorAll('span').forEach(s=>s.classList.remove('sel'));
+  document.getElementById('rating-thanks').style.display = 'none';
+  updateCart();
+}
+
+function cartLineQty(i,delta){
+  if(!cart[i]) return;
+  cart[i].q += delta;
+  if(cart[i].q <= 0) delete cart[i];
+  updateCart();
+}
+
+function removeCartLine(i){
+  delete cart[i];
+  updateCart();
+}
+
+function updateCart(){
+  const bar = document.getElementById('cart');
+  const summary = document.getElementById('cart-summary');
+  const total = document.getElementById('cart-total');
+  const orderItems = document.getElementById('order-items');
+  const entries = Object.entries(cart);
+  const totalQty = entries.reduce((a,[,v])=>a+v.q,0);
+  saveCart();
+  const badge = document.getElementById('nav-badge');
+  if(badge){
+    if(totalQty > 0){ badge.textContent = totalQty; badge.classList.add('show'); }
+    else { badge.classList.remove('show'); }
+  }
+  if(entries.length === 0){
+    bar.classList.remove('show');
+    orderItems.innerHTML = 'Zatím jste nic nepřidali.';
+    return;
+  }
+  bar.classList.add('show');
+  const sum = entries.reduce((a,[,v])=>a+v.item.p*v.q,0);
+  summary.textContent = totalQty + (totalQty===1?' kus':' kusů') + ' v košíku';
+  total.textContent = sum.toLocaleString('cs-CZ') + ' Kč';
+  const lines = entries.map(([i,v])=>`
+    <div class="order-line">
+      <span class="ol-name">${v.item.n}</span>
+      <div class="stepper">
+        <button onclick="cartLineQty(${i},-1)">−</button>
+        <span>${v.q}</span>
+        <button onclick="cartLineQty(${i},1)">+</button>
+      </div>
+      <span class="ol-sum">${v.item.p*v.q} Kč</span>
+      <button class="ol-remove" onclick="removeCartLine(${i})">×</button>
+    </div>`).join('');
+  orderItems.innerHTML = '<strong>Vaše objednávka:</strong>' + lines + '<div class="order-line" style="border:none;font-weight:700;"><span>Celkem</span><span class="ol-sum">'+sum.toLocaleString('cs-CZ')+' Kč</span></div>';
+  document.getElementById('order-form').classList.add('show');
+}
+
+function submitOrder(){
+  const nameInput = document.getElementById('cust-name');
+  const phoneInput = document.getElementById('cust-phone');
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const note = document.getElementById('cust-note').value.trim();
+  const errName = document.getElementById('err-name');
+  const errPhone = document.getElementById('err-phone');
+  const err = document.getElementById('form-error');
+  const entries = Object.entries(cart);
+
+  let valid = true;
+  if(!name){ errName.style.display = 'block'; nameInput.classList.add('invalid'); valid = false; }
+  else { errName.style.display = 'none'; nameInput.classList.remove('invalid'); }
+  if(!phone){ errPhone.style.display = 'block'; phoneInput.classList.add('invalid'); valid = false; }
+  else { errPhone.style.display = 'none'; phoneInput.classList.remove('invalid'); }
+
+  if(!valid || entries.length===0){
+    err.style.display = entries.length===0 ? 'block' : 'none';
+    return;
+  }
+  err.style.display = 'none';
+
+  const sum = entries.reduce((a,[,v])=>a+v.item.p*v.q,0);
+  const lines = entries.map(([,v])=>'- '+v.item.n+(v.q>1?' ×'+v.q:'')+' ('+(v.item.p*v.q)+' Kč)').join('\n');
+  const msg = 'Nová objednávka z webu\n\n'+lines+'\n\nCelkem: '+sum+' Kč\n\nJméno: '+name+'\nTelefon: '+phone+(note?'\nPoznámka: '+note:'');
+  const waUrl = 'https://wa.me/420000000000?text='+encodeURIComponent(msg);
+
+  document.getElementById('order-form').classList.remove('show');
+  document.getElementById('confirm').style.display = 'block';
+  document.getElementById('satisfaction').style.display = 'block';
+  document.getElementById('cart').classList.remove('show');
+  cart = {};
+  renderMenu();
+  updateCart();
+
+  window.open(waUrl, '_blank', 'noopener');
+}
+
+function rate(v){
+  document.querySelectorAll('#stars-input span').forEach(s=>{
+    s.classList.toggle('sel', parseInt(s.dataset.v) <= v);
+  });
+  const thanks = document.getElementById('rating-thanks');
+  thanks.style.display = 'block';
+  if(v >= 4){
+    thanks.innerHTML = 'Děkujeme! Moc nás potěší, když nám <a href="https://www.google.com/maps" target="_blank" rel="noopener">necháte recenzi na Google</a>.';
+  } else {
+    thanks.innerHTML = 'Děkujeme za zpětnou vazbu — příště si na tom dáme víc záležet. Pokud chcete, napište nám přímo přes <a href="https://wa.me/420000000000" target="_blank" rel="noopener">WhatsApp</a>.';
+  }
+}
+
+function goOrder(cat){
+  activeCat = cat || 'Vše';
+  document.getElementById('view-home').style.display = 'none';
+  document.getElementById('view-order').style.display = 'block';
+  renderChips();
+  renderMenu();
+  window.scrollTo({top:0,behavior:'auto'});
+}
+
+function goHome(scrollTo){
+  document.getElementById('view-order').style.display = 'none';
+  document.getElementById('view-home').style.display = 'block';
+  window.scrollTo({top:0,behavior:'auto'});
+  if(scrollTo){
+    const target = document.getElementById(scrollTo);
+    if(target){
+      setTimeout(()=>{
+        const headerH = document.querySelector('header').offsetHeight;
+        const y = target.getBoundingClientRect().top + window.pageYOffset - headerH - 10;
+        window.scrollTo({top:Math.max(y,0),behavior:'smooth'});
+      },0);
+    }
+  }
+}
+
+function scrollToCheckout(){
+  const orderView = document.getElementById('view-order');
+  if(orderView.style.display !== 'block'){
+    document.getElementById('view-home').style.display = 'none';
+    orderView.style.display = 'block';
+    renderChips();
+    renderMenu();
+  }
+  setTimeout(()=>{
+    const target = document.getElementById('order-form');
+    const headerH = document.querySelector('header').offsetHeight;
+    const y = target.getBoundingClientRect().top + window.pageYOffset - headerH - 10;
+    window.scrollTo({top:Math.max(y,0),behavior:'smooth'});
+  },0);
+}
+
+loadCart();
+updateCart();
+</script>
+
+</body>
+</html>
