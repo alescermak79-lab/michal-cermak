@@ -457,6 +457,8 @@ var KEBAB="<!DOCTYPE html>\n<html lang=\"cs\">\n<head>\n<meta charset=\"UTF-8\">
   op.addEventListener('click',open);
   cl.addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!box.hidden)close()});
+  if(location.hash==='#kebab')open();
+  window.addEventListener('hashchange',function(){if(location.hash==='#kebab')open()});
 })();
 </script>
 </body>
